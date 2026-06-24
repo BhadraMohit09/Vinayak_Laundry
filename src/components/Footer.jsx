@@ -64,7 +64,7 @@ const Footer = () => {
             </li>
             <li style={{ display: 'flex', gap: '0.8rem' }}>
               <Phone size={20} style={{ color: 'var(--accent-secondary)', flexShrink: 0 }} />
-              <a href="tel:+919924787882" style={{ color: 'var(--text-secondary)' }}>+91 6351674100</a>
+              <a href="tel:+916351674100" style={{ color: 'var(--text-secondary)' }}>+91 6351674100</a>
             </li>
             <li style={{ display: 'flex', gap: '0.8rem' }}>
               <WhatsAppIcon size={20} color="#25D366" style={{ flexShrink: 0 }} />

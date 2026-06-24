@@ -49,8 +49,27 @@ body {
 .glass-panel:hover {
   background: var(--bg-card-hover);
   border-color: rgba(124, 58, 237, 0.2);
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.01);
   box-shadow: var(--shadow-glow);
+}
+
+/* Unique micro-animation: icons inside cards slightly pop when card is hovered */
+.glass-panel svg {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-panel:hover svg {
+  transform: scale(1.15) rotate(3deg);
+}
+
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.06);
+  border-color: rgba(37, 99, 235, 0.2) !important;
 }
 
 /* Pill Navbar */
@@ -114,6 +133,11 @@ body {
   box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
 }
 
+.btn-primary:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.2);
+}
+
 .btn-outline {
   background: transparent;
   color: var(--text-primary) !important;
@@ -135,6 +159,11 @@ body {
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
   transform: translateY(-2px);
+}
+
+.btn-outline:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Links */

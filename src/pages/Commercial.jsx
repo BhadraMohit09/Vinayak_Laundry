@@ -56,7 +56,7 @@ const Commercial = () => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
             {['Hotels & Hospitality', 'Healthcare & Clinics', 'Restaurants & Catering', 'Corporate Uniforms', 'Spas & Salons', 'Event Management'].map((industry, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
+              <div key={i} className="hover-lift" style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                 <CheckCircle size={20} style={{ color: '#25D366' }} />
                 <span style={{ fontWeight: '600', fontSize: '1.1rem' }}>{industry}</span>
               </div>
