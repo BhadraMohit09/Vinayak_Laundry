@@ -118,8 +118,17 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Nav Toggle */}
-          <div className="mobile-toggle" style={{ cursor: 'pointer', color: 'var(--text-primary)', display: 'flex', alignItems: 'center' }} onClick={() => setIsMobileMenuOpen(true)}>
-            <Menu size={28} />
+          <div className="mobile-toggle" style={{ cursor: 'pointer' }} onClick={() => setIsMobileMenuOpen(true)}>
+            <div style={{
+              background: 'rgba(0,0,0,0.05)',
+              padding: '0.4rem 1rem',
+              borderRadius: '20px',
+              fontWeight: '600',
+              fontSize: '0.85rem',
+              color: 'var(--text-primary)'
+            }}>
+              Menu
+            </div>
           </div>
         </div>
       </nav>
@@ -147,24 +156,28 @@ const Navbar = () => {
             </div>
           </div>
 
-          <ul style={{ display: 'flex', flexDirection: 'column', gap: '2rem', listStyle: 'none', padding: 0 }}>
+          <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', listStyle: 'none', padding: '0 1rem', width: '100%' }}>
             {navLinks.map((link) => (
               <li key={link.name}>
                 <Link
                   to={link.path}
                   style={{
-                    color: location.pathname === link.path ? 'var(--accent-primary)' : 'var(--text-primary)',
-                    fontWeight: '700',
-                    fontSize: '2rem',
-                    display: 'block'
+                    color: location.pathname === link.path ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                    fontWeight: location.pathname === link.path ? '700' : '500',
+                    fontSize: '1.2rem',
+                    display: 'block',
+                    padding: '0.5rem 0',
+                    borderBottom: '1px solid rgba(0,0,0,0.05)',
+                    width: '100%',
+                    textAlign: 'left'
                   }}
                 >
                   {link.name}
                 </Link>
               </li>
             ))}
-            <li style={{ marginTop: '2rem' }}>
-                <Link to="/contact" className="btn-primary" style={{ width: '100%', fontSize: '1.2rem', padding: '1rem' }}>
+            <li style={{ marginTop: '1.5rem', width: '100%', padding: '0 1rem' }}>
+                <Link to="/contact" className="btn-primary" style={{ width: '100%', fontSize: '1rem', padding: '0.8rem' }}>
                     Book Now
                 </Link>
             </li>

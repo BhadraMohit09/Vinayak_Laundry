@@ -33,7 +33,7 @@ const Contact = () => {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '4rem' }}>
             {/* Contact Info */}
             <div>
               <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Contact Information</h2>
@@ -101,7 +101,7 @@ const Contact = () => {
             <div className="glass-panel" style={{ padding: '3rem' }}>
               <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Send a Message</h2>
               <form onSubmit={handleSubmit}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Name</label>
                     <input 

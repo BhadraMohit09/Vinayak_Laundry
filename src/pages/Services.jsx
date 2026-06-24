@@ -16,7 +16,7 @@ const Services = () => {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem', marginBottom: '4rem' }}>
             {/* Service 1 */}
             <div className="glass-panel" style={{ padding: '2.5rem' }}>
               <Droplets size={40} style={{ color: 'var(--accent-secondary)', marginBottom: '1.5rem' }} />
