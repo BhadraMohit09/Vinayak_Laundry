@@ -46,7 +46,7 @@ const Home = () => {
               color: 'var(--text-secondary)',
               boxShadow: '0 4px 6px rgba(0,0,0,0.02)'
             }}>
-              <span className="text-gradient" style={{ fontWeight: '600' }}>New in 2026</span> - AI-Optimized Fabric Care
+              <span className="text-gradient" style={{ fontWeight: '600' }}>Jamnagar's Finest</span> - Premium Garment Care
             </div>
             
             <h1 style={{
