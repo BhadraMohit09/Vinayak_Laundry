@@ -46,8 +46,10 @@ const Footer = () => {
           <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
             <li><Link to="/about" style={{ color: 'var(--text-secondary)' }}>About Us</Link></li>
             <li><Link to="/services" style={{ color: 'var(--text-secondary)' }}>Our Services</Link></li>
-            <li><Link to="/contact" style={{ color: 'var(--text-secondary)' }}>Contact</Link></li>
-            <li><Link to="#" style={{ color: 'var(--text-secondary)' }}>Privacy Policy</Link></li>
+            <li><Link to="/commercial" style={{ color: 'var(--text-secondary)' }}>Commercial Solutions</Link></li>
+            <li><Link to="/faq" style={{ color: 'var(--text-secondary)' }}>FAQ</Link></li>
+            <li><Link to="/blog" style={{ color: 'var(--text-secondary)' }}>Fabric Care Blog</Link></li>
+            <li><Link to="/contact" style={{ color: 'var(--text-secondary)' }}>Contact Us</Link></li>
           </ul>
         </div>
 

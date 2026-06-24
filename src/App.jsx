@@ -6,6 +6,9 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import Commercial from './pages/Commercial';
+import FAQ from './pages/FAQ';
+import Blog from './pages/Blog';
 import WhatsAppFloat from './components/WhatsAppFloat';
 
 const ScrollToTop = () => {
@@ -28,6 +31,9 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/commercial" element={<Commercial />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/blog" element={<Blog />} />
           </Routes>
         </main>
         <Footer />
