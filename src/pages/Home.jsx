@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, ShieldCheck, Clock, Zap, CheckCircle2 } from 'lucide-react';
-import BeforeAfterSlider from '../components/BeforeAfterSlider';
+
+// Lazy load the slider because it contains heavy 1200px images below the fold
+const BeforeAfterSlider = React.lazy(() => import('../components/BeforeAfterSlider'));
 
 const Home = () => {
   return (
@@ -138,7 +140,9 @@ const Home = () => {
           </div>
           
           <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-            <BeforeAfterSlider />
+            <React.Suspense fallback={<div style={{ height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Interactive Preview...</div>}>
+              <BeforeAfterSlider />
+            </React.Suspense>
           </div>
         </div>
       </section>
