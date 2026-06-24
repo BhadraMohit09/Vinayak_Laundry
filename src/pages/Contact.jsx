@@ -40,7 +40,7 @@ const Contact = () => {
               <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '1rem', borderRadius: '50%', color: 'var(--accent-secondary)' }}>
+                    <div style={{ background: 'rgba(59, 130, 246, 0.1)', width: '48px', height: '48px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--accent-secondary)' }}>
                       <MapPin size={24} />
                     </div>
                     <div>
@@ -49,7 +49,7 @@ const Contact = () => {
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <div style={{ background: 'rgba(124, 58, 237, 0.1)', padding: '1rem', borderRadius: '50%', color: 'var(--accent-primary)' }}>
+                    <div style={{ background: 'rgba(124, 58, 237, 0.1)', width: '48px', height: '48px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--accent-primary)' }}>
                       <Phone size={24} />
                     </div>
                     <div>
@@ -58,7 +58,7 @@ const Contact = () => {
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <div style={{ background: 'rgba(37, 211, 102, 0.1)', padding: '1rem', borderRadius: '50%', color: '#25D366' }}>
+                    <div style={{ background: 'rgba(37, 211, 102, 0.1)', width: '48px', height: '48px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: '#25D366' }}>
                       <MessageCircle size={24} />
                     </div>
                     <div>
@@ -67,7 +67,7 @@ const Contact = () => {
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '1rem', borderRadius: '50%', color: 'var(--accent-secondary)' }}>
+                    <div style={{ background: 'rgba(59, 130, 246, 0.1)', width: '48px', height: '48px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--accent-secondary)' }}>
                       <Mail size={24} />
                     </div>
                     <div>

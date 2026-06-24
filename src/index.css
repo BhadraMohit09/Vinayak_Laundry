@@ -178,6 +178,30 @@ textarea.form-control {
   min-height: 150px;
 }
 
+/* Navbar Hover Effect */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent-primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 /* Mobile Responsiveness Overrides */
 @media (max-width: 768px) {
   .section {
@@ -185,10 +209,18 @@ textarea.form-control {
   }
   
   h1 {
-    font-size: 2.5rem !important;
+    font-size: 2rem !important;
   }
   
   h2 {
-    font-size: 2rem !important;
+    font-size: 1.6rem !important;
+  }
+  
+  h3 {
+    font-size: 1.3rem !important;
+  }
+  
+  p {
+    font-size: 0.95rem !important;
   }
 }
