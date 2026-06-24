@@ -50,6 +50,7 @@ const BeforeAfterSlider = ({
           alt="After Washing" 
           style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(1.1) contrast(1.1)' }} 
           draggable="false"
+          loading="lazy"
         />
       </div>
 
@@ -73,6 +74,7 @@ const BeforeAfterSlider = ({
             filter: 'sepia(0.3) contrast(0.7) brightness(0.85) grayscale(0.2) blur(1px)', // Simulates dull/aged fabric
           }} 
           draggable="false"
+          loading="lazy"
         />
       </div>
 
