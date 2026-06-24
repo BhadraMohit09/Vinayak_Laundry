@@ -31,7 +31,7 @@ const BeforeAfterSlider = ({
       style={{ 
         position: 'relative', 
         width: '100%', 
-        height: '450px', 
+        height: 'clamp(250px, 50vw, 450px)', // Makes it perfectly responsive
         overflow: 'hidden', 
         borderRadius: '24px',
         cursor: 'ew-resize',
@@ -51,9 +51,6 @@ const BeforeAfterSlider = ({
           style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(1.1) contrast(1.1)' }} 
           draggable="false"
         />
-        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'var(--accent-primary)', color: 'white', padding: '0.5rem 1.2rem', borderRadius: '30px', fontWeight: '700', boxShadow: '0 8px 15px rgba(124, 58, 237, 0.3)', fontSize: '0.9rem', zIndex: 10 }}>
-          After SVL Care
-        </div>
       </div>
 
       {/* "Before" Image (Faded/Dirty clipped foreground layer) */}
@@ -77,9 +74,15 @@ const BeforeAfterSlider = ({
           }} 
           draggable="false"
         />
-        <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(0,0,0,0.6)', color: 'white', padding: '0.5rem 1.2rem', borderRadius: '30px', fontWeight: '700', backdropFilter: 'blur(8px)', fontSize: '0.9rem', zIndex: 10 }}>
-          Before
-        </div>
+      </div>
+
+      {/* Fixed Labels (Placed entirely outside the clipped image layers so they NEVER move or disappear) */}
+      <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(0,0,0,0.6)', color: 'white', padding: '0.4rem 1rem', borderRadius: '30px', fontWeight: '700', backdropFilter: 'blur(8px)', fontSize: 'clamp(0.7rem, 2vw, 0.9rem)', zIndex: 30, pointerEvents: 'none' }}>
+        Before
+      </div>
+      
+      <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'var(--accent-primary)', color: 'white', padding: '0.4rem 1rem', borderRadius: '30px', fontWeight: '700', boxShadow: '0 8px 15px rgba(124, 58, 237, 0.3)', fontSize: 'clamp(0.7rem, 2vw, 0.9rem)', zIndex: 30, pointerEvents: 'none' }}>
+        After
       </div>
 
       {/* Slider Handle Line */}
@@ -101,8 +104,8 @@ const BeforeAfterSlider = ({
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '46px',
-          height: '46px',
+          width: 'clamp(36px, 10vw, 46px)',
+          height: 'clamp(36px, 10vw, 46px)',
           background: 'white',
           borderRadius: '50%',
           display: 'flex',
@@ -112,7 +115,7 @@ const BeforeAfterSlider = ({
           color: 'var(--accent-primary)',
           border: '2px solid rgba(0,0,0,0.05)'
         }}>
-          <ChevronsLeftRight size={24} />
+          <ChevronsLeftRight size={20} />
         </div>
       </div>
     </div>
