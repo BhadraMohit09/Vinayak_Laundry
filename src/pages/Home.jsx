@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, ShieldCheck, Clock, Zap, CheckCircle2 } from 'lucide-react';
+import BeforeAfterSlider from '../components/BeforeAfterSlider';
 
 const Home = () => {
   return (
@@ -122,6 +123,22 @@ const Home = () => {
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{feature.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Magic Slider Section */}
+      <section className="section" style={{ background: 'rgba(37, 99, 235, 0.02)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>Experience the <span className="text-gradient">SVL Difference</span></h2>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
+              Drag the slider below to see how our advanced fabric care revives and restores your garments.
+            </p>
+          </div>
+          
+          <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+            <BeforeAfterSlider />
           </div>
         </div>
       </section>
