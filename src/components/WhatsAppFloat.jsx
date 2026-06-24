@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const WhatsAppFloat = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -43,7 +43,7 @@ const WhatsAppFloat = () => {
         transform: isHovered ? 'rotate(-10deg) scale(1.1)' : 'rotate(0) scale(1)',
         transition: 'transform 0.3s ease'
       }}>
-        <MessageCircle size={32} />
+        <WhatsAppIcon size={32} />
       </div>
       
       <span style={{

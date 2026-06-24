@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Send, MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import WhatsAppIcon from '../components/WhatsAppIcon';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ const Contact = () => {
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                     <div style={{ background: 'rgba(37, 211, 102, 0.1)', width: '48px', height: '48px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: '#25D366' }}>
-                      <MessageCircle size={24} />
+                      <WhatsAppIcon size={24} color="#25D366" />
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem' }}>WhatsApp</h4>

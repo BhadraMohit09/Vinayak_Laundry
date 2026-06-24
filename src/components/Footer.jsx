@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const Footer = () => {
   return (
@@ -66,7 +67,7 @@ const Footer = () => {
               <a href="tel:+919924787882" style={{ color: 'var(--text-secondary)' }}>+91 9924787882</a>
             </li>
             <li style={{ display: 'flex', gap: '0.8rem' }}>
-              <MessageCircle size={20} style={{ color: '#25D366', flexShrink: 0 }} />
+              <WhatsAppIcon size={20} color="#25D366" style={{ flexShrink: 0 }} />
               <a href="https://wa.me/918780570242?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)' }}>WhatsApp Us</a>
             </li>
             <li style={{ display: 'flex', gap: '0.8rem' }}>
