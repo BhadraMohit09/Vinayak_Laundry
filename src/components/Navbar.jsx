@@ -51,7 +51,7 @@ const Navbar = () => {
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', textDecoration: 'none' }}>
-            <img src="/assets/logo.png" alt="Siddhi Vinayak Laundry Logo" style={{ height: '40px', borderRadius: '8px' }} />
+            <img src="/assets/logo.png" alt="Siddhi Vinayak Laundry Logo" width="40" height="40" fetchpriority="high" style={{ height: '40px', width: '40px', borderRadius: '8px', objectFit: 'contain' }} />
             <div style={{
               display: 'flex',
               flexDirection: 'column',

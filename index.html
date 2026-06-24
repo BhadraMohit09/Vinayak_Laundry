@@ -10,6 +10,14 @@
   <meta name="keywords"
     content="laundry, dry cleaning, premium laundry Jamnagar, garment care, bulk laundry, Siddhi Vinayak Laundry, SVL">
 
+  <!-- Preload LCP Elements -->
+  <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high">
+
+  <!-- Font Optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vinayaklaundry.vercel.app/">
@@ -27,8 +35,8 @@
   <meta property="twitter:image" content="https://vinayaklaundry.vercel.app/assets/logo.png">
 
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P1HXZ2HSZ3"></script>
-  <script>
+  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-P1HXZ2HSZ3"></script>
+  <script defer>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
