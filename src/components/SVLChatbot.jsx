@@ -10,7 +10,7 @@ const SVLChatbot = () => {
   ]);
   const [inputText, setInputText] = useState('');
   const [isThinking, setIsThinking] = useState(false);
-  const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
   // Booking Wizard State
   const [bookingStep, setBookingStep] = useState(1);
@@ -19,13 +19,25 @@ const SVLChatbot = () => {
   // Stain Guide State
   const [selectedStain, setSelectedStain] = useState(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
+  // When chatbot is opened or tab changed, always position at the TOP
   useEffect(() => {
-    if (isOpen) scrollToBottom();
-  }, [messages, isOpen, activeTab, bookingStep, isThinking]);
+    if (isOpen && chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = 0;
+    }
+  }, [isOpen, activeTab]);
+
+  // When conversation progresses, scroll smoothly inside the container only
+  useEffect(() => {
+    if (isOpen && chatContainerRef.current && messages.length > 1) {
+      const container = chatContainerRef.current;
+      requestAnimationFrame(() => {
+        container.scrollTo({
+          top: container.scrollHeight,
+          behavior: 'smooth'
+        });
+      });
+    }
+  }, [messages, isThinking, isOpen]);
 
   // Lock body scroll on mobile when full modal drawer is open
   useEffect(() => {
@@ -359,7 +371,7 @@ const SVLChatbot = () => {
           </div>
 
           {/* Tab Content Area */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div ref={chatContainerRef} style={{ flex: 1, overflowY: 'auto', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             
             {/* TAB 1: GENERAL Q&A CHAT */}
             {activeTab === 'chat' && (
@@ -434,7 +446,6 @@ const SVLChatbot = () => {
                     ))}
                   </div>
                 )}
-                <div ref={messagesEndRef} />
               </>
             )}
 
