@@ -6,16 +6,58 @@ const generalWhatsAppUrl = "https://wa.me/916351674100?text=Hello%20Siddhi%20Vin
 const intentDatabase = [
   {
     category: 'contact_details',
-    triggers: ['contact', 'phone', 'number', 'email', 'call', 'reach', 'address', 'gmail', 'mobile', 'connect', 'customer care', 'helpdesk', 'whatsapp number', 'where are you', 'locate', 'location', 'mail'],
+    triggers: ['contact', 'details', 'phone', 'number', 'email', 'call', 'reach', 'address', 'gmail', 'mobile', 'connect', 'customer care', 'helpdesk', 'whatsapp number', 'where are you', 'locate', 'location', 'mail'],
     responses: [
       `You can reach our Siddhi Vinayak Laundry team directly through any of these official channels:\n\n• **📞 Phone / WhatsApp**: +91 6351674100\n• **📧 Email**: svinayaklaundry@gmail.com\n• **📍 Address**: Jamnagar, Gujarat, India\n\nFor instant inquiries or scheduling, message us directly:\n\n[💬 Connect on WhatsApp](${generalWhatsAppUrl})`
     ]
   },
   {
     category: 'pricing_rates',
-    triggers: ['price', 'cost', 'rate', 'how much', 'expensive', 'cheap', 'charge', 'menu', 'tariff', 'package', 'bill', 'estimate', 'shirt', 'suit', 'saree', 'blazer', 'piece', 'rates', 'pricing', 'amount', 'rupee', 'inr', 'discount'],
+    triggers: ['price', 'pricing', 'cost', 'rate', 'rates', 'how much', 'expensive', 'cheap', 'charge', 'menu', 'tariff', 'package', 'bill', 'estimate', 'shirt', 'suit', 'saree', 'blazer', 'piece', 'amount', 'rupee', 'inr', 'discount'],
     responses: [
       `All our laundry, steam pressing, and dry cleaning services are strictly charged **per piece** (piece-wise rates) ensuring individual inspection and care for every garment.\n\nFor exact piece-wise pricing details for your wardrobe, please connect with our team directly on WhatsApp:\n\n[💬 Inquire Piece-Wise Rates on WhatsApp](${pricingWhatsAppUrl})`
+    ]
+  },
+  {
+    category: 'jamnagar_logistics',
+    triggers: ['free', 'jamnagar', 'pickup', 'area', 'areas', 'patel colony', 'digjam', 'ranjit nagar', 'summair', 'valsure', 'drop', 'free delivery', 'doorstep', 'home delivery'],
+    responses: [
+      "We operate out of our high-tech facility in **Jamnagar, Gujarat** and provide **100% FREE doorstep pickup & delivery** across all major Jamnagar neighborhoods including Patel Colony, Digjam Circle, Ranjit Nagar, Defense Colony, and Valsure!"
+    ]
+  },
+  {
+    category: 'turnaround_express',
+    triggers: ['express', 'urgent', 'how long', 'turnaround', 'days', 'hours', 'delivery time', 'fast', 'same day', 'quick', 'emergency', 'when will i get', 'time taken', 'speed'],
+    responses: [
+      "Our standard pristine processing turnaround is **24 to 48 hours**. For urgent events or emergency spills, we also offer **Express 12-Hour Same-Day Processing** upon request!"
+    ]
+  },
+  {
+    category: 'stain_haldi_oil',
+    triggers: ['haldi', 'turmeric', 'curry', 'oil', 'grease', 'ghee', 'pickle', 'achar', 'stain', 'dirty', 'spot', 'ink', 'blood', 'wine', 'coffee', 'tea', 'spill', 'mark', 'removal', 'remove'],
+    responses: [
+      "**Stain Emergency First-Aid**: First rule—**do NOT apply heat or hot water**, and **never rub harsh bath soap** as it permanently locks Indian spices and tannins into the fabric weave! Blot gently with a clean dry paper towel. Our bio-enzymatic spotting table dissolves tough haldi, oil, ink, tea, and red wine stains safely."
+    ]
+  },
+  {
+    category: 'delicate_fabrics',
+    triggers: ['delicate', 'silk', 'zari', 'care', 'banarasi', 'pattu', 'lehenga', 'wedding', 'designer', 'embroidered', 'cashmere', 'wool', 'pashmina', 'coat', 'jacket', 'sherwani'],
+    responses: [
+      "Delicate heirlooms are our specialty! For pure silk sarees, bridal zari lehengas, and woolen suits, we use **neutral pH 7.0 silicone dry cleaning immersion** that cleans deeply without tarnishing metallic zari embroidery or shrinking wool."
+    ]
+  },
+  {
+    category: 'hours_timing',
+    triggers: ['business', 'store', 'timing', 'timings', 'open', 'close', 'business hours', 'sunday', 'saturday', 'night', 'morning', 'working hours', 'schedule'],
+    responses: [
+      "Our facility and concierge desk operate **Mon - Fri (8:00 AM - 8:00 PM)** and **Saturday (9:00 AM - 6:00 PM)**. We rest our industrial equipment on Sundays."
+    ]
+  },
+  {
+    category: 'household_heavy',
+    triggers: ['heavy', 'blanket', 'blankets', 'curtain', 'wash', 'carpet', 'rug', 'drape', 'razai', 'duvet', 'comforter', 'quilt', 'pillow', 'sofa cover', 'shoe', 'sneaker', 'bedsheet'],
+    responses: [
+      "Yes, we thoroughly clean heavy household textiles! Blankets, razais, curtains, and bedsheets undergo high-capacity industrial sanitization that eliminates dust mites and allergens while restoring plush softness."
     ]
   },
   {
@@ -50,48 +92,6 @@ const intentDatabase = [
     ]
   },
   {
-    category: 'turnaround_express',
-    triggers: ['how long', 'turnaround', 'days', 'hours', 'delivery time', 'fast', 'same day', 'urgent', 'quick', 'emergency', 'when will i get', 'time taken', 'speed'],
-    responses: [
-      "Our standard pristine processing turnaround is **24 to 48 hours**. For urgent events or emergency spills, we also offer **Express 12-Hour Same-Day Processing** upon request!"
-    ]
-  },
-  {
-    category: 'jamnagar_logistics',
-    triggers: ['jamnagar', 'patel colony', 'digjam', 'ranjit nagar', 'summair', 'valsure', 'area', 'pickup', 'drop', 'free delivery', 'doorstep', 'home delivery'],
-    responses: [
-      "We operate out of our high-tech facility in **Jamnagar, Gujarat** and provide **100% FREE doorstep pickup & delivery** across all major Jamnagar neighborhoods including Patel Colony, Digjam Circle, Ranjit Nagar, and Defense Colony!"
-    ]
-  },
-  {
-    category: 'stain_haldi_oil',
-    triggers: ['haldi', 'turmeric', 'curry', 'oil', 'grease', 'ghee', 'pickle', 'achar', 'stain', 'dirty', 'spot', 'ink', 'blood', 'wine', 'coffee', 'tea', 'spill', 'mark'],
-    responses: [
-      "**Stain Emergency First-Aid**: First rule—**do NOT apply heat or hot water**, and **never rub harsh bath soap** as it permanently locks Indian spices and tannins into the fabric weave! Blot gently with a clean dry paper towel. Our bio-enzymatic spotting table dissolves tough haldi, oil, ink, tea, and red wine stains safely."
-    ]
-  },
-  {
-    category: 'delicate_fabrics',
-    triggers: ['zari', 'banarasi', 'pattu', 'lehenga', 'wedding', 'designer', 'embroidered', 'cashmere', 'wool', 'pashmina', 'silk', 'coat', 'jacket', 'sherwani'],
-    responses: [
-      "Delicate heirlooms are our specialty! For pure silk sarees, bridal zari lehengas, and woolen suits, we use **neutral pH 7.0 silicone dry cleaning immersion** that cleans deeply without tarnishing metallic zari embroidery or shrinking wool."
-    ]
-  },
-  {
-    category: 'household_heavy',
-    triggers: ['carpet', 'rug', 'curtain', 'drape', 'blanket', 'razai', 'duvet', 'comforter', 'quilt', 'pillow', 'sofa cover', 'shoe', 'sneaker', 'bedsheet'],
-    responses: [
-      "Yes, we thoroughly clean heavy household textiles! Blankets, razais, curtains, and bedsheets undergo high-capacity industrial sanitization that eliminates dust mites and allergens while restoring plush softness."
-    ]
-  },
-  {
-    category: 'hours_timing',
-    triggers: ['open', 'close', 'timing', 'business hours', 'sunday', 'saturday', 'night', 'morning', 'working hours', 'schedule'],
-    responses: [
-      "Our facility and concierge desk operate **Mon - Fri (8:00 AM - 8:00 PM)** and **Saturday (9:00 AM - 6:00 PM)**. We rest our industrial equipment on Sundays."
-    ]
-  },
-  {
     category: 'humor_thanks',
     triggers: ['joke', 'funny', 'laugh', 'thank', 'thanks', 'awesome', 'great', 'wow', 'cool', 'love you', 'bye', 'goodnight', 'cheers', 'ok', 'okay', 'done'],
     responses: [
@@ -114,11 +114,11 @@ function scoreIntentMatch(userQuery) {
     for (const trigger of intent.triggers) {
       const triggerTokens = trigger.split(/\s+/);
       if (cleanQuery.includes(trigger)) {
-        currentScore += 14 + triggerTokens.length * 3;
+        currentScore += 15 + triggerTokens.length * 3;
       } else {
         const overlap = triggerTokens.filter(t => tokens.includes(t));
         if (overlap.length > 0) {
-          currentScore += overlap.length * 3.5;
+          currentScore += overlap.length * 4;
         }
       }
     }
@@ -129,7 +129,6 @@ function scoreIntentMatch(userQuery) {
     }
   }
 
-  // Threshold score of 3 matches casual overlaps
   if (highestScore >= 3 && bestMatch) {
     const respList = bestMatch.responses;
     return respList[Math.floor(Math.random() * respList.length)];

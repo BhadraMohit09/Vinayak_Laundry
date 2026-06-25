@@ -400,9 +400,18 @@ const SVLChatbot = () => {
                 )}
 
                 {/* Quick Suggestion Pills */}
-                {!isThinking && messages.length < 4 && (
+                {!isThinking && messages.length < 12 && (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
-                    {["Piece-wise pricing & rates", "Contact details (email & phone)", "Turmeric & haldi stain removal", "Express urgent turnaround"].map((pill, idx) => (
+                    {[
+                      "Piece-wise pricing & rates",
+                      "Contact details (email & phone)",
+                      "Free Jamnagar pickup areas",
+                      "Express urgent turnaround",
+                      "Turmeric & haldi stain removal",
+                      "Delicate silk & zari care",
+                      "Business & store timings",
+                      "Heavy blankets & curtain wash"
+                    ].map((pill, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSend(pill)}
