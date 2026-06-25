@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, Sparkles, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert } from 'lucide-react';
+import { Bot, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert } from 'lucide-react';
 import { processNaturalAIQuery } from '../utils/aiBrain';
 
 const SVLChatbot = () => {
@@ -124,10 +124,10 @@ const SVLChatbot = () => {
       <style>{`
         .svl-chat-launcher {
           position: fixed;
-          bottom: 6.8rem;
+          bottom: 6.75rem;
           right: 2rem;
-          width: 56px;
-          height: 56px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
           background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
           color: white;
@@ -139,6 +139,7 @@ const SVLChatbot = () => {
           justify-content: center;
           z-index: 999;
           transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          box-sizing: border-box;
         }
 
         .svl-chat-launcher:hover {
@@ -151,11 +152,11 @@ const SVLChatbot = () => {
 
         .svl-chat-modal {
           position: fixed;
-          bottom: 10.5rem;
+          bottom: 11rem;
           right: 2rem;
           width: 380px;
           height: 540px;
-          max-height: calc(100vh - 12rem);
+          max-height: calc(100vh - 12.5rem);
           display: flex;
           flex-direction: column;
           z-index: 1000;
@@ -201,10 +202,10 @@ const SVLChatbot = () => {
 
         @media (max-width: 640px) {
           .svl-chat-launcher {
-            bottom: 5.8rem;
-            right: 1.2rem;
-            width: 50px;
-            height: 50px;
+            bottom: 5.5rem;
+            right: 1.5rem;
+            width: 52px;
+            height: 52px;
           }
 
           .svl-chat-backdrop {
@@ -257,7 +258,7 @@ const SVLChatbot = () => {
         className="svl-chat-launcher"
         aria-label="Open SVL AI Concierge"
       >
-        {isOpen ? <X size={24} /> : <Sparkles size={24} />}
+        {isOpen ? <X size={26} /> : <MessageCircleMore size={28} />}
       </button>
 
       {/* Mobile Dark Backdrop Overlay */}
