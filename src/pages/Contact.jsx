@@ -55,7 +55,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem' }}>Phone</h4>
-                      <a href="tel:+919924787882" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>+91 9924787882</a>
+                      <a href="tel:+916351674100" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>+91 6351674100</a>
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -64,7 +64,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem' }}>WhatsApp</h4>
-                      <a href="https://wa.me/918780570242?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>+91 8780570242</a>
+                      <a href="https://wa.me/916351674100?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>+91 6351674100</a>
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>

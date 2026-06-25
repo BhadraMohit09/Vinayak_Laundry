@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, ShieldCheck, Clock, Zap, CheckCircle2 } from 'lucide-react';
+import { Sparkles, ShieldCheck, Clock, Zap } from 'lucide-react';
 
-// Lazy load the slider because it contains heavy 1200px images below the fold
+// Lazy load components
 const BeforeAfterSlider = React.lazy(() => import('../components/BeforeAfterSlider'));
+const FabricScience = React.lazy(() => import('../components/FabricScience'));
 
 const Home = () => {
   return (
@@ -146,6 +147,11 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Advanced Fabric Science Showcase */}
+      <React.Suspense fallback={<div style={{ height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Molecular Science Showcase...</div>}>
+        <FabricScience />
+      </React.Suspense>
 
       {/* How It Works Section */}
       <section className="section" style={{ background: 'rgba(0,0,0,0.02)' }}>
