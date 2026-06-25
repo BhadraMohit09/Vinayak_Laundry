@@ -33,6 +33,16 @@ const SVLChatbot = () => {
     if (isOpen) scrollToBottom();
   }, [messages, isOpen, activeTab, bookingStep]);
 
+  // Lock body scroll on mobile when full modal drawer is open
+  useEffect(() => {
+    if (isOpen && window.innerWidth <= 640) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isOpen]);
+
   const handleSend = (textToSend) => {
     const query = textToSend || inputText;
     if (!query.trim()) return;
@@ -41,7 +51,6 @@ const SVLChatbot = () => {
     setMessages(newMsgs);
     if (!textToSend) setInputText('');
 
-    // Bot Response Logic
     setTimeout(() => {
       const lower = query.toLowerCase();
       let foundReply = null;
@@ -85,86 +94,184 @@ const SVLChatbot = () => {
 
   return (
     <>
+      {/* Comprehensive Ultra-Responsive CSS */}
+      <style>{`
+        .svl-chat-launcher {
+          position: fixed;
+          bottom: 6.8rem;
+          right: 2rem;
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+          color: white;
+          border: none;
+          box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 999;
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .svl-chat-launcher:hover {
+          transform: scale(1.1) rotate(5deg);
+        }
+
+        .svl-chat-backdrop {
+          display: none;
+        }
+
+        .svl-chat-modal {
+          position: fixed;
+          bottom: 10.5rem;
+          right: 2rem;
+          width: 380px;
+          height: 540px;
+          max-height: calc(100vh - 12rem);
+          display: flex;
+          flex-direction: column;
+          z-index: 1000;
+          overflow: hidden;
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          border: 1px solid rgba(124, 58, 237, 0.2);
+          border-radius: 24px;
+        }
+
+        .svl-grid-2 {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.6rem;
+        }
+
+        .svl-chat-input {
+          flex: 1;
+          padding: 0.75rem 1rem;
+          border: 1px solid var(--border-color);
+          border-radius: 50px;
+          font-size: 0.9rem;
+          outline: none;
+          background: #f8fafc;
+          font-family: inherit;
+        }
+
+        /* Mobile & Tablet Ultra-Responsive Breakpoint */
+        @media (max-width: 640px) {
+          .svl-chat-launcher {
+            bottom: 5.8rem;
+            right: 1.2rem;
+            width: 50px;
+            height: 50px;
+          }
+
+          .svl-chat-backdrop {
+            display: block;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 99998;
+            animation: fadeIn 0.2s ease forwards;
+          }
+
+          .svl-chat-modal {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: auto;
+            width: 100%;
+            height: 88dvh;
+            max-height: 88dvh;
+            border-radius: 24px 24px 0 0;
+            border: none;
+            border-top: 1px solid rgba(124, 58, 237, 0.25);
+            z-index: 99999;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+          }
+
+          .svl-grid-2 {
+            grid-template-columns: 1fr;
+          }
+
+          .svl-chat-input {
+            font-size: 16px !important; /* Prevents iOS Safari zoom */
+          }
+        }
+
+        /* Very narrow screens (Galaxy Fold / small SE) */
+        @media (max-width: 360px) {
+          .svl-chat-modal {
+            height: 94dvh;
+            max-height: 94dvh;
+          }
+        }
+      `}</style>
+
       {/* Floating Launcher Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        style={{
-          position: 'fixed',
-          bottom: '6.8rem',
-          right: '2rem',
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-          color: 'white',
-          border: 'none',
-          boxShadow: '0 8px 25px rgba(124, 58, 237, 0.4)',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 999,
-          transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)'}
-        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
+        className="svl-chat-launcher"
         aria-label="Open SVL AI Concierge"
       >
-        {isOpen ? <X size={26} /> : <Sparkles size={26} />}
+        {isOpen ? <X size={24} /> : <Sparkles size={24} />}
       </button>
+
+      {/* Mobile Dark Backdrop Overlay */}
+      {isOpen && (
+        <div 
+          className="svl-chat-backdrop" 
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Chatbot Window Modal */}
       {isOpen && (
-        <div className="glass-panel animate-fade-in" style={{
-          position: 'fixed',
-          bottom: '10.5rem',
-          right: '2rem',
-          width: 'min(380px, calc(100vw - 2.5rem))',
-          height: '520px',
-          maxHeight: 'calc(100vh - 12rem)',
-          display: 'flex',
-          flexDirection: 'column',
-          zIndex: 1000,
-          overflow: 'hidden',
-          background: 'rgba(255, 255, 255, 0.95)',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-          border: '1px solid rgba(124, 58, 237, 0.2)',
-          borderRadius: '24px'
-        }}>
+        <div className="svl-chat-modal animate-fade-in">
+          
           {/* Header */}
           <div style={{
-            padding: '1.2rem 1.5rem',
+            padding: '1rem 1.4rem',
             background: 'linear-gradient(135deg, #0f172a, #1e293b)',
             color: 'white',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            flexShrink: 0
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{
-                width: '38px',
-                height: '38px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '10px',
-                background: 'rgba(124, 58, 237, 0.3)',
+                background: 'rgba(124, 58, 237, 0.35)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#a855f7'
+                color: '#c084fc',
+                flexShrink: 0
               }}>
-                <Bot size={22} />
+                <Bot size={20} />
               </div>
               <div>
-                <h3 style={{ fontSize: '1rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  SVL Concierge <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e' }}></span>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem', letterSpacing: '0.3px' }}>
+                  SVL Concierge <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', flexShrink: 0 }}></span>
                 </h3>
-                <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Vinayak Advanced AI</span>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block' }}>Vinayak Advanced AI</span>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '4px' }}
+              style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: '#e2e8f0', borderRadius: '50%', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              aria-label="Close Assistant"
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
 
@@ -173,7 +280,9 @@ const SVLChatbot = () => {
             display: 'flex',
             borderBottom: '1px solid var(--border-color)',
             background: '#f8fafc',
-            padding: '0.4rem'
+            padding: '0.4rem',
+            gap: '0.3rem',
+            flexShrink: 0
           }}>
             {[
               { id: 'chat', label: 'Q&A Chat', icon: HelpCircle },
@@ -185,23 +294,24 @@ const SVLChatbot = () => {
                 onClick={() => setActiveTab(tab.id)}
                 style={{
                   flex: 1,
-                  padding: '0.6rem 0.4rem',
+                  padding: '0.6rem 0.3rem',
                   border: 'none',
                   background: activeTab === tab.id ? 'white' : 'transparent',
                   color: activeTab === tab.id ? 'var(--accent-primary)' : 'var(--text-secondary)',
                   fontWeight: activeTab === tab.id ? '600' : '500',
-                  fontSize: '0.8rem',
+                  fontSize: 'clamp(0.75rem, 2vw, 0.82rem)',
                   borderRadius: '10px',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '0.4rem',
-                  boxShadow: activeTab === tab.id ? '0 2px 6px rgba(0,0,0,0.05)' : 'none',
-                  transition: 'all 0.2s ease'
+                  gap: '0.35rem',
+                  boxShadow: activeTab === tab.id ? '0 2px 8px rgba(0,0,0,0.06)' : 'none',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap'
                 }}
               >
-                <tab.icon size={15} /> {tab.label}
+                <tab.icon size={15} style={{ flexShrink: 0 }} /> <span>{tab.label}</span>
               </button>
             ))}
           </div>
@@ -215,16 +325,17 @@ const SVLChatbot = () => {
                 {messages.map((msg, i) => (
                   <div key={i} style={{
                     alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
-                    maxWidth: '85%',
-                    padding: '0.8rem 1rem',
+                    maxWidth: '88%',
+                    padding: '0.8rem 1.05rem',
                     borderRadius: msg.sender === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
-                    background: msg.sender === 'user' ? 'var(--accent-primary)' : '#f1f5f9',
+                    background: msg.sender === 'user' ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : '#f1f5f9',
                     color: msg.sender === 'user' ? 'white' : 'var(--text-primary)',
-                    fontSize: '0.9rem',
-                    lineHeight: '1.4',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.03)'
+                    fontSize: 'clamp(0.85rem, 2.5vw, 0.92rem)',
+                    lineHeight: '1.5',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+                    wordBreak: 'break-word',
+                    overflowWrap: 'break-word'
                   }}>
-                    {/* Render basic bold formatting */}
                     {msg.text.split('**').map((part, idx) => idx % 2 === 1 ? <strong key={idx}>{part}</strong> : part)}
                   </div>
                 ))}
@@ -237,14 +348,17 @@ const SVLChatbot = () => {
                         key={idx}
                         onClick={() => handleSend(pill)}
                         style={{
-                          padding: '0.4rem 0.8rem',
+                          padding: '0.45rem 0.85rem',
                           background: 'rgba(124, 58, 237, 0.08)',
                           color: 'var(--accent-primary)',
-                          border: '1px solid rgba(124, 58, 237, 0.2)',
+                          border: '1px solid rgba(124, 58, 237, 0.22)',
                           borderRadius: '50px',
-                          fontSize: '0.75rem',
+                          fontSize: 'clamp(0.72rem, 2vw, 0.78rem)',
                           fontWeight: '500',
-                          cursor: 'pointer'
+                          cursor: 'pointer',
+                          transition: 'background 0.2s',
+                          whiteSpace: 'normal',
+                          textAlign: 'left'
                         }}
                       >
                         {pill}
@@ -260,17 +374,17 @@ const SVLChatbot = () => {
             {activeTab === 'book' && (
               <div style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
                 <div>
-                  <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '1.1rem', marginBottom: '0.3rem', color: 'var(--text-primary)' }}>Smart Order Assistant</h4>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Answer 3 quick questions to plan your pickup</p>
+                  <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
+                    <h4 style={{ fontSize: '1.05rem', marginBottom: '0.2rem', color: 'var(--text-primary)' }}>Smart Order Assistant</h4>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Answer 3 quick questions to plan your pickup</p>
                   </div>
 
                   {bookingStep === 1 && (
                     <div>
-                      <span style={{ fontWeight: '600', fontSize: '0.9rem', display: 'block', marginBottom: '0.8rem' }}>1. What service do you require?</span>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
+                      <span style={{ fontWeight: '600', fontSize: '0.88rem', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>1. What service do you require?</span>
+                      <div className="svl-grid-2">
                         {['Wash & Fold', 'Advanced Dry Clean', 'Steam Ironing', 'Bulk Commercial'].map(srv => (
-                          <button key={srv} onClick={() => handleBookingSelect('service', srv)} className="btn-outline" style={{ padding: '0.8rem', fontSize: '0.85rem', textAlign: 'center', justifyContent: 'center' }}>{srv}</button>
+                          <button key={srv} onClick={() => handleBookingSelect('service', srv)} className="btn-outline" style={{ padding: '0.85rem 0.5rem', fontSize: '0.85rem', textAlign: 'center', justifyContent: 'center', width: '100%', wordBreak: 'break-word' }}>{srv}</button>
                         ))}
                       </div>
                     </div>
@@ -278,10 +392,10 @@ const SVLChatbot = () => {
 
                   {bookingStep === 2 && (
                     <div>
-                      <span style={{ fontWeight: '600', fontSize: '0.9rem', display: 'block', marginBottom: '0.8rem' }}>2. Estimated load size?</span>
+                      <span style={{ fontWeight: '600', fontSize: '0.88rem', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>2. Estimated load size?</span>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                         {['1 - 5 Garments', 'Medium Load (6-15 items)', 'Large Laundry Bag (5kg+)'].map(q => (
-                          <button key={q} onClick={() => handleBookingSelect('quantity', q)} className="btn-outline" style={{ padding: '0.8rem', fontSize: '0.85rem', justifyContent: 'center' }}>{q}</button>
+                          <button key={q} onClick={() => handleBookingSelect('quantity', q)} className="btn-outline" style={{ padding: '0.85rem', fontSize: '0.85rem', justifyContent: 'center', width: '100%' }}>{q}</button>
                         ))}
                       </div>
                     </div>
@@ -289,39 +403,39 @@ const SVLChatbot = () => {
 
                   {bookingStep === 3 && (
                     <div>
-                      <span style={{ fontWeight: '600', fontSize: '0.9rem', display: 'block', marginBottom: '0.8rem' }}>3. Preferred pickup window?</span>
+                      <span style={{ fontWeight: '600', fontSize: '0.88rem', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>3. Preferred pickup window?</span>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                         {['Today Afternoon/Evening', 'Tomorrow Morning (8 AM - 12 PM)', 'Flexible Schedule'].map(t => (
-                          <button key={t} onClick={() => handleBookingSelect('timing', t)} className="btn-outline" style={{ padding: '0.8rem', fontSize: '0.85rem', justifyContent: 'center' }}>{t}</button>
+                          <button key={t} onClick={() => handleBookingSelect('timing', t)} className="btn-outline" style={{ padding: '0.85rem', fontSize: '0.85rem', justifyContent: 'center', width: '100%' }}>{t}</button>
                         ))}
                       </div>
                     </div>
                   )}
 
                   {bookingStep > 3 && (
-                    <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-                      <CheckCircle2 size={48} style={{ color: '#22c55e', margin: '0 auto 1rem' }} />
-                      <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>Ready to Schedule!</h4>
-                      <div style={{ background: '#f1f5f9', padding: '1rem', borderRadius: '12px', textAlign: 'left', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>
+                    <div style={{ textAlign: 'center', padding: '0.5rem 0' }}>
+                      <CheckCircle2 size={44} style={{ color: '#22c55e', margin: '0 auto 0.8rem' }} />
+                      <h4 style={{ fontSize: '1.15rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Ready to Schedule!</h4>
+                      <div style={{ background: '#f1f5f9', padding: '1rem', borderRadius: '14px', textAlign: 'left', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: '1.6', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
                         <div><strong>Service:</strong> {bookingData.service}</div>
-                        <div><strong>Load:</strong> {bookingData.quantity}</div>
+                        <div><strong>Load Size:</strong> {bookingData.quantity}</div>
                         <div><strong>Window:</strong> {bookingData.timing}</div>
-                        <div style={{ marginTop: '0.5rem', color: 'var(--accent-primary)', fontWeight: '600' }}>⚡ Est. Turnaround: 24-36 Hours</div>
+                        <div style={{ marginTop: '0.6rem', color: 'var(--accent-primary)', fontWeight: '600', fontSize: '0.88rem' }}>⚡ Est. Turnaround: 24-36 Hours</div>
                       </div>
-                      <a href={getWhatsAppBookingUrl()} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '1rem', fontSize: '0.95rem' }}>
-                        Confirm via WhatsApp <ArrowRight size={18} style={{ marginLeft: '6px' }} />
+                      <a href={getWhatsAppBookingUrl()} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '1rem', fontSize: '0.95rem', boxSizing: 'border-box', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        Confirm via WhatsApp <ArrowRight size={18} style={{ marginLeft: '6px', flexShrink: 0 }} />
                       </a>
                     </div>
                   )}
                 </div>
 
                 {bookingStep > 1 && bookingStep <= 3 && (
-                  <button onClick={() => setBookingStep(bookingStep - 1)} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.85rem', marginTop: '1rem' }}>
+                  <button onClick={() => setBookingStep(bookingStep - 1)} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.85rem', marginTop: '1rem', padding: '0.5rem' }}>
                     ← Back to previous step
                   </button>
                 )}
                 {bookingStep > 3 && (
-                  <button onClick={() => { setBookingStep(1); setBookingData({ service: '', quantity: '', timing: '' }); }} style={{ background: 'transparent', border: 'none', color: 'var(--accent-secondary)', cursor: 'pointer', fontSize: '0.85rem', marginTop: '1rem' }}>
+                  <button onClick={() => { setBookingStep(1); setBookingData({ service: '', quantity: '', timing: '' }); }} style={{ background: 'transparent', border: 'none', color: 'var(--accent-secondary)', cursor: 'pointer', fontSize: '0.85rem', marginTop: '1rem', padding: '0.5rem' }}>
                     Start over
                   </button>
                 )}
@@ -332,25 +446,28 @@ const SVLChatbot = () => {
             {activeTab === 'stain' && (
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem', padding: '0.8rem', background: 'rgba(239, 68, 68, 0.08)', borderRadius: '12px', color: '#dc2626' }}>
-                  <ShieldAlert size={24} style={{ flexShrink: 0 }} />
+                  <ShieldAlert size={22} style={{ flexShrink: 0 }} />
                   <span style={{ fontSize: '0.8rem', fontWeight: '600', lineHeight: '1.3' }}>Stain Emergency? Take first aid immediately, then send to SVL.</span>
                 </div>
 
-                <span style={{ fontWeight: '600', fontSize: '0.85rem', display: 'block', marginBottom: '0.8rem' }}>Select Stain Type:</span>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1.2rem' }}>
+                <span style={{ fontWeight: '600', fontSize: '0.85rem', display: 'block', marginBottom: '0.8rem', color: 'var(--text-primary)' }}>Select Stain Type:</span>
+                <div className="svl-grid-2" style={{ marginBottom: '1.2rem' }}>
                   {Object.keys(stainTips).map(k => (
                     <button
                       key={k}
                       onClick={() => setSelectedStain(k)}
                       style={{
-                        padding: '0.7rem',
+                        padding: '0.75rem 0.5rem',
                         borderRadius: '12px',
                         border: selectedStain === k ? '2px solid var(--accent-primary)' : '1px solid var(--border-color)',
-                        background: selectedStain === k ? 'rgba(124, 58, 237, 0.05)' : 'white',
+                        background: selectedStain === k ? 'rgba(124, 58, 237, 0.06)' : 'white',
                         fontWeight: selectedStain === k ? '600' : '500',
                         fontSize: '0.85rem',
                         cursor: 'pointer',
-                        color: selectedStain === k ? 'var(--accent-primary)' : 'var(--text-primary)'
+                        color: selectedStain === k ? 'var(--accent-primary)' : 'var(--text-primary)',
+                        width: '100%',
+                        wordBreak: 'break-word',
+                        transition: 'all 0.2s'
                       }}
                     >
                       {stainTips[k].title}
@@ -361,10 +478,10 @@ const SVLChatbot = () => {
                 {selectedStain && (
                   <div className="animate-fade-in" style={{ background: '#f8fafc', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                     <h5 style={{ fontSize: '0.95rem', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{stainTips[selectedStain].title} First Aid</h5>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '1rem' }}>
+                    <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: '1.55', marginBottom: '1.2rem', wordBreak: 'break-word' }}>
                       {stainTips[selectedStain].advice}
                     </p>
-                    <a href="https://wa.me/916351674100?text=Hello%20SVL,%20I%20have%20an%20urgent%20stain%20removal%20request!" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '0.7rem', fontSize: '0.85rem', justifyContent: 'center' }}>
+                    <a href="https://wa.me/916351674100?text=Hello%20SVL,%20I%20have%20an%20urgent%20stain%20removal%20request!" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '0.8rem', fontSize: '0.88rem', justifyContent: 'center', boxSizing: 'border-box', display: 'flex' }}>
                       Book Stain Removal
                     </a>
                   </div>
@@ -378,41 +495,37 @@ const SVLChatbot = () => {
           {activeTab === 'chat' && (
             <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} style={{
               display: 'flex',
-              padding: '0.8rem',
+              padding: '0.8rem 1rem',
               borderTop: '1px solid var(--border-color)',
               background: 'white',
-              gap: '0.5rem'
+              gap: '0.6rem',
+              flexShrink: 0,
+              alignItems: 'center'
             }}>
               <input
                 type="text"
                 placeholder="Ask about time, price, Jamnagar..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                style={{
-                  flex: 1,
-                  padding: '0.7rem 1rem',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '50px',
-                  fontSize: '0.85rem',
-                  outline: 'none',
-                  background: '#f8fafc'
-                }}
+                className="svl-chat-input"
               />
               <button
                 type="submit"
                 style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '42px',
+                  height: '42px',
                   borderRadius: '50%',
-                  background: 'var(--accent-primary)',
+                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'white',
                   border: 'none',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  flexShrink: 0
+                  flexShrink: 0,
+                  boxShadow: '0 4px 12px rgba(124, 58, 237, 0.3)'
                 }}
+                aria-label="Send Message"
               >
                 <Send size={18} />
               </button>
