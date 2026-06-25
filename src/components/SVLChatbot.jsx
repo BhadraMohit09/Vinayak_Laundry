@@ -75,7 +75,7 @@ const SVLChatbot = () => {
     wine: { title: "Red Wine / Fruit Juice", advice: "Blot immediately with a clean cloth. Club soda helps lift pigments temporarily. Bring to SVL within 24 hours for complete oxidation treatment." }
   };
 
-  // Helper to render basic markdown bold and links nicely inside chat bubbles
+  // Helper to render basic markdown bold (**bold**) and italic (*italic*) and links nicely inside chat bubbles
   const renderFormattedText = (text) => {
     const lines = text.split('\n');
     return lines.map((line, lIdx) => {
@@ -111,7 +111,10 @@ const SVLChatbot = () => {
         <React.Fragment key={lIdx}>
           {contentToFormat.map((chunk, _cIdx) => {
             if (typeof chunk !== 'string') return chunk;
-            return chunk.split('**').map((subChunk, sIdx) => sIdx % 2 === 1 ? <strong key={sIdx}>{subChunk}</strong> : subChunk);
+            return chunk.split('**').map((subChunk, sIdx) => {
+              if (sIdx % 2 === 1) return <strong key={sIdx}>{subChunk}</strong>;
+              return subChunk.split('*').map((italicChunk, iIdx) => iIdx % 2 === 1 ? <em key={`${sIdx}-${iIdx}`}>{italicChunk}</em> : italicChunk);
+            });
           })}
           {lIdx < lines.length - 1 && <br />}
         </React.Fragment>
@@ -399,7 +402,7 @@ const SVLChatbot = () => {
                 {/* Quick Suggestion Pills */}
                 {!isThinking && messages.length < 4 && (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
-                    {["Piece-wise pricing & rates", "Why choose SVL vs local dhobi?", "Express urgent turnaround", "Turmeric & haldi stain removal"].map((pill, idx) => (
+                    {["Piece-wise pricing & rates", "Contact details (email & phone)", "Turmeric & haldi stain removal", "Express urgent turnaround"].map((pill, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSend(pill)}

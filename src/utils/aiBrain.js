@@ -5,26 +5,33 @@ const generalWhatsAppUrl = "https://wa.me/916351674100?text=Hello%20Siddhi%20Vin
 
 const intentDatabase = [
   {
-    category: 'pricing_rates',
-    triggers: ['price', 'cost', 'rate', 'how much', 'expensive', 'cheap', 'charge', 'menu', 'tariff', 'package', 'bill', 'estimate', 'shirt', 'suit', 'saree', 'blazer', 'piece'],
+    category: 'contact_details',
+    triggers: ['contact', 'phone', 'number', 'email', 'call', 'reach', 'address', 'gmail', 'mobile', 'connect', 'customer care', 'helpdesk', 'whatsapp number', 'where are you', 'locate', 'location', 'mail'],
     responses: [
-      `All our laundry, ironing, and dry cleaning services are strictly charged **per piece** (piece-wise rates) ensuring meticulous individual attention for every garment.\n\nFor exact tailored pricing and tariff details for your items, please connect with our team directly on WhatsApp:\n\n[💬 Inquire Piece-Wise Rates on WhatsApp](${pricingWhatsAppUrl})`
+      `You can reach our Siddhi Vinayak Laundry team directly through any of these official channels:\n\n• **📞 Phone / WhatsApp**: +91 6351674100\n• **📧 Email**: svinayaklaundry@gmail.com\n• **📍 Address**: Jamnagar, Gujarat, India\n\nFor instant inquiries or scheduling, message us directly:\n\n[💬 Connect on WhatsApp](${generalWhatsAppUrl})`
+    ]
+  },
+  {
+    category: 'pricing_rates',
+    triggers: ['price', 'cost', 'rate', 'how much', 'expensive', 'cheap', 'charge', 'menu', 'tariff', 'package', 'bill', 'estimate', 'shirt', 'suit', 'saree', 'blazer', 'piece', 'rates', 'pricing', 'amount', 'rupee', 'inr', 'discount'],
+    responses: [
+      `All our laundry, steam pressing, and dry cleaning services are strictly charged **per piece** (piece-wise rates) ensuring individual inspection and care for every garment.\n\nFor exact piece-wise pricing details for your wardrobe, please connect with our team directly on WhatsApp:\n\n[💬 Inquire Piece-Wise Rates on WhatsApp](${pricingWhatsAppUrl})`
     ]
   },
   {
     category: 'identity',
-    triggers: ['who are you', 'what is your name', 'are you ai', 'are you a robot', 'are you human', 'who made you', 'bot'],
+    triggers: ['who are you', 'what is your name', 'are you ai', 'are you a robot', 'are you human', 'who made you', 'bot', 'assistant', 'concierge', 'vinayak'],
     responses: [
-      "I am **Vinayak AI**, an advanced conversational garment concierge developed specifically for Siddhi Vinayak Laundry. I'm equipped with deep textile biochemistry knowledge and real-time scheduling capabilities!",
-      "Hi! I'm **Vinayak AI Concierge**. Think of me as your personal fabric care expert available 24/7. Whether you need stain advice or instant Jamnagar pickup scheduling, I'm here to help!"
+      "I am **Vinayak AI**, an advanced conversational garment care concierge developed for Siddhi Vinayak Laundry! I'm equipped with deep textile biochemistry knowledge and instant booking assistance.",
+      "Hi! I'm **Vinayak AI Concierge**. Think of me as your personal fabric care expert available 24/7. Whether you need stain first-aid advice or contact details, I'm right here to help!"
     ]
   },
   {
     category: 'greetings',
-    triggers: ['hello', 'hi', 'hey', 'good morning', 'good evening', 'good afternoon', 'namaste', 'kem cho'],
+    triggers: ['hello', 'hi', 'hey', 'good morning', 'good evening', 'good afternoon', 'namaste', 'kem cho', 'greetings', 'sup', 'yo'],
     responses: [
-      "Namaste & Welcome to **Siddhi Vinayak Laundry**! How can I make your garment care effortless today? Feel free to ask about our specialized stain advice or schedule a free pickup.",
-      "Hello there! Great to chat with you. Do you have any favorite pieces that need pristine piece-wise dry cleaning or washing today?"
+      "Namaste & Welcome to **Siddhi Vinayak Laundry**! How can I make your garment care effortless today? Feel free to ask about our contact details, stain advice, or schedule a free pickup.",
+      "Hello there! Great to chat with you. Do you have any favorite wardrobe pieces that need pristine piece-wise dry cleaning or washing today?"
     ]
   },
   {
@@ -32,64 +39,64 @@ const intentDatabase = [
     triggers: ['how are you', 'how is it going', 'whatsup', 'whats up'],
     responses: [
       "I'm operating at 100% molecular efficiency and ready to tackle tough stains! How are you doing today?",
-      "Doing fantastic! Just finished analyzing our latest eco-friendly silicone solvent protocols. How can I assist with your wardrobe today?"
+      "Doing fantastic! Just finished reviewing our latest eco-friendly silicone dry cleaning protocols. How can I assist with your garments today?"
     ]
   },
   {
     category: 'competitor_advantage',
-    triggers: ['why svl', 'why choose', 'better than', 'local dhobi', 'home wash', 'washing machine', 'difference'],
+    triggers: ['why svl', 'why choose', 'better than', 'local dhobi', 'home wash', 'washing machine', 'difference', 'advantage'],
     responses: [
-      "Unlike traditional home washing or local dhobis that use harsh high-pH detergents and rough scrubbing, SVL utilizes **pH-neutral bio-solvents** and computer-controlled tension pressing. This prevents fiber fraying, stops dye bleeding, and extends garment lifespan by up to **40%**!"
+      "Unlike traditional home washing or local dhobis that use harsh high-pH bath detergents and rough scrubbing, SVL utilizes **pH-neutral bio-solvents** and tension steam pressing. This stops fiber fraying, prevents dye bleeding, and extends garment lifespan by up to **40%**!"
     ]
   },
   {
     category: 'turnaround_express',
-    triggers: ['how long', 'turnaround', 'days', 'hours', 'delivery time', 'fast', 'same day', 'urgent', 'quick', 'emergency'],
+    triggers: ['how long', 'turnaround', 'days', 'hours', 'delivery time', 'fast', 'same day', 'urgent', 'quick', 'emergency', 'when will i get', 'time taken', 'speed'],
     responses: [
-      "Our standard turnaround is **24 to 48 hours**. However, if you have an urgent event or emergency stain, we offer **Express 12-Hour Same-Day Processing**! Just mention 'Express' when booking your pickup."
+      "Our standard pristine processing turnaround is **24 to 48 hours**. For urgent events or emergency spills, we also offer **Express 12-Hour Same-Day Processing** upon request!"
     ]
   },
   {
     category: 'jamnagar_logistics',
-    triggers: ['jamnagar', 'patel colony', 'digjam', 'ranjit nagar', 'summair', 'valsure', 'area', 'where', 'location', 'pickup', 'drop', 'free delivery'],
+    triggers: ['jamnagar', 'patel colony', 'digjam', 'ranjit nagar', 'summair', 'valsure', 'area', 'pickup', 'drop', 'free delivery', 'doorstep', 'home delivery'],
     responses: [
-      "We operate out of our high-tech facility in **Jamnagar, Gujarat** and offer **100% FREE doorstep pickup & delivery** across all major Jamnagar areas including Patel Colony, Ranjit Nagar, Digjam Circle, and Defense Colony!"
+      "We operate out of our high-tech facility in **Jamnagar, Gujarat** and provide **100% FREE doorstep pickup & delivery** across all major Jamnagar neighborhoods including Patel Colony, Digjam Circle, Ranjit Nagar, and Defense Colony!"
     ]
   },
   {
     category: 'stain_haldi_oil',
-    triggers: ['haldi', 'turmeric', 'curry', 'oil', 'grease', 'ghee', 'pickle', 'achar', 'stain', 'dirty', 'spot', 'ink', 'blood', 'wine', 'coffee', 'tea'],
+    triggers: ['haldi', 'turmeric', 'curry', 'oil', 'grease', 'ghee', 'pickle', 'achar', 'stain', 'dirty', 'spot', 'ink', 'blood', 'wine', 'coffee', 'tea', 'spill', 'mark'],
     responses: [
-      "**Stain Emergency Protocol**: First rule—*do NOT apply heat or hot water*, and *never rub harsh bath soap* as it locks Indian spices and tannins into the weave! Blot gently with a dry paper towel. Our bio-enzymatic targeted spotting table uses specialized hydrocarbon lipids to dissolve tough Indian curry, haldi, oil, and ink stains safely."
+      "**Stain Emergency First-Aid**: First rule—**do NOT apply heat or hot water**, and **never rub harsh bath soap** as it permanently locks Indian spices and tannins into the fabric weave! Blot gently with a clean dry paper towel. Our bio-enzymatic spotting table dissolves tough haldi, oil, ink, tea, and red wine stains safely."
     ]
   },
   {
     category: 'delicate_fabrics',
-    triggers: ['zari', 'banarasi', 'pattu', 'lehenga', 'wedding', 'designer', 'embroidered', 'cashmere', 'wool', 'pashmina'],
+    triggers: ['zari', 'banarasi', 'pattu', 'lehenga', 'wedding', 'designer', 'embroidered', 'cashmere', 'wool', 'pashmina', 'silk', 'coat', 'jacket', 'sherwani'],
     responses: [
-      "Delicate heirlooms are our specialty! For pure silk sarees, zari work, and woolen blazers, we use **neutral pH 7.0 silicone dry cleaning immersion**. It cleans deep into the keratin and silk protein fibers without tarnishing metallic zari or shrinking wool."
+      "Delicate heirlooms are our specialty! For pure silk sarees, bridal zari lehengas, and woolen suits, we use **neutral pH 7.0 silicone dry cleaning immersion** that cleans deeply without tarnishing metallic zari embroidery or shrinking wool."
     ]
   },
   {
     category: 'household_heavy',
-    triggers: ['carpet', 'rug', 'curtain', 'drape', 'blanket', 'razai', 'duvet', 'comforter', 'quilt', 'pillow', 'sofa cover', 'shoe', 'sneaker'],
+    triggers: ['carpet', 'rug', 'curtain', 'drape', 'blanket', 'razai', 'duvet', 'comforter', 'quilt', 'pillow', 'sofa cover', 'shoe', 'sneaker', 'bedsheet'],
     responses: [
-      "Yes, we thoroughly clean heavy household pieces! Blankets, razais, and curtains undergo high-capacity industrial sanitization that eliminates dust mites, allergens, and pet dander while restoring plush softness."
+      "Yes, we thoroughly clean heavy household textiles! Blankets, razais, curtains, and bedsheets undergo high-capacity industrial sanitization that eliminates dust mites and allergens while restoring plush softness."
     ]
   },
   {
     category: 'hours_timing',
-    triggers: ['open', 'close', 'timing', 'business hours', 'sunday', 'saturday', 'night', 'morning'],
+    triggers: ['open', 'close', 'timing', 'business hours', 'sunday', 'saturday', 'night', 'morning', 'working hours', 'schedule'],
     responses: [
-      "Our concierge desk and facility operate **Mon - Fri (8:00 AM - 8:00 PM)** and **Saturday (9:00 AM - 6:00 PM)**. We rest our industrial equipment on Sundays."
+      "Our facility and concierge desk operate **Mon - Fri (8:00 AM - 8:00 PM)** and **Saturday (9:00 AM - 6:00 PM)**. We rest our industrial equipment on Sundays."
     ]
   },
   {
     category: 'humor_thanks',
-    triggers: ['joke', 'funny', 'laugh', 'thank', 'awesome', 'great', 'wow', 'cool', 'love you', 'bye', 'goodnight'],
+    triggers: ['joke', 'funny', 'laugh', 'thank', 'thanks', 'awesome', 'great', 'wow', 'cool', 'love you', 'bye', 'goodnight', 'cheers', 'ok', 'okay', 'done'],
     responses: [
       "Why did the shirt go to Siddhi Vinayak Laundry? Because it wanted to make a **flawless first impression**! 😄 You're very welcome—have a wonderful day!",
-      "It is an absolute pleasure assisting you! Whenever your wardrobe pieces need renewal, you know where to find me. Have a fantastic day ahead!"
+      "It is an absolute pleasure assisting you! Whenever your wardrobe pieces need renewal, you know where to find us. Have a fantastic day ahead!"
     ]
   }
 ];
@@ -107,11 +114,11 @@ function scoreIntentMatch(userQuery) {
     for (const trigger of intent.triggers) {
       const triggerTokens = trigger.split(/\s+/);
       if (cleanQuery.includes(trigger)) {
-        currentScore += 12 + triggerTokens.length * 3;
+        currentScore += 14 + triggerTokens.length * 3;
       } else {
         const overlap = triggerTokens.filter(t => tokens.includes(t));
         if (overlap.length > 0) {
-          currentScore += overlap.length * 3;
+          currentScore += overlap.length * 3.5;
         }
       }
     }
@@ -122,6 +129,7 @@ function scoreIntentMatch(userQuery) {
     }
   }
 
+  // Threshold score of 3 matches casual overlaps
   if (highestScore >= 3 && bestMatch) {
     const respList = bestMatch.responses;
     return respList[Math.floor(Math.random() * respList.length)];
@@ -131,7 +139,7 @@ function scoreIntentMatch(userQuery) {
 }
 
 export async function processNaturalAIQuery(userQuery, _history = []) {
-  const thinkingTime = Math.floor(Math.random() * 450) + 500;
+  const thinkingTime = Math.floor(Math.random() * 400) + 450;
   await new Promise(resolve => setTimeout(resolve, thinkingTime));
 
   const trimmed = userQuery.trim();
@@ -141,6 +149,6 @@ export async function processNaturalAIQuery(userQuery, _history = []) {
   const matchedResponse = scoreIntentMatch(trimmed);
   if (matchedResponse) return matchedResponse;
 
-  // Conversational fallback without mentioning phone numbers
-  return `That is a great question! While my neural brain is specialized deeply in **fabric care chemistry** and **Jamnagar logistics**, I want to ensure you get the exact precise detail for "${trimmed}".\n\nOur human garment care masters are online right now on WhatsApp to assist you directly:\n\n[💬 Connect with SVL Experts on WhatsApp](${generalWhatsAppUrl})`;
+  // Conversational fallback directing to general WhatsApp link
+  return `That is a wonderful question! While my neural brain is specialized deeply in **fabric care chemistry** and **Jamnagar pickup logistics**, I want to ensure you get exact precision for "${trimmed}".\n\nOur human garment care masters are online right now on WhatsApp to assist you directly:\n\n[💬 Chat with SVL Experts on WhatsApp](${generalWhatsAppUrl})`;
 }
