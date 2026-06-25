@@ -6,7 +6,7 @@ const SVLChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('chat'); // 'chat', 'book', 'stain'
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: "Hello! I'm your **SVL AI Concierge**. Feel free to ask me anything about our fabric care, Jamnagar pickup, or pricing calculations (e.g. 'How much for 3 shirts and 2 suits?')!" }
+    { sender: 'bot', text: "Hello! I'm your **SVL AI Concierge**. Feel free to ask me anything about our specialized piece-wise garment care, Jamnagar pickup logistics, or stain removal advice!" }
   ]);
   const [inputText, setInputText] = useState('');
   const [isThinking, setIsThinking] = useState(false);
@@ -51,7 +51,7 @@ const SVLChatbot = () => {
       const botReply = await processNaturalAIQuery(query, messages);
       setMessages(prev => [...prev, { sender: 'bot', text: botReply }]);
     } catch {
-      setMessages(prev => [...prev, { sender: 'bot', text: "I apologize, my neural link experienced a momentary hiccup! Please reach out on WhatsApp at **+91 6351674100**." }]);
+      setMessages(prev => [...prev, { sender: 'bot', text: "I apologize, my neural link experienced a momentary hiccup! Please connect with our team directly on WhatsApp via our quick link." }]);
     } finally {
       setIsThinking(false);
     }
@@ -64,7 +64,7 @@ const SVLChatbot = () => {
   };
 
   const getWhatsAppBookingUrl = () => {
-    const text = `Hello Siddhi Vinayak Laundry! I used your AI Concierge to plan an order:\n- Care Protocol: ${bookingData.service}\n- Load Size: ${bookingData.quantity}\n- Preferred Pickup: ${bookingData.timing}\n\nPlease confirm my booking!`;
+    const text = `Hello Siddhi Vinayak Laundry! I used your AI Concierge to plan a piece-wise order:\n- Care Protocol: ${bookingData.service}\n- Load Volume: ${bookingData.quantity}\n- Preferred Pickup: ${bookingData.timing}\n\nPlease confirm my booking and share piece-wise rates!`;
     return `https://wa.me/916351674100?text=${encodeURIComponent(text)}`;
   };
 
@@ -79,7 +79,6 @@ const SVLChatbot = () => {
   const renderFormattedText = (text) => {
     const lines = text.split('\n');
     return lines.map((line, lIdx) => {
-      // Check for markdown link [text](url)
       const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
       const parts = [];
       let lastIdx = 0;
@@ -122,7 +121,6 @@ const SVLChatbot = () => {
 
   return (
     <>
-      {/* Comprehensive Ultra-Responsive CSS */}
       <style>{`
         .svl-chat-launcher {
           position: fixed;
@@ -201,7 +199,6 @@ const SVLChatbot = () => {
           animation: svlBounce 1.4s infinite ease-in-out both;
         }
 
-        /* Mobile & Tablet Ultra-Responsive Breakpoint */
         @media (max-width: 640px) {
           .svl-chat-launcher {
             bottom: 5.8rem;
@@ -242,7 +239,7 @@ const SVLChatbot = () => {
           }
 
           .svl-chat-input {
-            font-size: 16px !important; /* Prevents iOS Safari zoom */
+            font-size: 16px !important;
           }
         }
 
@@ -326,7 +323,7 @@ const SVLChatbot = () => {
             flexShrink: 0
           }}>
             {[
-              { id: 'chat', label: 'Natural Q&A', icon: HelpCircle },
+              { id: 'chat', label: 'General', icon: HelpCircle },
               { id: 'book', label: 'Smart Booking', icon: Calendar },
               { id: 'stain', label: 'Stain Aid', icon: Droplets }
             ].map(tab => (
@@ -360,7 +357,7 @@ const SVLChatbot = () => {
           {/* Tab Content Area */}
           <div style={{ flex: 1, overflowY: 'auto', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             
-            {/* TAB 1: NATURAL Q&A CHAT */}
+            {/* TAB 1: GENERAL Q&A CHAT */}
             {activeTab === 'chat' && (
               <>
                 {messages.map((msg, i) => (
@@ -401,7 +398,7 @@ const SVLChatbot = () => {
                 {/* Quick Suggestion Pills */}
                 {!isThinking && messages.length < 4 && (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
-                    {["Calculate estimate for 3 suits", "Why choose SVL vs local dhobi?", "Express urgent turnaround", "Turmeric & haldi stain removal"].map((pill, idx) => (
+                    {["Piece-wise pricing & rates", "Why choose SVL vs local dhobi?", "Express urgent turnaround", "Turmeric & haldi stain removal"].map((pill, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSend(pill)}
@@ -441,7 +438,7 @@ const SVLChatbot = () => {
                     <div>
                       <span style={{ fontWeight: '600', fontSize: '0.88rem', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>1. What service do you require?</span>
                       <div className="svl-grid-2">
-                        {['Wash & Fold', 'Advanced Dry Clean', 'Steam Ironing', 'Bulk Commercial'].map(srv => (
+                        {['Everyday Garment Care', 'Advanced Dry Clean', 'Steam Pressing', 'Bulk Commercial'].map(srv => (
                           <button key={srv} onClick={() => handleBookingSelect('service', srv)} className="btn-outline" style={{ padding: '0.85rem 0.5rem', fontSize: '0.85rem', textAlign: 'center', justifyContent: 'center', width: '100%', wordBreak: 'break-word' }}>{srv}</button>
                         ))}
                       </div>
@@ -452,7 +449,7 @@ const SVLChatbot = () => {
                     <div>
                       <span style={{ fontWeight: '600', fontSize: '0.88rem', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>2. Estimated load size?</span>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                        {['1 - 5 Garments', 'Medium Load (6-15 items)', 'Large Laundry Bag (5kg+)'].map(q => (
+                        {['1 - 5 Pieces', '6 - 15 Pieces', '16+ Pieces (Bulk Load)'].map(q => (
                           <button key={q} onClick={() => handleBookingSelect('quantity', q)} className="btn-outline" style={{ padding: '0.85rem', fontSize: '0.85rem', justifyContent: 'center', width: '100%' }}>{q}</button>
                         ))}
                       </div>
@@ -476,7 +473,7 @@ const SVLChatbot = () => {
                       <h4 style={{ fontSize: '1.15rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Ready to Schedule!</h4>
                       <div style={{ background: '#f1f5f9', padding: '1rem', borderRadius: '14px', textAlign: 'left', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: '1.6', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
                         <div><strong>Service:</strong> {bookingData.service}</div>
-                        <div><strong>Load Size:</strong> {bookingData.quantity}</div>
+                        <div><strong>Load Volume:</strong> {bookingData.quantity}</div>
                         <div><strong>Window:</strong> {bookingData.timing}</div>
                         <div style={{ marginTop: '0.6rem', color: 'var(--accent-primary)', fontWeight: '600', fontSize: '0.88rem' }}>⚡ Est. Turnaround: 24-36 Hours</div>
                       </div>
@@ -549,7 +546,7 @@ const SVLChatbot = () => {
 
           </div>
 
-          {/* Chat Input Bar (Only on Q&A Chat tab) */}
+          {/* Chat Input Bar (Only on General tab) */}
           {activeTab === 'chat' && (
             <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} style={{
               display: 'flex',
@@ -562,7 +559,7 @@ const SVLChatbot = () => {
             }}>
               <input
                 type="text"
-                placeholder="Ask anything (e.g. 'Price for 4 shirts')..."
+                placeholder="Ask anything (e.g. 'Turnaround time')..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 className="svl-chat-input"
