@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert } from 'lucide-react';
+import { Bot, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
 import { processNaturalAIQuery } from '../utils/aiBrain';
 
 const SVLChatbot = () => {
@@ -500,7 +500,9 @@ const SVLChatbot = () => {
                         <div><strong>Service:</strong> {bookingData.service}</div>
                         <div><strong>Load Volume:</strong> {bookingData.quantity}</div>
                         <div><strong>Window:</strong> {bookingData.timing}</div>
-                        <div style={{ marginTop: '0.6rem', color: 'var(--accent-primary)', fontWeight: '600', fontSize: '0.88rem' }}>⚡ Est. Turnaround: 24-36 Hours</div>
+                        <div style={{ marginTop: '0.6rem', color: 'var(--accent-primary)', fontWeight: '600', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                          <Clock size={16} /> <span>Est. Turnaround: 24-36 Hours</span>
+                        </div>
                       </div>
                       <a href={getWhatsAppBookingUrl()} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '1rem', fontSize: '0.95rem', boxSizing: 'border-box', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         Confirm via WhatsApp <ArrowRight size={18} style={{ marginLeft: '6px', flexShrink: 0 }} />
@@ -510,8 +512,8 @@ const SVLChatbot = () => {
                 </div>
 
                 {bookingStep > 1 && bookingStep <= 3 && (
-                  <button onClick={() => setBookingStep(bookingStep - 1)} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.85rem', marginTop: '1rem', padding: '0.5rem' }}>
-                    ← Back to previous step
+                  <button onClick={() => setBookingStep(bookingStep - 1)} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.85rem', marginTop: '1rem', padding: '0.5rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <ArrowLeft size={15} /> <span>Back to previous step</span>
                   </button>
                 )}
                 {bookingStep > 3 && (

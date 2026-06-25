@@ -8,14 +8,14 @@ const intentDatabase = [
     category: 'contact_details',
     triggers: ['contact', 'details', 'phone', 'number', 'email', 'call', 'reach', 'address', 'gmail', 'mobile', 'connect', 'customer care', 'helpdesk', 'whatsapp number', 'where are you', 'locate', 'location', 'mail'],
     responses: [
-      `You can reach our Siddhi Vinayak Laundry team directly through any of these official channels:\n\n• **📞 Phone / WhatsApp**: +91 6351674100\n• **📧 Email**: svinayaklaundry@gmail.com\n• **📍 Address**: Jamnagar, Gujarat, India\n\nFor instant inquiries or scheduling, message us directly:\n\n[💬 Connect on WhatsApp](${generalWhatsAppUrl})`
+      `You can reach our Siddhi Vinayak Laundry team directly through any of these official channels:\n\n• **Phone / WhatsApp**: +91 6351674100\n• **Email**: svinayaklaundry@gmail.com\n• **Address**: Jamnagar, Gujarat, India\n\nFor instant inquiries or scheduling, message us directly:\n\n[Connect on WhatsApp](${generalWhatsAppUrl})`
     ]
   },
   {
     category: 'pricing_rates',
     triggers: ['price', 'pricing', 'cost', 'rate', 'rates', 'how much', 'expensive', 'cheap', 'charge', 'menu', 'tariff', 'package', 'bill', 'estimate', 'shirt', 'suit', 'saree', 'blazer', 'piece', 'amount', 'rupee', 'inr', 'discount'],
     responses: [
-      `All our laundry, steam pressing, and dry cleaning services are strictly charged **per piece** (piece-wise rates) ensuring individual inspection and care for every garment.\n\nFor exact piece-wise pricing details for your wardrobe, please connect with our team directly on WhatsApp:\n\n[💬 Inquire Piece-Wise Rates on WhatsApp](${pricingWhatsAppUrl})`
+      `All our laundry, steam pressing, and dry cleaning services are strictly charged **per piece** (piece-wise rates) ensuring individual inspection and care for every garment.\n\nFor exact piece-wise pricing details for your wardrobe, please connect with our team directly on WhatsApp:\n\n[Inquire Piece-Wise Rates on WhatsApp](${pricingWhatsAppUrl})`
     ]
   },
   {
@@ -95,7 +95,7 @@ const intentDatabase = [
     category: 'humor_thanks',
     triggers: ['joke', 'funny', 'laugh', 'thank', 'thanks', 'awesome', 'great', 'wow', 'cool', 'love you', 'bye', 'goodnight', 'cheers', 'ok', 'okay', 'done'],
     responses: [
-      "Why did the shirt go to Siddhi Vinayak Laundry? Because it wanted to make a **flawless first impression**! 😄 You're very welcome—have a wonderful day!",
+      "Why did the shirt go to Siddhi Vinayak Laundry? Because it wanted to make a **flawless first impression**! You're very welcome—have a wonderful day!",
       "It is an absolute pleasure assisting you! Whenever your wardrobe pieces need renewal, you know where to find us. Have a fantastic day ahead!"
     ]
   }
@@ -149,5 +149,5 @@ export async function processNaturalAIQuery(userQuery, _history = []) {
   if (matchedResponse) return matchedResponse;
 
   // Conversational fallback directing to general WhatsApp link
-  return `That is a wonderful question! While my neural brain is specialized deeply in **fabric care chemistry** and **Jamnagar pickup logistics**, I want to ensure you get exact precision for "${trimmed}".\n\nOur human garment care masters are online right now on WhatsApp to assist you directly:\n\n[💬 Chat with SVL Experts on WhatsApp](${generalWhatsAppUrl})`;
+  return `That is a wonderful question! While my neural brain is specialized deeply in **fabric care chemistry** and **Jamnagar pickup logistics**, I want to ensure you get exact precision for "${trimmed}".\n\nOur human garment care masters are online right now on WhatsApp to assist you directly:\n\n[Chat with SVL Experts on WhatsApp](${generalWhatsAppUrl})`;
 }
