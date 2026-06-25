@@ -13,7 +13,10 @@ const WhatsAppFloat = () => {
           100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        .svl-wa-float {
+        .svl-wa-float,
+        .svl-wa-float:hover,
+        .svl-wa-float:focus,
+        .svl-wa-float:active {
           position: fixed;
           bottom: 2rem;
           right: 2rem;
@@ -21,7 +24,7 @@ const WhatsAppFloat = () => {
           width: 60px;
           border-radius: 30px;
           background-color: #25D366;
-          color: white;
+          color: #ffffff !important;
           display: flex;
           align-items: center;
           padding: 0 14px;
@@ -30,12 +33,15 @@ const WhatsAppFloat = () => {
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           cursor: pointer;
           overflow: hidden;
-          text-decoration: none;
+          text-decoration: none !important;
           box-sizing: border-box;
         }
 
-        .svl-wa-float.hovered {
+        .svl-wa-float.hovered,
+        .svl-wa-float:hover {
           width: 190px;
+          background-color: #22c55e !important;
+          color: #ffffff !important;
           box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
         }
 
@@ -87,7 +93,7 @@ const WhatsAppFloat = () => {
           transition: 'transform 0.3s ease',
           flexShrink: 0
         }}>
-          <WhatsAppIcon size={32} />
+          <WhatsAppIcon size={32} color="#ffffff" />
         </div>
         
         <span style={{
@@ -95,6 +101,7 @@ const WhatsAppFloat = () => {
           fontWeight: '600',
           fontSize: '1rem',
           marginLeft: '10px',
+          color: '#ffffff',
           opacity: isHovered ? 1 : 0,
           transform: isHovered ? 'translateX(0)' : 'translateX(-10px)',
           transition: 'all 0.3s ease',
