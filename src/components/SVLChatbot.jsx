@@ -1,21 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, X, Send, Sparkles, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert } from 'lucide-react';
-
-const faqKnowledge = [
-  { keywords: ['time', 'turnaround', 'how long', 'days', 'delivery', 'fast', 'same day'], answer: "Our standard turnaround time is **1-2 days**. We also offer express same-day processing for urgent personal orders upon request!" },
-  { keywords: ['price', 'cost', 'rate', 'how much', 'expensive', 'cheap', 'charge'], answer: "We offer highly competitive rates in Jamnagar! Everyday Wash & Fold starts at affordable per-kg rates, while delicate Dry Cleaning is priced per item. Select **Book Pickup** to get an exact tailored quote." },
-  { keywords: ['location', 'where', 'address', 'jamnagar', 'city', 'area'], answer: "We are located in **Jamnagar, Gujarat, India**. We offer **FREE pickup and delivery** across all major Jamnagar neighborhoods!" },
-  { keywords: ['hour', 'open', 'close', 'timing', 'sunday', 'saturday'], answer: "We are open **Monday to Friday (8 AM - 8 PM)** and **Saturday (9 AM - 6 PM)**. We are closed on Sundays to rest and service our industrial machines." },
-  { keywords: ['silk', 'wool', 'saree', 'blazer', 'suit', 'cashmere', 'delicate'], answer: "Yes! We specialize in delicate garment care. We use advanced bio-solvents that clean deep into silk, wool, and zari without fading colors or shrinking fibers." }
-];
+import { processNaturalAIQuery } from '../utils/aiBrain';
 
 const SVLChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('chat'); // 'chat', 'book', 'stain'
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: "Hello! I'm your **SVL AI Concierge**. How can I assist you with your garment care today?" }
+    { sender: 'bot', text: "Hello! I'm your **SVL AI Concierge**. Feel free to ask me anything about our fabric care, Jamnagar pickup, or pricing calculations (e.g. 'How much for 3 shirts and 2 suits?')!" }
   ]);
   const [inputText, setInputText] = useState('');
+  const [isThinking, setIsThinking] = useState(false);
   const messagesEndRef = useRef(null);
 
   // Booking Wizard State
@@ -31,7 +25,7 @@ const SVLChatbot = () => {
 
   useEffect(() => {
     if (isOpen) scrollToBottom();
-  }, [messages, isOpen, activeTab, bookingStep]);
+  }, [messages, isOpen, activeTab, bookingStep, isThinking]);
 
   // Lock body scroll on mobile when full modal drawer is open
   useEffect(() => {
@@ -43,35 +37,24 @@ const SVLChatbot = () => {
     return () => { document.body.style.overflow = 'auto'; };
   }, [isOpen]);
 
-  const handleSend = (textToSend) => {
+  const handleSend = async (textToSend) => {
     const query = textToSend || inputText;
-    if (!query.trim()) return;
+    if (!query.trim() || isThinking) return;
 
-    const newMsgs = [...messages, { sender: 'user', text: query }];
-    setMessages(newMsgs);
+    const userMsg = { sender: 'user', text: query };
+    setMessages(prev => [...prev, userMsg]);
     if (!textToSend) setInputText('');
 
-    setTimeout(() => {
-      const lower = query.toLowerCase();
-      let foundReply = null;
+    setIsThinking(true);
 
-      for (const item of faqKnowledge) {
-        if (item.keywords.some(k => lower.includes(k))) {
-          foundReply = item.answer;
-          break;
-        }
-      }
-
-      if (!foundReply) {
-        if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-          foundReply = "Hi there! Feel free to ask me about our turnaround times, pricing, Jamnagar free pickup, or stain advice!";
-        } else {
-          foundReply = "I can certainly help with that! For specific requests or instant confirmation, you can chat directly with our human experts on WhatsApp at **+91 6351674100**.";
-        }
-      }
-
-      setMessages(prev => [...prev, { sender: 'bot', text: foundReply }]);
-    }, 400);
+    try {
+      const botReply = await processNaturalAIQuery(query, messages);
+      setMessages(prev => [...prev, { sender: 'bot', text: botReply }]);
+    } catch {
+      setMessages(prev => [...prev, { sender: 'bot', text: "I apologize, my neural link experienced a momentary hiccup! Please reach out on WhatsApp at **+91 6351674100**." }]);
+    } finally {
+      setIsThinking(false);
+    }
   };
 
   const handleBookingSelect = (field, val) => {
@@ -90,6 +73,51 @@ const SVLChatbot = () => {
     oil: { title: "Oil / Curry / Grease", advice: "Sprinkle talcum powder or baking soda immediately to absorb surface oils. Do not apply hot water. Requires our specialized hydrocarbon lipid-remover." },
     ink: { title: "Ink / Ballpoint Pen", advice: "Never rub ink! Place a paper towel underneath and dab gently with rubbing alcohol if available, or keep it dry until professional dry cleaning." },
     wine: { title: "Red Wine / Fruit Juice", advice: "Blot immediately with a clean cloth. Club soda helps lift pigments temporarily. Bring to SVL within 24 hours for complete oxidation treatment." }
+  };
+
+  // Helper to render basic markdown bold and links nicely inside chat bubbles
+  const renderFormattedText = (text) => {
+    const lines = text.split('\n');
+    return lines.map((line, lIdx) => {
+      // Check for markdown link [text](url)
+      const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+      const parts = [];
+      let lastIdx = 0;
+      let match;
+
+      while ((match = linkRegex.exec(line)) !== null) {
+        if (match.index > lastIdx) {
+          parts.push(line.substring(lastIdx, match.index));
+        }
+        parts.push(
+          <a
+            key={`link-${lastIdx}`}
+            href={match[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: '#2563eb', fontWeight: '700', textDecoration: 'underline', display: 'inline-block', margin: '4px 0' }}
+          >
+            {match[1]}
+          </a>
+        );
+        lastIdx = linkRegex.lastIndex;
+      }
+      if (lastIdx < line.length) {
+        parts.push(line.substring(lastIdx));
+      }
+
+      const contentToFormat = parts.length > 0 ? parts : [line];
+
+      return (
+        <React.Fragment key={lIdx}>
+          {contentToFormat.map((chunk, _cIdx) => {
+            if (typeof chunk !== 'string') return chunk;
+            return chunk.split('**').map((subChunk, sIdx) => sIdx % 2 === 1 ? <strong key={sIdx}>{subChunk}</strong> : subChunk);
+          })}
+          {lIdx < lines.length - 1 && <br />}
+        </React.Fragment>
+      );
+    });
   };
 
   return (
@@ -159,6 +187,20 @@ const SVLChatbot = () => {
           font-family: inherit;
         }
 
+        @keyframes svlBounce {
+          0%, 80%, 100% { transform: scale(0); }
+          40% { transform: scale(1); }
+        }
+
+        .svl-typing-dot {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          background-color: #94a3b8;
+          border-radius: 50%;
+          animation: svlBounce 1.4s infinite ease-in-out both;
+        }
+
         /* Mobile & Tablet Ultra-Responsive Breakpoint */
         @media (max-width: 640px) {
           .svl-chat-launcher {
@@ -204,7 +246,6 @@ const SVLChatbot = () => {
           }
         }
 
-        /* Very narrow screens (Galaxy Fold / small SE) */
         @media (max-width: 360px) {
           .svl-chat-modal {
             height: 94dvh;
@@ -285,7 +326,7 @@ const SVLChatbot = () => {
             flexShrink: 0
           }}>
             {[
-              { id: 'chat', label: 'Q&A Chat', icon: HelpCircle },
+              { id: 'chat', label: 'Natural Q&A', icon: HelpCircle },
               { id: 'book', label: 'Smart Booking', icon: Calendar },
               { id: 'stain', label: 'Stain Aid', icon: Droplets }
             ].map(tab => (
@@ -319,7 +360,7 @@ const SVLChatbot = () => {
           {/* Tab Content Area */}
           <div style={{ flex: 1, overflowY: 'auto', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             
-            {/* TAB 1: QUICK CHAT */}
+            {/* TAB 1: NATURAL Q&A CHAT */}
             {activeTab === 'chat' && (
               <>
                 {messages.map((msg, i) => (
@@ -336,14 +377,31 @@ const SVLChatbot = () => {
                     wordBreak: 'break-word',
                     overflowWrap: 'break-word'
                   }}>
-                    {msg.text.split('**').map((part, idx) => idx % 2 === 1 ? <strong key={idx}>{part}</strong> : part)}
+                    {msg.sender === 'user' ? msg.text : renderFormattedText(msg.text)}
                   </div>
                 ))}
                 
+                {/* Natural Typing Indicator */}
+                {isThinking && (
+                  <div style={{
+                    alignSelf: 'flex-start',
+                    padding: '0.7rem 1rem',
+                    borderRadius: '18px 18px 18px 4px',
+                    background: '#f1f5f9',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}>
+                    <span className="svl-typing-dot" style={{ animationDelay: '0s' }}></span>
+                    <span className="svl-typing-dot" style={{ animationDelay: '0.2s' }}></span>
+                    <span className="svl-typing-dot" style={{ animationDelay: '0.4s' }}></span>
+                  </div>
+                )}
+
                 {/* Quick Suggestion Pills */}
-                {messages.length < 4 && (
+                {!isThinking && messages.length < 4 && (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
-                    {["Turnaround time?", "Pricing details", "Free Pickup area?", "Silk garment care"].map((pill, idx) => (
+                    {["Calculate estimate for 3 suits", "Why choose SVL vs local dhobi?", "Express urgent turnaround", "Turmeric & haldi stain removal"].map((pill, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSend(pill)}
@@ -504,10 +562,11 @@ const SVLChatbot = () => {
             }}>
               <input
                 type="text"
-                placeholder="Ask about time, price, Jamnagar..."
+                placeholder="Ask anything (e.g. 'Price for 4 shirts')..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 className="svl-chat-input"
+                disabled={isThinking}
               />
               <button
                 type="submit"
@@ -515,16 +574,17 @@ const SVLChatbot = () => {
                   width: '42px',
                   height: '42px',
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                  background: isThinking ? '#cbd5e1' : 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
                   color: 'white',
                   border: 'none',
-                  cursor: 'pointer',
+                  cursor: isThinking ? 'not-allowed' : 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
-                  boxShadow: '0 4px 12px rgba(124, 58, 237, 0.3)'
+                  boxShadow: isThinking ? 'none' : '0 4px 12px rgba(124, 58, 237, 0.3)'
                 }}
+                disabled={isThinking}
                 aria-label="Send Message"
               >
                 <Send size={18} />
