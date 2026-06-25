@@ -26,9 +26,10 @@ const SVLChatbot = () => {
     }
   }, [isOpen, activeTab]);
 
-  // When conversation progresses, scroll smoothly inside the container only
+  // Only scroll down when the user submits a query (isThinking becomes true), revealing typing dots.
+  // When bot responds (isThinking becomes false), keep scroll position anchored so the message doesn't scroll up out of view!
   useEffect(() => {
-    if (isOpen && chatContainerRef.current && messages.length > 1) {
+    if (isOpen && chatContainerRef.current && isThinking) {
       const container = chatContainerRef.current;
       requestAnimationFrame(() => {
         container.scrollTo({
@@ -37,7 +38,7 @@ const SVLChatbot = () => {
         });
       });
     }
-  }, [messages, isThinking, isOpen]);
+  }, [isThinking, isOpen]);
 
   // Lock body scroll on mobile when full modal drawer is open
   useEffect(() => {
