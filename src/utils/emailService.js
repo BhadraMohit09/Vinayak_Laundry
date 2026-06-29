@@ -2,6 +2,7 @@ const EMAILJS_SERVICE_ID = (typeof process !== 'undefined' && process.env && pro
 const EMAILJS_OWNER_TEMPLATE_ID = (typeof process !== 'undefined' && process.env && process.env.EMAILJS_OWNER_TEMPLATE_ID) || 'template_n6y2shv';
 const EMAILJS_CUSTOMER_TEMPLATE_ID = (typeof process !== 'undefined' && process.env && process.env.EMAILJS_CUSTOMER_TEMPLATE_ID) || 'template_nfsoy4r';
 const EMAILJS_PUBLIC_KEY = (typeof process !== 'undefined' && process.env && process.env.EMAILJS_PUBLIC_KEY) || 'fWKmKeEqHy7Cz_Sim';
+const EMAILJS_PRIVATE_KEY = (typeof process !== 'undefined' && process.env && process.env.EMAILJS_PRIVATE_KEY) || '';
 
 /**
  * Sends notification and confirmation emails using EmailJS REST API
@@ -15,6 +16,7 @@ export async function sendFormEmails({ name, email, subject, message }) {
   const ownerTemplateId = EMAILJS_OWNER_TEMPLATE_ID.trim();
   const customerTemplateId = EMAILJS_CUSTOMER_TEMPLATE_ID.trim();
   const publicKey = EMAILJS_PUBLIC_KEY.trim();
+  const privateKey = EMAILJS_PRIVATE_KEY.trim();
 
   if (!serviceId || !ownerTemplateId || !customerTemplateId || !publicKey) {
     throw new Error('Server Configuration Error: EmailJS IDs or Public Key are missing.');
@@ -27,6 +29,15 @@ export async function sendFormEmails({ name, email, subject, message }) {
     message
   };
 
+  const basePayload = {
+    service_id: serviceId,
+    user_id: publicKey,
+    template_params: templateParams
+  };
+  if (privateKey) {
+    basePayload.accessToken = privateKey;
+  }
+
   // 1. Send Owner Notification Email
   const ownerResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
     method: 'POST',
@@ -34,10 +45,8 @@ export async function sendFormEmails({ name, email, subject, message }) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      service_id: serviceId,
-      template_id: ownerTemplateId,
-      user_id: publicKey,
-      template_params: templateParams
+      ...basePayload,
+      template_id: ownerTemplateId
     })
   });
 
@@ -55,10 +64,8 @@ export async function sendFormEmails({ name, email, subject, message }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        service_id: serviceId,
-        template_id: customerTemplateId,
-        user_id: publicKey,
-        template_params: templateParams
+        ...basePayload,
+        template_id: customerTemplateId
       })
     });
 
