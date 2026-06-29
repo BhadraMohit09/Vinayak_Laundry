@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
+import { Bot, X, Send, MessageCircleMore, Sparkles, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
 import { processNaturalAIQuery } from '../utils/aiBrain';
 
 const SVLChatbot = () => {
@@ -142,24 +142,34 @@ const SVLChatbot = () => {
           position: fixed;
           bottom: 6.75rem;
           right: 2rem;
-          width: 60px;
-          height: 60px;
+          width: 64px;
+          height: 64px;
           border-radius: 50%;
-          background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+          background: linear-gradient(135deg, #4338ca, #0284c7);
           color: white;
-          border: none;
-          box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          box-shadow: 0 10px 30px rgba(67, 56, 202, 0.45), 0 0 20px rgba(2, 132, 199, 0.3);
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
           z-index: 999;
-          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           box-sizing: border-box;
         }
 
+        .svl-chat-launcher::before {
+          content: '';
+          position: absolute;
+          inset: -6px;
+          border-radius: 50%;
+          border: 2px dashed rgba(67, 56, 202, 0.6);
+          animation: spin 10s linear infinite;
+        }
+
         .svl-chat-launcher:hover {
-          transform: scale(1.1) rotate(5deg);
+          transform: scale(1.12) translateY(-4px);
+          box-shadow: 0 15px 35px rgba(67, 56, 202, 0.6);
         }
 
         .svl-chat-backdrop {
@@ -268,14 +278,46 @@ const SVLChatbot = () => {
         }
       `}</style>
 
-      {/* Floating Launcher Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="svl-chat-launcher"
-        aria-label="Open SVL AI Concierge"
-      >
-        {isOpen ? <X size={26} /> : <MessageCircleMore size={28} />}
-      </button>
+      {/* Floating Out-of-the-Box AI Launcher Button */}
+      <div style={{ position: 'fixed', bottom: '6.75rem', right: '2rem', zIndex: 999 }}>
+        {!isOpen && (
+          <div style={{
+            position: 'absolute',
+            right: '74px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            background: '#1c1917',
+            color: '#ffffff',
+            padding: '0.45rem 0.85rem',
+            borderRadius: '20px',
+            fontSize: '0.78rem',
+            fontWeight: '700',
+            whiteSpace: 'nowrap',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.4rem',
+            animation: 'fadeIn 0.5s ease-out'
+          }}>
+            <Sparkles size={14} color="#0284c7" />
+            <span>Ask AI Lab</span>
+          </div>
+        )}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="svl-chat-launcher"
+          style={{ position: 'relative', bottom: 'auto', right: 'auto' }}
+          aria-label="Open SVL AI Concierge"
+        >
+          {isOpen ? <X size={28} /> : (
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Bot size={30} style={{ animation: 'splashPulse 2s infinite' }} />
+              <Sparkles size={14} color="#38bdf8" style={{ position: 'absolute', top: '-6px', right: '-6px', animation: 'spin 4s linear infinite' }} />
+            </div>
+          )}
+        </button>
+      </div>
 
       {/* Mobile Dark Backdrop Overlay */}
       {isOpen && (
@@ -293,26 +335,29 @@ const SVLChatbot = () => {
           {/* Header */}
           <div style={{
             padding: '1rem 1.4rem',
-            background: 'linear-gradient(135deg, #0f172a, #1e293b)',
+            background: 'linear-gradient(135deg, #4338ca, #0284c7)',
             color: 'white',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            flexShrink: 0
+            flexShrink: 0,
+            boxShadow: '0 4px 15px rgba(67, 56, 202, 0.2)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '10px',
-                background: 'rgba(124, 58, 237, 0.35)',
+                width: '38px',
+                height: '38px',
+                borderRadius: '12px',
+                background: 'rgba(255, 255, 255, 0.2)',
+                backdropFilter: 'blur(8px)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#c084fc',
-                flexShrink: 0
+                color: '#ffffff',
+                flexShrink: 0,
+                border: '1px solid rgba(255,255,255,0.3)'
               }}>
-                <Bot size={20} />
+                <Sparkles size={20} />
               </div>
               <div>
                 <h3 style={{ fontSize: '0.95rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem', letterSpacing: '0.3px' }}>
