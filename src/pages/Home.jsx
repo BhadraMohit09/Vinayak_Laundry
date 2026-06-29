@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, ShieldCheck, Clock, Zap } from 'lucide-react';
+import { Award, ShieldCheck, Clock, Zap } from 'lucide-react';
 
 // Lazy load components
 const BeforeAfterSlider = React.lazy(() => import('../components/BeforeAfterSlider'));
@@ -102,7 +102,7 @@ const Home = () => {
             gap: '2rem'
           }}>
             {[
-              { icon: Sparkles, title: 'Premium Quality', desc: 'Meticulous attention to detail ensuring every fiber is perfectly cleaned and restored.', color: 'var(--accent-primary)', bg: 'rgba(124, 58, 237, 0.08)' },
+              { icon: Award, title: 'Premium Quality', desc: 'Meticulous attention to detail ensuring every fiber is perfectly cleaned and restored.', color: 'var(--accent-primary)', bg: 'rgba(124, 58, 237, 0.08)' },
               { icon: Zap, title: 'Advanced Tech', desc: 'Utilizing state-of-the-art equipment for efficient and fabric-safe washing processes.', color: 'var(--accent-secondary)', bg: 'rgba(37, 99, 235, 0.08)' },
               { icon: ShieldCheck, title: 'Garment Protection', desc: 'Advanced eco-friendly solvents that protect your clothes and extend their lifespan.', color: 'var(--accent-primary)', bg: 'rgba(124, 58, 237, 0.08)' },
               { icon: Clock, title: 'Reliable Delivery', desc: 'On-time pickup and delivery tailored to your busy schedule with precision.', color: 'var(--accent-secondary)', bg: 'rgba(37, 99, 235, 0.08)' }

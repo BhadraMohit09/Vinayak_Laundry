@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { X, GripHorizontal, Sparkles, Home as HomeIcon, Info, Briefcase, BookOpen, HelpCircle, PhoneCall, ArrowRight } from 'lucide-react';
+import { X, GripHorizontal, Shirt, Home as HomeIcon, Info, Briefcase, BookOpen, HelpCircle, PhoneCall, ArrowRight } from 'lucide-react';
 
 const taglines = [
   "Premium Garment Care",
@@ -25,7 +25,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/', icon: HomeIcon },
     { name: 'About', path: '/about', icon: Info },
-    { name: 'Services', path: '/services', icon: Sparkles },
+    { name: 'Services', path: '/services', icon: Shirt },
     { name: 'Commercial', path: '/commercial', icon: Briefcase },
     { name: 'Blog', path: '/blog', icon: BookOpen },
     { name: 'FAQ', path: '/faq', icon: HelpCircle },
@@ -93,7 +93,6 @@ const Navbar = () => {
                         <Icon size={16} />
                       </span>
                       <span>{link.name}</span>
-                      {isActive && <span className="capsule-dot" />}
                     </Link>
                   </li>
                 );
@@ -202,56 +201,35 @@ const Navbar = () => {
           display: inline-flex;
           align-items: center;
           gap: 0.45rem;
-          padding: 0.45rem 0.85rem;
-          border-radius: 30px;
+          padding: 0.45rem 0.9rem;
+          border-radius: 25px;
           color: var(--text-secondary);
-          font-weight: 600;
-          font-size: 0.9rem;
+          font-weight: 500;
+          font-size: 0.92rem;
           text-decoration: none;
-          background: transparent;
-          border: 1px solid transparent;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          position: relative;
+          transition: all 0.2s ease;
         }
         .desktop-capsule .capsule-icon {
           display: flex;
           align-items: center;
-          justify-content: center;
           color: #94a3b8;
-          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transition: color 0.2s ease;
         }
         .desktop-capsule:hover {
-          background: rgba(255, 255, 255, 0.9);
-          border-color: rgba(67, 56, 202, 0.18);
-          color: var(--accent-primary);
-          transform: translateY(-2px);
-          box-shadow: 0 6px 16px rgba(67, 56, 202, 0.08);
+          background: rgba(0, 0, 0, 0.04);
+          color: var(--text-primary);
         }
         .desktop-capsule:hover .capsule-icon {
           color: var(--accent-primary);
-          transform: scale(1.2) rotate(-8deg);
         }
         .active-capsule {
-          background: linear-gradient(135deg, rgba(67, 56, 202, 0.1), rgba(2, 132, 199, 0.1)) !important;
-          border-color: rgba(67, 56, 202, 0.3) !important;
-          color: var(--accent-primary) !important;
-          font-weight: 700 !important;
-          box-shadow: 0 4px 12px rgba(67, 56, 202, 0.12) !important;
+          background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+          color: #ffffff !important;
+          font-weight: 600 !important;
+          box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2) !important;
         }
         .active-capsule .capsule-icon {
-          color: var(--accent-primary) !important;
-        }
-        .capsule-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #22c55e;
-          box-shadow: 0 0 8px #22c55e;
-          animation: pulseDot 2s infinite;
-        }
-        @keyframes pulseDot {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.4); opacity: 0.5; }
+          color: #ffffff !important;
         }
         .brand-title {
           font-size: 1.25rem;

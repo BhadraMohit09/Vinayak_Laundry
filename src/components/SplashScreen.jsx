@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Sparkles, Droplets, Wind } from 'lucide-react';
+import { CheckCircle2, Droplets, Wind } from 'lucide-react';
 
 const SplashScreen = ({ onFinish }) => {
   const [step, setStep] = useState(0);
@@ -29,7 +29,7 @@ const SplashScreen = ({ onFinish }) => {
   const workflowSteps = [
     { text: 'Gentle Wash & Stain Treatment...', icon: Droplets, color: '#0284c7' },
     { text: 'Eco-Solvent Rinse & Spin...', icon: Wind, color: '#4338ca' },
-    { text: 'Pristine & Flawlessly Ready!', icon: Sparkles, color: '#059669' }
+    { text: 'Pristine & Flawlessly Ready!', icon: CheckCircle2, color: '#059669' }
   ];
 
   const CurrentIcon = workflowSteps[step].icon;

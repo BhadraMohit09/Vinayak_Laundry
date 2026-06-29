@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, MessageCircleMore, Sparkles, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
+import { Bot, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
 import { processNaturalAIQuery } from '../utils/aiBrain';
 
 const SVLChatbot = () => {
