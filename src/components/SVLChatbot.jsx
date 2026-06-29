@@ -275,7 +275,7 @@ const SVLChatbot = () => {
         className="svl-chat-launcher"
         aria-label="Open Virtual Concierge"
       >
-        {isOpen ? <X size={26} /> : <MessageCircleMore size={28} />}
+        {isOpen ? <X size={26} /> : <Bot size={30} />}
       </button>
 
       {/* Mobile Dark Backdrop Overlay */}
