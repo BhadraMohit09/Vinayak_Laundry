@@ -79,24 +79,34 @@ const Navbar = () => {
 
           {/* Desktop Nav Links (Restored exactly to original laptop view preference) */}
           <div className="desktop-nav">
-            <ul style={{ display: 'flex', gap: '1.8rem', listStyle: 'none', margin: 0, padding: 0 }}>
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className="nav-link"
-                    style={{
-                      color: location.pathname === link.path ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                      fontWeight: location.pathname === link.path ? '600' : '500',
-                      transition: 'color 0.2s',
-                      fontSize: '0.95rem',
-                      textDecoration: 'none'
-                    }}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <ul style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', listStyle: 'none', margin: 0, padding: 0 }}>
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <li key={link.name}>
+                    <Link
+                      to={link.path}
+                      className="nav-link hover-nav-pill"
+                      style={{
+                        padding: '0.45rem 0.95rem',
+                        borderRadius: '20px',
+                        background: isActive ? 'rgba(67, 56, 202, 0.08)' : 'transparent',
+                        color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                        fontWeight: isActive ? '700' : '500',
+                        border: isActive ? '1px solid rgba(67, 56, 202, 0.2)' : '1px solid transparent',
+                        transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                        fontSize: '0.92rem',
+                        textDecoration: 'none',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem'
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           
@@ -134,7 +144,7 @@ const Navbar = () => {
             gap: '0.7rem',
             animation: 'fadeIn 0.2s ease-out'
           }} className="mobile-toggle">
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.65rem' }}>
               {navLinks.map((link) => {
                 const Icon = link.icon;
                 const isActive = location.pathname === link.path;
@@ -147,21 +157,35 @@ const Navbar = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      padding: '0.75rem 0.9rem',
-                      borderRadius: '14px',
-                      background: isActive ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : 'rgba(0,0,0,0.03)',
+                      padding: '0.65rem 0.8rem',
+                      borderRadius: '16px',
+                      background: isActive ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : '#ffffff',
                       color: isActive ? '#ffffff' : 'var(--text-primary)',
                       fontWeight: isActive ? '700' : '600',
-                      fontSize: '0.9rem',
+                      fontSize: '0.88rem',
                       textDecoration: 'none',
-                      transition: 'all 0.2s'
+                      border: isActive ? 'none' : '1px solid rgba(0,0,0,0.06)',
+                      boxShadow: isActive ? '0 6px 16px rgba(67, 56, 202, 0.3)' : '0 2px 6px rgba(0,0,0,0.02)',
+                      transition: 'all 0.25s ease'
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <Icon size={16} style={{ color: isActive ? '#ffffff' : 'var(--accent-primary)' }} />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                      <div style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '10px',
+                        background: isActive ? 'rgba(255, 255, 255, 0.2)' : 'rgba(67, 56, 202, 0.08)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: isActive ? '#ffffff' : 'var(--accent-primary)',
+                        flexShrink: 0
+                      }}>
+                        <Icon size={16} />
+                      </div>
                       <span>{link.name}</span>
                     </div>
-                    <ArrowRight size={14} style={{ opacity: isActive ? 1 : 0.4 }} />
+                    <ArrowRight size={14} style={{ opacity: isActive ? 0.9 : 0.3, transform: isActive ? 'translateX(2px)' : 'none', transition: 'all 0.2s' }} />
                   </Link>
                 );
               })}
@@ -182,6 +206,11 @@ const Navbar = () => {
       <style>{`
         .navbar-container {
           padding: 0.8rem 1.8rem;
+        }
+        .hover-nav-pill:hover {
+          background: rgba(0,0,0,0.04) !important;
+          color: var(--text-primary) !important;
+          transform: translateY(-1px);
         }
         .brand-title {
           font-size: 1.25rem;
