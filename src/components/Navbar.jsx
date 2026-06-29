@@ -79,30 +79,21 @@ const Navbar = () => {
 
           {/* Desktop Nav Links (Restored exactly to original laptop view preference) */}
           <div className="desktop-nav">
-            <ul style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', listStyle: 'none', margin: 0, padding: 0 }}>
+            <ul style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', listStyle: 'none', margin: 0, padding: 0 }}>
               {navLinks.map((link) => {
+                const Icon = link.icon;
                 const isActive = location.pathname === link.path;
                 return (
                   <li key={link.name}>
                     <Link
                       to={link.path}
-                      className="nav-link hover-nav-pill"
-                      style={{
-                        padding: '0.45rem 0.95rem',
-                        borderRadius: '20px',
-                        background: isActive ? 'rgba(67, 56, 202, 0.08)' : 'transparent',
-                        color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                        fontWeight: isActive ? '700' : '500',
-                        border: isActive ? '1px solid rgba(67, 56, 202, 0.2)' : '1px solid transparent',
-                        transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-                        fontSize: '0.92rem',
-                        textDecoration: 'none',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.35rem'
-                      }}
+                      className={`desktop-capsule ${isActive ? 'active-capsule' : ''}`}
                     >
-                      {link.name}
+                      <span className="capsule-icon">
+                        <Icon size={16} />
+                      </span>
+                      <span>{link.name}</span>
+                      {isActive && <span className="capsule-dot" />}
                     </Link>
                   </li>
                 );
@@ -207,10 +198,60 @@ const Navbar = () => {
         .navbar-container {
           padding: 0.8rem 1.8rem;
         }
-        .hover-nav-pill:hover {
-          background: rgba(0,0,0,0.04) !important;
-          color: var(--text-primary) !important;
-          transform: translateY(-1px);
+        .desktop-capsule {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          padding: 0.45rem 0.85rem;
+          border-radius: 30px;
+          color: var(--text-secondary);
+          font-weight: 600;
+          font-size: 0.9rem;
+          text-decoration: none;
+          background: transparent;
+          border: 1px solid transparent;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+        }
+        .desktop-capsule .capsule-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #94a3b8;
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .desktop-capsule:hover {
+          background: rgba(255, 255, 255, 0.9);
+          border-color: rgba(67, 56, 202, 0.18);
+          color: var(--accent-primary);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(67, 56, 202, 0.08);
+        }
+        .desktop-capsule:hover .capsule-icon {
+          color: var(--accent-primary);
+          transform: scale(1.2) rotate(-8deg);
+        }
+        .active-capsule {
+          background: linear-gradient(135deg, rgba(67, 56, 202, 0.1), rgba(2, 132, 199, 0.1)) !important;
+          border-color: rgba(67, 56, 202, 0.3) !important;
+          color: var(--accent-primary) !important;
+          font-weight: 700 !important;
+          box-shadow: 0 4px 12px rgba(67, 56, 202, 0.12) !important;
+        }
+        .active-capsule .capsule-icon {
+          color: var(--accent-primary) !important;
+        }
+        .capsule-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #22c55e;
+          box-shadow: 0 0 8px #22c55e;
+          animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.4); opacity: 0.5; }
         }
         .brand-title {
           font-size: 1.25rem;
