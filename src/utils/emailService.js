@@ -1,4 +1,4 @@
-const RESEND_API_KEY = 're_LQLCJZH1_3rZGmZdGkHZtkcKUkAFfNpCy';
+const RESEND_API_KEY = (typeof process !== 'undefined' && process.env && process.env.RESEND_API_KEY) || 're_LQLCJZH1_3rZGmZdGkHZtkcKUkAFfNpCy';
 const ADMIN_EMAIL = 'bhadramohit.cloud@gmail.com';
 const SENDER_EMAIL = 'Siddhi Vinayak Laundry <onboarding@resend.dev>';
 
