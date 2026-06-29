@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -7,7 +7,6 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 
 import ErrorBoundary from './components/ErrorBoundary';
 import SVLChatbot from './components/SVLChatbot';
-import SplashScreen from './components/SplashScreen';
 import { useScrollReveal } from './utils/useScrollReveal';
 
 // Lazy load routes
@@ -28,16 +27,8 @@ const ScrollToTop = () => {
 };
 
 function App() {
-  const [showSplash, setShowSplash] = useState(() => !sessionStorage.getItem('svl_splash_shown'));
-
-  const handleSplashFinish = () => {
-    sessionStorage.setItem('svl_splash_shown', 'true');
-    setShowSplash(false);
-  };
-
   return (
     <Router>
-      {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
       <ScrollToTop />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Navbar />
