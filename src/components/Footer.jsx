@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, ArrowUpRight, ShieldCheck, Clock, Award } from 'lucide-react';
+import { Mail, MapPin, Phone, ArrowUpRight, ShieldCheck, Clock, Award, X } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 
 const Footer = () => {
+  const [activeModal, setActiveModal] = useState(null); // null | 'privacy' | 'terms'
+  const [istTime, setIstTime] = useState('');
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      const options = {
+        timeZone: 'Asia/Kolkata',
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      };
+      setIstTime(now.toLocaleString('en-IN', options) + ' IST');
+    };
+    updateClock();
+    const timer = setInterval(updateClock, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <footer style={{
       background: 'linear-gradient(180deg, rgba(250, 249, 246, 0.4) 0%, rgba(240, 238, 233, 0.9) 100%)',
@@ -127,14 +150,114 @@ const Footer = () => {
         padding: '1.5rem 0'
       }}>
         <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', fontSize: '0.85rem', color: '#78716c' }}>
-          <p style={{ margin: 0 }}>&copy; {new Date().getFullYear()} Siddhi Vinayak Laundry. All rights reserved.</p>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexWrap: 'wrap' }}>
+            <p style={{ margin: 0 }}>&copy; {new Date().getFullYear()} Siddhi Vinayak Laundry. All rights reserved.</p>
+            {/* Laptop IST Live Clock */}
+            {istTime && (
+              <div className="footer-ist-clock" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(67, 56, 202, 0.08)', padding: '0.3rem 0.85rem', borderRadius: '20px', color: 'var(--accent-primary)', fontWeight: '600', fontSize: '0.82rem', border: '1px solid rgba(67, 56, 202, 0.15)' }}>
+                <Clock size={13} style={{ animation: 'pulse 2s infinite' }} />
+                <span>{istTime}</span>
+              </div>
+            )}
+          </div>
+          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Award size={14} color="var(--accent-primary)" /> Premium Care</span>
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+            <button type="button" onClick={() => setActiveModal('privacy')} style={{ background: 'transparent', border: 'none', color: '#78716c', cursor: 'pointer', fontSize: '0.85rem', padding: 0, textDecoration: 'underline' }}>Privacy Policy</button>
+            <button type="button" onClick={() => setActiveModal('terms')} style={{ background: 'transparent', border: 'none', color: '#78716c', cursor: 'pointer', fontSize: '0.85rem', padding: 0, textDecoration: 'underline' }}>Terms of Service</button>
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 850px) {
+          .footer-ist-clock { display: none !important; }
+        }
+      `}</style>
+
+      {/* Legal Modals */}
+      {activeModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0, 0, 0, 0.55)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1.5rem'
+        }} onClick={() => setActiveModal(null)}>
+          <div style={{
+            background: '#ffffff',
+            borderRadius: '24px',
+            maxWidth: '650px',
+            width: '100%',
+            maxHeight: '85vh',
+            overflowY: 'auto',
+            padding: '2.5rem',
+            position: 'relative',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+            border: '1px solid rgba(0,0,0,0.08)'
+          }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.08)', paddingBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#1c1917', margin: 0 }}>
+                {activeModal === 'privacy' ? 'Privacy Policy' : 'Terms of Service'}
+              </h3>
+              <button type="button" onClick={() => setActiveModal(null)} style={{ background: 'rgba(0,0,0,0.05)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#57534e' }} aria-label="Close modal">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.7' }}>
+              {activeModal === 'privacy' ? (
+                <>
+                  <p><strong>Last Updated:</strong> June 2026</p>
+                  <p>At <strong>Siddhi Vinayak Laundry (SVL)</strong>, we value your trust and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data when you use our website or services in Jamnagar.</p>
+                  
+                  <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>1. Information We Collect</h4>
+                  <p>We collect essential contact information necessary to provide garment care and pickup/delivery services. This includes your name, phone number, residential or commercial address in Jamnagar, and specific garment care preferences.</p>
+
+                  <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>2. Use of Information</h4>
+                  <p>Your personal data is strictly used for processing laundry orders, scheduling doorstep pickup and delivery, sending automated order status updates via SMS or WhatsApp, and handling customer support inquiries.</p>
+
+                  <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>3. Data Protection & Sharing</h4>
+                  <p>We implement strict security measures to keep your data confidential. We do not sell, rent, or trade your customer information to any third-party marketing agencies. Data is only shared with authorized delivery personnel solely for completing your order.</p>
+
+                  <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>4. Contact Us</h4>
+                  <p>If you have any questions regarding our privacy practices or wish to update your information, please contact us at <strong>svinayaklaundry@gmail.com</strong> or call our direct line at <strong>+91 6351674100</strong>.</p>
+                </>
+              ) : (
+                <>
+                  <p><strong>Last Updated:</strong> June 2026</p>
+                  <p>Welcome to <strong>Siddhi Vinayak Laundry (SVL)</strong>. By scheduling a pickup or using our garment care services in Jamnagar, you agree to the following Terms of Service.</p>
+
+                  <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>1. Garment Inspection & Care</h4>
+                  <p>All garments are thoroughly inspected prior to processing. While we use advanced eco-friendly solvents and professional bio-enzyme fabric care protocols, SVL is not responsible for inherent garment defects, pre-existing wear and tear, weak fabrics, or color bleeding caused by poor manufacturer dyes.</p>
+
+                  <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>2. Stain Removal Limitations</h4>
+                  <p>We treat all stains with industry-leading stain extraction technology. However, certain old, set-in, or chemical stains (such as permanent inks, old rust, or harsh dyes) may not be 100% removable without damaging the underlying fabric. Our technicians will exercise professional judgment to prioritize garment integrity.</p>
+
+                  <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>3. Unclaimed Garments</h4>
+                  <p>Completed laundry orders should be collected or accepted for delivery within 30 days of notification. SVL is not responsible for any items left unclaimed beyond 45 days from the order date.</p>
+
+                  <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>4. Payments & Billing</h4>
+                  <p>Payments are due upon delivery unless prior commercial account arrangements have been established. We accept UPI, cash, and major digital payment methods.</p>
+                </>
+              )}
+            </div>
+
+            <div style={{ marginTop: '2rem', textAlign: 'right' }}>
+              <button type="button" onClick={() => setActiveModal(null)} className="btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.9rem' }}>
+                Understood
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </footer>
   );
 };
