@@ -595,9 +595,11 @@ const SVLChatbot = () => {
                 onChange={(e) => setInputText(e.target.value)}
                 className="svl-chat-input"
                 disabled={isThinking}
+                aria-label="Type your query"
               />
               <button
                 type="submit"
+                aria-label="Send message"
                 style={{
                   width: '42px',
                   height: '42px',

@@ -36,14 +36,14 @@ const Navbar = () => {
     <div style={{ position: 'fixed', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 1000, top: 0 }}>
       <nav className="navbar-container" style={{
         marginTop: '1.2rem',
-        width: '92%',
-        maxWidth: '1200px',
+        width: '95%',
+        maxWidth: '1280px',
         borderRadius: '50px',
         border: '1px solid rgba(0,0,0,0.06)',
-        background: 'rgba(255, 255, 255, 0.9)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.08)',
+        background: 'rgba(255, 255, 255, 0.88)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.06)',
         position: 'relative',
         transition: 'all 0.3s ease'
       }}>
@@ -79,20 +79,17 @@ const Navbar = () => {
 
           {/* Desktop Nav Links (Restored exactly to original laptop view preference) */}
           <div className="desktop-nav">
-            <ul style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', listStyle: 'none', margin: 0, padding: 0 }}>
+            <ul style={{ display: 'flex', gap: '2.4rem', alignItems: 'center', listStyle: 'none', margin: 0, padding: 0 }}>
               {navLinks.map((link) => {
-                const Icon = link.icon;
                 const isActive = location.pathname === link.path;
                 return (
                   <li key={link.name}>
                     <Link
                       to={link.path}
-                      className={`desktop-capsule ${isActive ? 'active-capsule' : ''}`}
+                      className={`ai-nav-link ${isActive ? 'active-ai-link' : ''}`}
                     >
-                      <span className="capsule-icon">
-                        <Icon size={16} />
-                      </span>
                       <span>{link.name}</span>
+                      {isActive && <span className="ai-link-bar" />}
                     </Link>
                   </li>
                 );
@@ -107,7 +104,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Nav Toggle */}
-          <div className="mobile-toggle" style={{ cursor: 'pointer', flexShrink: 0, marginLeft: '0.5rem' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <button type="button" className="mobile-toggle" style={{ cursor: 'pointer', flexShrink: 0, marginLeft: '0.5rem', background: 'transparent', border: 'none', padding: 0 }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle navigation menu">
             <div style={{
               background: isMobileMenuOpen ? 'rgba(67, 56, 202, 0.1)' : 'rgba(0,0,0,0.05)',
               padding: '0.55rem',
@@ -120,7 +117,7 @@ const Navbar = () => {
             }}>
               {isMobileMenuOpen ? <X size={22} /> : <GripHorizontal size={22} />}
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Unique Responsive Collapsed Menu for Mobile (No AI buzzwords) */}
@@ -195,41 +192,34 @@ const Navbar = () => {
 
       <style>{`
         .navbar-container {
-          padding: 0.8rem 1.8rem;
+          padding: 0.9rem 2.4rem;
         }
-        .desktop-capsule {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          padding: 0.45rem 0.9rem;
-          border-radius: 25px;
+        .ai-nav-link {
           color: var(--text-secondary);
           font-weight: 500;
-          font-size: 0.92rem;
+          font-size: 0.95rem;
           text-decoration: none;
-          transition: all 0.2s ease;
-        }
-        .desktop-capsule .capsule-icon {
-          display: flex;
-          align-items: center;
-          color: #94a3b8;
+          position: relative;
+          padding: 0.4rem 0;
           transition: color 0.2s ease;
+          letter-spacing: -0.01em;
         }
-        .desktop-capsule:hover {
-          background: rgba(0, 0, 0, 0.04);
+        .ai-nav-link:hover {
           color: var(--text-primary);
         }
-        .desktop-capsule:hover .capsule-icon {
-          color: var(--accent-primary);
-        }
-        .active-capsule {
-          background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
-          color: #ffffff !important;
+        .active-ai-link {
+          color: var(--accent-primary) !important;
           font-weight: 600 !important;
-          box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2) !important;
         }
-        .active-capsule .capsule-icon {
-          color: #ffffff !important;
+        .ai-link-bar {
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          border-radius: 2px;
+          background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+          animation: fadeIn 0.2s ease;
         }
         .brand-title {
           font-size: 1.25rem;
