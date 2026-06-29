@@ -26,12 +26,20 @@ const Footer = () => {
           <div>
             <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', textDecoration: 'none', marginBottom: '1.2rem' }}>
               <img src="/assets/logo-small.png" alt="Siddhi Vinayak Laundry Logo" style={{ height: '46px', width: '46px', borderRadius: '12px', objectFit: 'contain', boxShadow: '0 4px 10px rgba(0,0,0,0.06)' }} />
-              <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.1' }}>
-                <span style={{ fontWeight: '800', fontSize: '1.4rem', color: '#1c1917', fontFamily: "'Inter', sans-serif" }}>
-                  Siddhi <span style={{ color: 'var(--accent-primary)' }}>Vinayak</span>
+              <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2' }}>
+                <span style={{
+                  background: 'linear-gradient(135deg, var(--accent-secondary), var(--accent-primary))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontWeight: '800',
+                  fontSize: '1.45rem',
+                  letterSpacing: '0.3px',
+                  fontFamily: "'Inter', sans-serif"
+                }}>
+                  Siddhi Vinayak
                 </span>
-                <span style={{ fontSize: '0.7rem', color: 'var(--accent-secondary)', fontWeight: '700', letterSpacing: '2px', textTransform: 'uppercase', marginTop: '0.2rem' }}>
-                  Premium Laundry
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase', marginTop: '0.1rem' }}>
+                  Premium Garment Care
                 </span>
               </div>
             </Link>
