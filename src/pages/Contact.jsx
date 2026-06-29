@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 
 const Contact = () => {
@@ -9,16 +9,37 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [status, setStatus] = useState({ loading: false, success: false, error: '' });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Use mailto as a fallback since there is no backend
-    const mailtoLink = `mailto:svinayaklaundry@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-    window.location.href = mailtoLink;
+    setStatus({ loading: true, success: false, error: '' });
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message. Please try again.');
+      }
+
+      setStatus({ loading: false, success: true, error: '' });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      console.error('Submit error:', err);
+      setStatus({ loading: false, success: false, error: err.message || 'Something went wrong. Please try again or call us directly.' });
+    }
   };
 
   return (
@@ -99,8 +120,46 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="glass-panel" style={{ padding: '3rem' }}>
+            <div className="glass-panel" style={{ padding: '3rem', position: 'relative' }}>
               <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Send a Message</h2>
+              
+              {status.success && (
+                <div style={{
+                  padding: '1.5rem',
+                  backgroundColor: 'rgba(34, 197, 94, 0.15)',
+                  border: '1px solid rgba(34, 197, 94, 0.3)',
+                  borderRadius: '12px',
+                  marginBottom: '2rem',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '1rem'
+                }}>
+                  <CheckCircle size={24} style={{ color: '#22c55e', flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <h4 style={{ color: '#22c55e', marginBottom: '0.5rem', fontSize: '1.1rem' }}>Message Sent Successfully!</h4>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>
+                      Thank you for contacting us. Your message has been sent to our team, and we've also sent a confirmation mail to your inbox. We will get back to you shortly!
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {status.error && (
+                <div style={{
+                  padding: '1.25rem',
+                  backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                  border: '1px solid rgba(239, 68, 68, 0.3)',
+                  borderRadius: '12px',
+                  marginBottom: '2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem'
+                }}>
+                  <AlertCircle size={24} style={{ color: '#ef4444', flexShrink: 0 }} />
+                  <p style={{ color: '#ef4444', fontSize: '0.95rem', margin: 0 }}>{status.error}</p>
+                </div>
+              )}
+
               <form onSubmit={handleSubmit}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
                   <div>
@@ -113,6 +172,7 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
+                      disabled={status.loading}
                     />
                   </div>
                   <div>
@@ -125,6 +185,7 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
+                      disabled={status.loading}
                     />
                   </div>
                 </div>
@@ -139,6 +200,7 @@ const Contact = () => {
                     required
                     value={formData.subject}
                     onChange={handleChange}
+                    disabled={status.loading}
                   />
                 </div>
 
@@ -151,11 +213,34 @@ const Contact = () => {
                     required
                     value={formData.message}
                     onChange={handleChange}
+                    disabled={status.loading}
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn-primary" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' }}>
-                  <Send size={18} /> Send Message
+                <button 
+                  type="submit" 
+                  className="btn-primary" 
+                  disabled={status.loading}
+                  style={{ 
+                    width: '100%', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center', 
+                    gap: '0.5rem', 
+                    marginTop: '1rem',
+                    opacity: status.loading ? 0.7 : 1,
+                    cursor: status.loading ? 'not-allowed' : 'pointer'
+                  }}
+                >
+                  {status.loading ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" /> Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={18} /> Send Message
+                    </>
+                  )}
                 </button>
               </form>
             </div>
