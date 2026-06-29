@@ -15,7 +15,7 @@ export async function sendFormEmails({ name, email, subject, message }) {
 
   const senderEmail = (typeof process !== 'undefined' && process.env && process.env.RESEND_FROM_EMAIL)
     ? process.env.RESEND_FROM_EMAIL.trim()
-    : 'Siddhi Vinayak Laundry <info@siddhivinayaklaundry.com>';
+    : 'Siddhi Vinayak Laundry <onboarding@resend.dev>';
 
   // 1. HTML Template for Admin Notification
   const adminHtml = `
