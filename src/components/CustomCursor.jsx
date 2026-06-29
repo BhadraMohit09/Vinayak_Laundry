@@ -1,26 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CustomCursor = () => {
+  const [mousePos, setMousePos] = useState({ x: -500, y: -500 });
+  const [ripples, setRipples] = useState([]);
   const [isFinePointer, setIsFinePointer] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
-
-  // Instant dot position
-  const dotPos = useRef({ x: -100, y: -100 });
-  const [dotRenderPos, setDotRenderPos] = useState({ x: -100, y: -100 });
-
-  // Smooth halo position
-  const haloPos = useRef({ x: -100, y: -100 });
-  const [haloRenderPos, setHaloRenderPos] = useState({ x: -100, y: -100 });
 
   useEffect(() => {
-    // Check if device uses fine pointer (mouse/trackpad)
     const mediaQuery = window.matchMedia('(pointer: fine)');
     setIsFinePointer(mediaQuery.matches);
-
     const handleMediaChange = (e) => setIsFinePointer(e.matches);
     mediaQuery.addEventListener('change', handleMediaChange);
-
     return () => mediaQuery.removeEventListener('change', handleMediaChange);
   }, []);
 
@@ -28,43 +17,27 @@ const CustomCursor = () => {
     if (!isFinePointer) return;
 
     const handleMouseMove = (e) => {
-      dotPos.current = { x: e.clientX, y: e.clientY };
-      setDotRenderPos({ x: e.clientX, y: e.clientY });
+      setMousePos({ x: e.clientX, y: e.clientY });
     };
 
-    const handleMouseDown = () => setClicked(true);
-    const handleMouseUp = () => setClicked(false);
-
-    const handleMouseOver = (e) => {
-      const target = e.target.closest('a, button, input, textarea, select, [role="button"], .interactive-cursor');
-      setIsHovered(!!target);
+    const handleClick = (e) => {
+      const newRipple = {
+        id: Date.now(),
+        x: e.clientX,
+        y: e.clientY
+      };
+      setRipples((prev) => [...prev, newRipple]);
+      setTimeout(() => {
+        setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
+      }, 600);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseover', handleMouseOver);
-
-    // Animation frame for smooth halo follow
-    let animationFrameId;
-    const updateHalo = () => {
-      const dx = dotPos.current.x - haloPos.current.x;
-      const dy = dotPos.current.y - haloPos.current.y;
-      
-      haloPos.current.x += dx * 0.18;
-      haloPos.current.y += dy * 0.18;
-
-      setHaloRenderPos({ x: haloPos.current.x, y: haloPos.current.y });
-      animationFrameId = requestAnimationFrame(updateHalo);
-    };
-    animationFrameId = requestAnimationFrame(updateHalo);
+    window.addEventListener('click', handleClick);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseover', handleMouseOver);
-      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('click', handleClick);
     };
   }, [isFinePointer]);
 
@@ -73,51 +46,47 @@ const CustomCursor = () => {
   return (
     <>
       <style>{`
-        @media (pointer: fine) {
-          * {
-            cursor: none !important;
-          }
+        @keyframes rippleExpand {
+          0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.6; }
+          100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
         }
       `}</style>
 
-      {/* Central exact dot */}
+      {/* Subtle Ambient Mouse Spotlight Glow (Keeps native pointer visible for 100% ease of use) */}
       <div
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
-          transform: `translate3d(${dotRenderPos.x}px, ${dotRenderPos.y}px, 0) translate(-50%, -50%) scale(${clicked ? 0.6 : isHovered ? 1.4 : 1})`,
-          width: '8px',
-          height: '8px',
-          backgroundColor: isHovered ? '#6366f1' : '#0284c7',
+          transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0) translate(-50%, -50%)`,
+          width: '320px',
+          height: '320px',
+          background: 'radial-gradient(circle, rgba(67, 56, 202, 0.045) 0%, rgba(14, 165, 233, 0.02) 40%, rgba(255,255,255,0) 70%)',
           borderRadius: '50%',
           pointerEvents: 'none',
-          zIndex: 99999,
-          transition: 'transform 0.15s ease-out, background-color 0.2s ease',
-          boxShadow: '0 0 10px rgba(2, 132, 199, 0.6)'
+          zIndex: 9990,
+          transition: 'transform 0.08s linear'
         }}
       />
 
-      {/* Smooth physics halo bubble */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          transform: `translate3d(${haloRenderPos.x}px, ${haloRenderPos.y}px, 0) translate(-50%, -50%) scale(${clicked ? 0.85 : isHovered ? 1.6 : 1})`,
-          width: '38px',
-          height: '38px',
-          border: `1.5px solid ${isHovered ? 'rgba(99, 102, 241, 0.6)' : 'rgba(14, 165, 233, 0.45)'}`,
-          backgroundColor: isHovered ? 'rgba(99, 102, 241, 0.12)' : 'rgba(14, 165, 233, 0.06)',
-          backdropFilter: 'blur(1.5px)',
-          WebkitBackdropFilter: 'blur(1.5px)',
-          borderRadius: '50%',
-          pointerEvents: 'none',
-          zIndex: 99998,
-          transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease',
-          boxShadow: isHovered ? '0 0 20px rgba(99, 102, 241, 0.25)' : '0 0 15px rgba(14, 165, 233, 0.15)'
-        }}
-      />
+      {/* Click Interactive Ripples */}
+      {ripples.map((r) => (
+        <div
+          key={r.id}
+          style={{
+            position: 'fixed',
+            top: r.y,
+            left: r.x,
+            width: '36px',
+            height: '36px',
+            border: '1.5px solid rgba(67, 56, 202, 0.4)',
+            borderRadius: '50%',
+            pointerEvents: 'none',
+            zIndex: 99999,
+            animation: 'rippleExpand 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+          }}
+        />
+      ))}
     </>
   );
 };
