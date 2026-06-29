@@ -174,9 +174,6 @@ const Footer = () => {
           .floating-live-clock {
             padding: 0.4rem 0.5rem 0.4rem 0.85rem !important;
           }
-          .floating-live-clock .clock-label {
-            display: none !important;
-          }
         }
       `}</style>
 
@@ -325,10 +322,7 @@ const Footer = () => {
               <span style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', background: '#22c55e', animation: 'radarPing 1.5s cubic-bezier(0, 0, 0.2, 1) infinite', opacity: 0.75 }}></span>
               <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#4ade80', boxShadow: '0 0 8px #4ade80' }}></span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', fontFamily: "'JetBrains Mono', 'Inter', monospace" }}>
-              <span className="clock-label" style={{ fontSize: '0.72rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', borderRight: '1px solid rgba(255,255,255,0.15)', paddingRight: '0.55rem' }}>
-                Jamnagar Live
-              </span>
+            <div style={{ display: 'flex', alignItems: 'center', fontFamily: "'JetBrains Mono', 'Inter', monospace" }}>
               <span style={{ fontSize: '0.84rem', fontWeight: '700', color: '#38bdf8', letterSpacing: '0.3px' }}>
                 {istTime}
               </span>
