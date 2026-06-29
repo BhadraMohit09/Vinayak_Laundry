@@ -80,8 +80,8 @@ const Footer = () => {
             <h4 style={{ color: '#1c1917', marginBottom: '1.4rem', fontSize: '1.1rem', fontWeight: '700', letterSpacing: '0.3px' }}>Contact Us</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.1rem', padding: 0, margin: 0 }}>
               <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
-                <div style={{ padding: '0.5rem', background: 'rgba(67, 56, 202, 0.08)', borderRadius: '10px', color: 'var(--accent-primary)' }}>
-                  <MapPin size={18} />
+                <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(67, 56, 202, 0.08)', borderRadius: '10px', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <MapPin size={18} style={{ flexShrink: 0 }} />
                 </div>
                 <div>
                   <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>Facility Address</strong>
@@ -89,8 +89,8 @@ const Footer = () => {
                 </div>
               </li>
               <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
-                <div style={{ padding: '0.5rem', background: 'rgba(2, 132, 199, 0.08)', borderRadius: '10px', color: 'var(--accent-secondary)' }}>
-                  <Phone size={18} />
+                <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(2, 132, 199, 0.08)', borderRadius: '10px', color: 'var(--accent-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Phone size={18} style={{ flexShrink: 0 }} />
                 </div>
                 <div>
                   <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>Direct Line & SMS</strong>
@@ -98,8 +98,8 @@ const Footer = () => {
                 </div>
               </li>
               <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
-                <div style={{ padding: '0.5rem', background: 'rgba(37, 211, 102, 0.1)', borderRadius: '10px' }}>
-                  <WhatsAppIcon size={18} color="#25D366" />
+                <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(37, 211, 102, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <WhatsAppIcon size={18} color="#25D366" style={{ flexShrink: 0 }} />
                 </div>
                 <div>
                   <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>WhatsApp Care</strong>
@@ -107,8 +107,8 @@ const Footer = () => {
                 </div>
               </li>
               <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
-                <div style={{ padding: '0.5rem', background: 'rgba(67, 56, 202, 0.08)', borderRadius: '10px', color: 'var(--accent-primary)' }}>
-                  <Mail size={18} />
+                <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(67, 56, 202, 0.08)', borderRadius: '10px', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Mail size={18} style={{ flexShrink: 0 }} />
                 </div>
                 <div>
                   <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>Email Us</strong>
