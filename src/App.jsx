@@ -8,6 +8,8 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import ErrorBoundary from './components/ErrorBoundary';
 import SVLChatbot from './components/SVLChatbot';
 import SplashScreen from './components/SplashScreen';
+import CustomCursor from './components/CustomCursor';
+import AmbientBackground from './components/AmbientBackground';
 import { useScrollReveal } from './utils/useScrollReveal';
 
 // Lazy load routes
@@ -37,9 +39,11 @@ function App() {
 
   return (
     <Router>
+      <CustomCursor />
+      <AmbientBackground />
       {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
       <ScrollToTop />
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
         <Navbar />
         <main style={{ flex: 1, paddingTop: '70px' }}>
           <ErrorBoundary>
