@@ -1,6 +1,4 @@
-const RESEND_API_KEY = (typeof process !== 'undefined' && process.env && process.env.RESEND_API_KEY) || 're_LQLCJZH1_3rZGmZdGkHZtkcKUkAFfNpCy';
 const ADMIN_EMAIL = 'bhadramohit.cloud@gmail.com';
-const SENDER_EMAIL = 'Siddhi Vinayak Laundry <onboarding@resend.dev>';
 
 /**
  * Sends notification and confirmation emails using Resend API
@@ -9,6 +7,15 @@ export async function sendFormEmails({ name, email, subject, message }) {
   if (!name || !email || !subject || !message) {
     throw new Error('All fields (name, email, subject, message) are required.');
   }
+
+  const apiKey = (typeof process !== 'undefined' && process.env && process.env.RESEND_API_KEY) ? process.env.RESEND_API_KEY.trim() : '';
+  if (!apiKey) {
+    throw new Error('Server Configuration Error: RESEND_API_KEY environment variable is missing.');
+  }
+
+  const senderEmail = (typeof process !== 'undefined' && process.env && process.env.RESEND_FROM_EMAIL)
+    ? process.env.RESEND_FROM_EMAIL.trim()
+    : 'Siddhi Vinayak Laundry <info@siddhivinayaklaundry.com>';
 
   // 1. HTML Template for Admin Notification
   const adminHtml = `
@@ -103,11 +110,11 @@ export async function sendFormEmails({ name, email, subject, message }) {
   const adminResponse = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${RESEND_API_KEY}`,
+      'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      from: SENDER_EMAIL,
+      from: senderEmail,
       to: [ADMIN_EMAIL],
       reply_to: email,
       subject: `New Inquiry: ${subject}`,
@@ -128,11 +135,11 @@ export async function sendFormEmails({ name, email, subject, message }) {
     const clientResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: SENDER_EMAIL,
+        from: senderEmail,
         to: [email],
         subject: `We received your message - Siddhi Vinayak Laundry`,
         html: clientHtml
@@ -140,10 +147,11 @@ export async function sendFormEmails({ name, email, subject, message }) {
     });
     clientResult = await clientResponse.json();
     if (!clientResponse.ok) {
-      console.warn('Note: Client confirmation mail returned non-200 (likely due to Resend sandbox domain restrictions):', clientResult);
+      console.error('Resend Client Confirmation Error:', clientResult);
+      // Note: If domain is not verified on Resend, sending to arbitrary client emails will fail with 403.
     }
   } catch (clientErr) {
-    console.warn('Could not send confirmation email to client:', clientErr);
+    console.error('Could not send confirmation email to client:', clientErr);
   }
 
   return {
