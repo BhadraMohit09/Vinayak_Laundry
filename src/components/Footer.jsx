@@ -6,6 +6,7 @@ import WhatsAppIcon from './WhatsAppIcon';
 const Footer = () => {
   const [activeModal, setActiveModal] = useState(null); // null | 'privacy' | 'terms'
   const [istTime, setIstTime] = useState('');
+  const [isClockMinimized, setIsClockMinimized] = useState(false);
 
   useEffect(() => {
     const updateClock = () => {
@@ -166,10 +167,12 @@ const Footer = () => {
           75%, 100% { transform: scale(2.2); opacity: 0; }
         }
         @media (max-width: 600px) {
-          .floating-live-clock {
+          .floating-live-clock, .floating-live-clock-minimized {
             bottom: 16px !important;
             left: 16px !important;
-            padding: 0.4rem 0.85rem !important;
+          }
+          .floating-live-clock {
+            padding: 0.4rem 0.5rem 0.4rem 0.85rem !important;
           }
           .floating-live-clock .clock-label {
             display: none !important;
@@ -262,40 +265,100 @@ const Footer = () => {
         </div>
       )}
 
-      {/* Floating Live Command Capsule (Fixed Bottom-Left for any screen view) */}
+      {/* Floating Live Command Capsule (Fixed Bottom-Left with Minimize Toggle) */}
       {istTime && (
-        <div className="floating-live-clock" style={{
-          position: 'fixed',
-          bottom: '24px',
-          left: '24px',
-          zIndex: 980,
-          background: 'rgba(15, 23, 42, 0.88)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          borderRadius: '30px',
-          padding: '0.45rem 1.1rem',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.7rem',
-          boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(34, 197, 94, 0.15)',
-          color: '#ffffff',
-          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-          cursor: 'default'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', position: 'relative', width: '10px', height: '10px', flexShrink: 0 }}>
-            <span style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', background: '#22c55e', animation: 'radarPing 1.5s cubic-bezier(0, 0, 0.2, 1) infinite', opacity: 0.75 }}></span>
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#4ade80', boxShadow: '0 0 8px #4ade80' }}></span>
+        isClockMinimized ? (
+          <button
+            type="button"
+            onClick={() => setIsClockMinimized(false)}
+            className="floating-live-clock-minimized"
+            title="Show Jamnagar Live Time"
+            aria-label="Show Jamnagar Live Time"
+            style={{
+              position: 'fixed',
+              bottom: '24px',
+              left: '24px',
+              zIndex: 980,
+              background: 'rgba(15, 23, 42, 0.88)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
+              borderRadius: '50%',
+              width: '46px',
+              height: '46px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(56, 189, 248, 0.2)',
+              cursor: 'pointer',
+              color: '#38bdf8',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              padding: 0
+            }}
+          >
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Clock size={20} style={{ animation: 'pulse 2s infinite' }} />
+              <span style={{ position: 'absolute', top: '-4px', right: '-4px', width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 6px #22c55e' }} />
+            </div>
+          </button>
+        ) : (
+          <div className="floating-live-clock" style={{
+            position: 'fixed',
+            bottom: '24px',
+            left: '24px',
+            zIndex: 980,
+            background: 'rgba(15, 23, 42, 0.88)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            borderRadius: '30px',
+            padding: '0.45rem 0.5rem 0.45rem 1.1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.7rem',
+            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(34, 197, 94, 0.15)',
+            color: '#ffffff',
+            transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            cursor: 'default'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', position: 'relative', width: '10px', height: '10px', flexShrink: 0 }}>
+              <span style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', background: '#22c55e', animation: 'radarPing 1.5s cubic-bezier(0, 0, 0.2, 1) infinite', opacity: 0.75 }}></span>
+              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#4ade80', boxShadow: '0 0 8px #4ade80' }}></span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', fontFamily: "'JetBrains Mono', 'Inter', monospace" }}>
+              <span className="clock-label" style={{ fontSize: '0.72rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', borderRight: '1px solid rgba(255,255,255,0.15)', paddingRight: '0.55rem' }}>
+                Jamnagar Live
+              </span>
+              <span style={{ fontSize: '0.84rem', fontWeight: '700', color: '#38bdf8', letterSpacing: '0.3px' }}>
+                {istTime}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsClockMinimized(true)}
+              title="Minimize clock"
+              aria-label="Minimize clock"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '24px',
+                height: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#94a3b8',
+                cursor: 'pointer',
+                marginLeft: '0.2rem',
+                transition: 'all 0.2s ease',
+                flexShrink: 0,
+                padding: 0
+              }}
+            >
+              <X size={14} />
+            </button>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', fontFamily: "'JetBrains Mono', 'Inter', monospace" }}>
-            <span className="clock-label" style={{ fontSize: '0.72rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', borderRight: '1px solid rgba(255,255,255,0.15)', paddingRight: '0.55rem' }}>
-              Jamnagar Live
-            </span>
-            <span style={{ fontSize: '0.84rem', fontWeight: '700', color: '#38bdf8', letterSpacing: '0.3px' }}>
-              {istTime}
-            </span>
-          </div>
-        </div>
+        )
       )}
     </footer>
   );
