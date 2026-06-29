@@ -6,7 +6,7 @@ const SVLChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('chat'); // 'chat', 'book', 'stain'
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: "Hello! I'm your **SVL AI Concierge**. Feel free to ask me anything about our specialized piece-wise garment care, Jamnagar pickup logistics, or stain removal advice!" }
+    { sender: 'bot', text: "Hello! I'm your **SVL Virtual Concierge**. Feel free to ask me anything about our specialized piece-wise garment care, pickup logistics, or stain removal advice!" }
   ]);
   const [inputText, setInputText] = useState('');
   const [isThinking, setIsThinking] = useState(false);
@@ -77,7 +77,7 @@ const SVLChatbot = () => {
   };
 
   const getWhatsAppBookingUrl = () => {
-    const text = `Hello Siddhi Vinayak Laundry! I used your AI Concierge to plan a piece-wise order:\n- Care Protocol: ${bookingData.service}\n- Load Volume: ${bookingData.quantity}\n- Preferred Pickup: ${bookingData.timing}\n\nPlease confirm my booking and share piece-wise rates!`;
+    const text = `Hello Siddhi Vinayak Laundry! I used your Virtual Concierge to plan a piece-wise order:\n- Care Protocol: ${bookingData.service}\n- Load Volume: ${bookingData.quantity}\n- Preferred Pickup: ${bookingData.timing}\n\nPlease confirm my booking and share piece-wise rates!`;
     return `https://wa.me/916351674100?text=${encodeURIComponent(text)}`;
   };
 
@@ -158,18 +158,9 @@ const SVLChatbot = () => {
           box-sizing: border-box;
         }
 
-        .svl-chat-launcher::before {
-          content: '';
-          position: absolute;
-          inset: -6px;
-          border-radius: 50%;
-          border: 2px dashed rgba(67, 56, 202, 0.6);
-          animation: spin 10s linear infinite;
-        }
-
         .svl-chat-launcher:hover {
-          transform: scale(1.12) translateY(-4px);
-          box-shadow: 0 15px 35px rgba(67, 56, 202, 0.6);
+          transform: scale(1.1) translateY(-2px);
+          box-shadow: 0 12px 30px rgba(67, 56, 202, 0.5);
         }
 
         .svl-chat-backdrop {
@@ -278,46 +269,14 @@ const SVLChatbot = () => {
         }
       `}</style>
 
-      {/* Floating Out-of-the-Box AI Launcher Button */}
-      <div style={{ position: 'fixed', bottom: '6.75rem', right: '2rem', zIndex: 999 }}>
-        {!isOpen && (
-          <div style={{
-            position: 'absolute',
-            right: '74px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            background: '#1c1917',
-            color: '#ffffff',
-            padding: '0.45rem 0.85rem',
-            borderRadius: '20px',
-            fontSize: '0.78rem',
-            fontWeight: '700',
-            whiteSpace: 'nowrap',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            animation: 'fadeIn 0.5s ease-out'
-          }}>
-            <Sparkles size={14} color="#0284c7" />
-            <span>Ask AI Lab</span>
-          </div>
-        )}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="svl-chat-launcher"
-          style={{ position: 'relative', bottom: 'auto', right: 'auto' }}
-          aria-label="Open SVL AI Concierge"
-        >
-          {isOpen ? <X size={28} /> : (
-            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Bot size={30} style={{ animation: 'splashPulse 2s infinite' }} />
-              <Sparkles size={14} color="#38bdf8" style={{ position: 'absolute', top: '-6px', right: '-6px', animation: 'spin 4s linear infinite' }} />
-            </div>
-          )}
-        </button>
-      </div>
+      {/* Floating Launcher Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="svl-chat-launcher"
+        aria-label="Open Virtual Concierge"
+      >
+        {isOpen ? <X size={26} /> : <MessageCircleMore size={28} />}
+      </button>
 
       {/* Mobile Dark Backdrop Overlay */}
       {isOpen && (
@@ -357,13 +316,13 @@ const SVLChatbot = () => {
                 flexShrink: 0,
                 border: '1px solid rgba(255,255,255,0.3)'
               }}>
-                <Sparkles size={20} />
+                <Bot size={20} />
               </div>
               <div>
                 <h3 style={{ fontSize: '0.95rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem', letterSpacing: '0.3px' }}>
                   SVL Concierge <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', flexShrink: 0 }}></span>
                 </h3>
-                <span style={{ fontSize: '0.72rem', color: '#94a3b8', display: 'block' }}>Vinayak Advanced AI</span>
+                <span style={{ fontSize: '0.72rem', color: '#e0e7ff', display: 'block' }}>Online Assistant</span>
               </div>
             </div>
             <button
