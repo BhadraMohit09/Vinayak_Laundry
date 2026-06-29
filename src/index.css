@@ -8,10 +8,10 @@
   --bg-card-hover: rgba(255, 255, 255, 1);
   --text-primary: #0f172a;
   --text-secondary: #475569;
-  --accent-primary: #7c3aed; /* Deep purple */
-  --accent-secondary: #2563eb; /* Electric blue */
+  --accent-primary: #f59e0b; /* Rich Warm Gold */
+  --accent-secondary: #1e293b; /* Midnight Slate */
   --border-color: rgba(0, 0, 0, 0.08);
-  --shadow-glow: 0 10px 25px -5px rgba(124, 58, 237, 0.15), 0 8px 10px -6px rgba(37, 99, 235, 0.1);
+  --shadow-glow: 0 10px 25px -5px rgba(245, 158, 11, 0.25), 0 8px 10px -6px rgba(30, 41, 59, 0.15);
   --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.025);
 }
 
@@ -52,7 +52,7 @@ body {
 
 .glass-panel:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(124, 58, 237, 0.2);
+  border-color: rgba(245, 158, 11, 0.35);
   transform: translateY(-5px) scale(1.01);
   box-shadow: var(--shadow-glow);
 }
@@ -73,7 +73,7 @@ body {
 .hover-lift:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 12px 25px rgba(0,0,0,0.06);
-  border-color: rgba(37, 99, 235, 0.2) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
 }
 
 /* Pill Navbar */
@@ -151,29 +151,30 @@ body {
 
 /* Buttons */
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  color: white !important;
+  background: var(--accent-primary);
+  color: #0f172a !important;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+  background: #d97706;
 }
 
 .btn-primary:active {
   transform: scale(0.96);
-  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
 }
 
 .btn-outline {
