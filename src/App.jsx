@@ -7,6 +7,7 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 
 import ErrorBoundary from './components/ErrorBoundary';
 import SVLChatbot from './components/SVLChatbot';
+import { useScrollReveal } from './utils/useScrollReveal';
 
 // Lazy load routes
 const About = lazy(() => import('./pages/About'));
@@ -18,6 +19,7 @@ const Blog = lazy(() => import('./pages/Blog'));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
+  useScrollReveal();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);

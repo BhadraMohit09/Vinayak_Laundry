@@ -89,7 +89,7 @@ const Home = () => {
       {/* Features Section */}
       <section className="section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>Why Choose Siddhi Vinayak?</h2>
             <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
               We set the standard for modern laundry services, focusing entirely on quality, precision, and customer satisfaction.
@@ -107,7 +107,7 @@ const Home = () => {
               { icon: ShieldCheck, title: 'Garment Protection', desc: 'Advanced eco-friendly solvents that protect your clothes and extend their lifespan.', color: 'var(--accent-primary)', bg: 'rgba(124, 58, 237, 0.08)' },
               { icon: Clock, title: 'Reliable Delivery', desc: 'On-time pickup and delivery tailored to your busy schedule with precision.', color: 'var(--accent-secondary)', bg: 'rgba(37, 99, 235, 0.08)' }
             ].map((feature, i) => (
-              <div key={i} className="glass-panel" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
+              <div key={i} className="glass-panel reveal-scale" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
                 <div style={{ 
                   background: feature.bg, 
                   width: '64px', 
@@ -133,7 +133,7 @@ const Home = () => {
       {/* Magic Slider Section */}
       <section className="section" style={{ background: 'rgba(37, 99, 235, 0.02)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>Experience the <span className="text-gradient">SVL Difference</span></h2>
             <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
               Drag the slider below to see how our advanced fabric care revives and restores your garments.
@@ -156,7 +156,7 @@ const Home = () => {
       {/* How It Works Section */}
       <section className="section" style={{ background: 'rgba(0,0,0,0.02)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>How It Works</h2>
             <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
               Three simple steps to pristine garments. We handle the complexity so you don't have to.
@@ -169,17 +169,17 @@ const Home = () => {
             gap: '3rem',
             position: 'relative'
           }}>
-            <div style={{ textAlign: 'center', position: 'relative' }}>
+            <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
               <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.3)' }}>1</div>
               <h3 style={{ marginBottom: '1rem' }}>Book & Schedule</h3>
               <p style={{ color: 'var(--text-secondary)' }}>Contact us via WhatsApp, phone, or email to schedule a pickup or drop off your garments at our Jamnagar facility.</p>
             </div>
-            <div style={{ textAlign: 'center', position: 'relative' }}>
+            <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
               <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-secondary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)' }}>2</div>
               <h3 style={{ marginBottom: '1rem' }}>Advanced Cleaning</h3>
               <p style={{ color: 'var(--text-secondary)' }}>Our experts analyze your fabrics and use state-of-the-art tech and premium solvents to safely remove stains and dirt.</p>
             </div>
-            <div style={{ textAlign: 'center', position: 'relative' }}>
+            <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
               <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.3)' }}>3</div>
               <h3 style={{ marginBottom: '1rem' }}>Fresh Delivery</h3>
               <p style={{ color: 'var(--text-secondary)' }}>Your garments are meticulously pressed, folded or hung, and returned to you feeling completely renewed.</p>
@@ -191,7 +191,7 @@ const Home = () => {
       {/* CTA Section */}
       <section className="section">
         <div className="container">
-          <div className="glass-panel" style={{ 
+          <div className="glass-panel reveal-scale" style={{ 
             padding: '5rem 2rem', 
             textAlign: 'center',
             background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.95))',

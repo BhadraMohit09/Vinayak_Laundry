@@ -7,7 +7,7 @@ const Services = () => {
     <div className="animate-fade-in">
       <section className="section" style={{ paddingTop: '8rem' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+          <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '5rem' }}>
             <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
               Premium <span className="text-gradient">Services</span>
             </h1>
@@ -18,7 +18,7 @@ const Services = () => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem', marginBottom: '4rem' }}>
             {/* Service 1 */}
-            <div className="glass-panel" style={{ padding: '2.5rem' }}>
+            <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
               <Droplets size={40} style={{ color: 'var(--accent-secondary)', marginBottom: '1.5rem' }} />
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Advanced Dry Cleaning</h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
@@ -32,7 +32,7 @@ const Services = () => {
             </div>
 
             {/* Service 2 */}
-            <div className="glass-panel" style={{ padding: '2.5rem' }}>
+            <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
               <Wind size={40} style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }} />
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Wash & Fold Precision</h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
@@ -46,7 +46,7 @@ const Services = () => {
             </div>
 
             {/* Service 3 */}
-            <div className="glass-panel" style={{ padding: '2.5rem' }}>
+            <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
               <Shirt size={40} style={{ color: 'var(--accent-secondary)', marginBottom: '1.5rem' }} />
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Steam Pressing & Ironing</h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
@@ -60,7 +60,7 @@ const Services = () => {
             </div>
 
             {/* Service 4 */}
-            <div className="glass-panel" style={{ padding: '2.5rem' }}>
+            <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
               <Box size={40} style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }} />
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Bulk & Commercial Orders</h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
@@ -74,7 +74,7 @@ const Services = () => {
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', background: 'rgba(0,0,0,0.02)' }}>
+          <div className="glass-panel reveal-scale" style={{ padding: '3rem', textAlign: 'center', background: 'rgba(0,0,0,0.02)' }}>
             <h2 style={{ marginBottom: '1rem' }}>Affordable Pricing for Unmatched Quality</h2>
             <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 2rem' }}>
               We believe premium care shouldn't come at an exorbitant cost. Contact us with your specific requirements, and we'll provide a tailored, highly competitive quote.
