@@ -40,9 +40,9 @@ const Navbar = () => {
         maxWidth: '1280px',
         borderRadius: '50px',
         border: '1px solid rgba(0,0,0,0.06)',
-        background: 'rgba(255, 255, 255, 0.88)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        background: 'rgba(255, 255, 255, 0.62)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
         boxShadow: '0 10px 30px -10px rgba(0,0,0,0.06)',
         position: 'relative',
         transition: 'all 0.3s ease'
