@@ -145,10 +145,10 @@ const SVLChatbot = () => {
           width: 64px;
           height: 64px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #4338ca, #0284c7);
+          background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
           color: white;
           border: 2px solid rgba(255, 255, 255, 0.3);
-          box-shadow: 0 10px 30px rgba(67, 56, 202, 0.45), 0 0 20px rgba(2, 132, 199, 0.3);
+          box-shadow: 0 10px 30px rgba(194, 65, 12, 0.45), 0 0 20px rgba(217, 119, 6, 0.3);
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -160,7 +160,7 @@ const SVLChatbot = () => {
 
         .svl-chat-launcher:hover {
           transform: scale(1.1) translateY(-2px);
-          box-shadow: 0 12px 30px rgba(67, 56, 202, 0.5);
+          box-shadow: 0 12px 30px rgba(194, 65, 12, 0.5);
         }
 
         .svl-chat-backdrop {
@@ -294,13 +294,13 @@ const SVLChatbot = () => {
           {/* Header */}
           <div style={{
             padding: '1rem 1.4rem',
-            background: 'linear-gradient(135deg, #4338ca, #0284c7)',
+            background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
             color: 'white',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexShrink: 0,
-            boxShadow: '0 4px 15px rgba(67, 56, 202, 0.2)'
+            boxShadow: '0 4px 15px rgba(194, 65, 12, 0.25)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{
