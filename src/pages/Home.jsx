@@ -54,7 +54,6 @@ const Home = () => {
             </div>
             
             <h1 style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
               lineHeight: '1.1',
               marginBottom: '1.5rem',
               fontWeight: '700',
@@ -65,7 +64,6 @@ const Home = () => {
             </h1>
             
             <p style={{
-              fontSize: '1.2rem',
               color: 'var(--text-secondary)',
               marginBottom: '2.5rem',
               maxWidth: '600px',
@@ -90,7 +88,7 @@ const Home = () => {
       <section className="section">
         <div className="container">
           <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>Why Choose Siddhi Vinayak?</h2>
+            <h2 style={{ marginBottom: '1rem', letterSpacing: '-0.5px' }}>Why Choose Siddhi Vinayak?</h2>
             <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
               We set the standard for modern laundry services, focusing entirely on quality, precision, and customer satisfaction.
             </p>
@@ -122,8 +120,8 @@ const Home = () => {
                 }}>
                   <feature.icon size={32} />
                 </div>
-                <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem' }}>{feature.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{feature.desc}</p>
+                <h3 style={{ marginBottom: '1rem' }}>{feature.title}</h3>
+                <p style={{ color: 'var(--text-secondary)' }}>{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -134,8 +132,8 @@ const Home = () => {
       <section className="section" style={{ background: 'rgba(37, 99, 235, 0.02)' }}>
         <div className="container">
           <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>Experience the <span className="text-gradient">SVL Difference</span></h2>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
+            <h2 style={{ marginBottom: '1rem', letterSpacing: '-0.5px' }}>Experience the <span className="text-gradient">SVL Difference</span></h2>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
               Drag the slider below to see how our advanced fabric care revives and restores your garments.
             </p>
           </div>
@@ -157,7 +155,7 @@ const Home = () => {
       <section className="section" style={{ background: 'rgba(0,0,0,0.02)' }}>
         <div className="container">
           <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>How It Works</h2>
+            <h2 style={{ marginBottom: '1rem', letterSpacing: '-0.5px' }}>How It Works</h2>
             <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
               Three simple steps to pristine garments. We handle the complexity so you don't have to.
             </p>
@@ -170,17 +168,17 @@ const Home = () => {
             position: 'relative'
           }}>
             <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
-              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.3)' }}>1</div>
+              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.3)' }}>1</div>
               <h3 style={{ marginBottom: '1rem' }}>Book & Schedule</h3>
               <p style={{ color: 'var(--text-secondary)' }}>Contact us via WhatsApp, phone, or email to schedule a pickup or drop off your garments at our Jamnagar facility.</p>
             </div>
             <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
-              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-secondary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)' }}>2</div>
+              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-secondary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)' }}>2</div>
               <h3 style={{ marginBottom: '1rem' }}>Advanced Cleaning</h3>
               <p style={{ color: 'var(--text-secondary)' }}>Our experts analyze your fabrics and use state-of-the-art tech and premium solvents to safely remove stains and dirt.</p>
             </div>
             <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
-              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.3)' }}>3</div>
+              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.3)' }}>3</div>
               <h3 style={{ marginBottom: '1rem' }}>Fresh Delivery</h3>
               <p style={{ color: 'var(--text-secondary)' }}>Your garments are meticulously pressed, folded or hung, and returned to you feeling completely renewed.</p>
             </div>
@@ -211,16 +209,15 @@ const Home = () => {
             }}></div>
             
             <div style={{ position: 'relative', zIndex: 1 }}>
-              <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', letterSpacing: '-0.5px' }}>Ready for a Flawless Clean?</h2>
+              <h2 style={{ marginBottom: '1.5rem', letterSpacing: '-0.5px' }}>Ready for a Flawless Clean?</h2>
               <p style={{ 
                 color: 'var(--text-secondary)', 
                 maxWidth: '600px', 
-                margin: '0 auto 2.5rem',
-                fontSize: '1.1rem'
+                margin: '0 auto 2.5rem'
               }}>
                 Whether you need everyday garment care or specialized bulk orders for your business, we offer unparalleled service at affordable rates.
               </p>
-              <Link to="/contact" className="btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+              <Link to="/contact" className="btn-primary" style={{ padding: '1rem 2.5rem' }}>
                 Contact Us Today
               </Link>
             </div>

@@ -8,17 +8,17 @@ const Commercial = () => {
       {/* Hero Section */}
       <section className="section" style={{ paddingTop: '8rem', background: 'linear-gradient(to bottom, rgba(37, 99, 235, 0.03), transparent)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1.2rem', background: 'rgba(37, 99, 235, 0.1)', color: 'var(--accent-secondary)', borderRadius: '50px', marginBottom: '2rem', fontWeight: '600', fontSize: '0.9rem' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1.2rem', background: 'rgba(37, 99, 235, 0.1)', color: 'var(--accent-secondary)', borderRadius: '50px', marginBottom: '2rem', fontWeight: '600' }}>
             <Building2 size={16} /> B2B Laundry Solutions
           </div>
           <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', lineHeight: '1.1', letterSpacing: '-1px' }}>
             Scale Your Operations with <br />
             <span className="text-gradient">Industrial Precision</span>
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto 2.5rem' }}>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2.5rem' }}>
             We provide high-volume, uncompromising garment and linen care for hotels, restaurants, healthcare facilities, and corporate clients across Jamnagar.
           </p>
-          <Link to="/contact" className="btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+          <Link to="/contact" className="btn-primary" style={{ padding: '1rem 2.5rem' }}>
             Request Bulk Quote
           </Link>
         </div>
@@ -38,7 +38,7 @@ const Commercial = () => {
                 <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(124, 58, 237, 0.08)', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <benefit.icon size={24} />
                 </div>
-                <h3 style={{ fontSize: '1.4rem' }}>{benefit.title}</h3>
+                <h3 >{benefit.title}</h3>
                 <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>{benefit.desc}</p>
               </div>
             ))}
@@ -50,7 +50,7 @@ const Commercial = () => {
       <section className="section" style={{ background: 'rgba(0,0,0,0.02)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Industries We Elevate</h2>
+            <h2 style={{ marginBottom: '1rem' }}>Industries We Elevate</h2>
             <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>We tailor our proprietary cleaning protocols to the rigorous standards of your specific sector.</p>
           </div>
 
@@ -58,7 +58,7 @@ const Commercial = () => {
             {['Hotels & Hospitality', 'Healthcare & Clinics', 'Restaurants & Catering', 'Corporate Uniforms', 'Spas & Salons', 'Event Management'].map((industry, i) => (
               <div key={i} className="hover-lift" style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
                 <CheckCircle size={20} style={{ color: '#25D366' }} />
-                <span style={{ fontWeight: '600', fontSize: '1.1rem' }}>{industry}</span>
+                <span style={{ fontWeight: '600' }}>{industry}</span>
               </div>
             ))}
           </div>

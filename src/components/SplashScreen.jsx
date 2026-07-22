@@ -94,7 +94,6 @@ const SplashScreen = ({ onFinish }) => {
       {/* Typography Header */}
       <h1 style={{
         color: '#1c1917',
-        fontSize: '1.75rem',
         fontWeight: '800',
         letterSpacing: '0.5px',
         margin: '0 0 0.5rem 0',
@@ -127,7 +126,6 @@ const SplashScreen = ({ onFinish }) => {
         }} />
         <span style={{
           color: '#475569',
-          fontSize: '0.95rem',
           fontWeight: '600',
           transition: 'all 0.3s ease'
         }}>

@@ -46,11 +46,11 @@ class ErrorBoundary extends React.Component {
               <AlertTriangle size={32} />
             </div>
             
-            <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+            <h2 style={{ marginBottom: '1rem', color: 'var(--text-primary)' }}>
               Unexpected Rendering Error
             </h2>
             
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', fontSize: '0.95rem' }}>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
               We encountered a minor glitch while loading this section. Please refresh the page to continue using Siddhi Vinayak Laundry.
             </p>
 

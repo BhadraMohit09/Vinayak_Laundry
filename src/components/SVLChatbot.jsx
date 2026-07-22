@@ -319,10 +319,10 @@ const SVLChatbot = () => {
                 <Bot size={20} />
               </div>
               <div>
-                <h3 style={{ fontSize: '0.95rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem', letterSpacing: '0.3px' }}>
+                <h3 style={{ fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem', letterSpacing: '0.3px' }}>
                   SVL Concierge <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', flexShrink: 0 }}></span>
                 </h3>
-                <span style={{ fontSize: '0.72rem', color: '#e0e7ff', display: 'block' }}>Online Assistant</span>
+                <span style={{ color: '#e0e7ff', display: 'block' }}>Online Assistant</span>
               </div>
             </div>
             <button
@@ -459,16 +459,16 @@ const SVLChatbot = () => {
               <div style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
-                    <h4 style={{ fontSize: '1.05rem', marginBottom: '0.2rem', color: 'var(--text-primary)' }}>Smart Order Assistant</h4>
-                    <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Answer 3 quick questions to plan your pickup</p>
+                    <h4 style={{ marginBottom: '0.2rem', color: 'var(--text-primary)' }}>Smart Order Assistant</h4>
+                    <p style={{ color: 'var(--text-secondary)' }}>Answer 3 quick questions to plan your pickup</p>
                   </div>
 
                   {bookingStep === 1 && (
                     <div>
-                      <span style={{ fontWeight: '600', fontSize: '0.88rem', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>1. What service do you require?</span>
+                      <span style={{ fontWeight: '600', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>1. What service do you require?</span>
                       <div className="svl-grid-2">
                         {['Everyday Garment Care', 'Advanced Dry Clean', 'Steam Pressing', 'Bulk Commercial'].map(srv => (
-                          <button key={srv} onClick={() => handleBookingSelect('service', srv)} className="btn-outline" style={{ padding: '0.85rem 0.5rem', fontSize: '0.85rem', textAlign: 'center', justifyContent: 'center', width: '100%', wordBreak: 'break-word' }}>{srv}</button>
+                          <button key={srv} onClick={() => handleBookingSelect('service', srv)} className="btn-outline" style={{ padding: '0.85rem 0.5rem', textAlign: 'center', justifyContent: 'center', width: '100%', wordBreak: 'break-word' }}>{srv}</button>
                         ))}
                       </div>
                     </div>
@@ -476,10 +476,10 @@ const SVLChatbot = () => {
 
                   {bookingStep === 2 && (
                     <div>
-                      <span style={{ fontWeight: '600', fontSize: '0.88rem', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>2. Estimated load size?</span>
+                      <span style={{ fontWeight: '600', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>2. Estimated load size?</span>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                         {['1 - 5 Pieces', '6 - 15 Pieces', '16+ Pieces (Bulk Load)'].map(q => (
-                          <button key={q} onClick={() => handleBookingSelect('quantity', q)} className="btn-outline" style={{ padding: '0.85rem', fontSize: '0.85rem', justifyContent: 'center', width: '100%' }}>{q}</button>
+                          <button key={q} onClick={() => handleBookingSelect('quantity', q)} className="btn-outline" style={{ padding: '0.85rem', justifyContent: 'center', width: '100%' }}>{q}</button>
                         ))}
                       </div>
                     </div>
@@ -487,10 +487,10 @@ const SVLChatbot = () => {
 
                   {bookingStep === 3 && (
                     <div>
-                      <span style={{ fontWeight: '600', fontSize: '0.88rem', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>3. Preferred pickup window?</span>
+                      <span style={{ fontWeight: '600', display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>3. Preferred pickup window?</span>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                         {['Today Afternoon/Evening', 'Tomorrow Morning (8 AM - 12 PM)', 'Flexible Schedule'].map(t => (
-                          <button key={t} onClick={() => handleBookingSelect('timing', t)} className="btn-outline" style={{ padding: '0.85rem', fontSize: '0.85rem', justifyContent: 'center', width: '100%' }}>{t}</button>
+                          <button key={t} onClick={() => handleBookingSelect('timing', t)} className="btn-outline" style={{ padding: '0.85rem', justifyContent: 'center', width: '100%' }}>{t}</button>
                         ))}
                       </div>
                     </div>
@@ -499,16 +499,16 @@ const SVLChatbot = () => {
                   {bookingStep > 3 && (
                     <div style={{ textAlign: 'center', padding: '0.5rem 0' }}>
                       <CheckCircle2 size={44} style={{ color: '#22c55e', margin: '0 auto 0.8rem' }} />
-                      <h4 style={{ fontSize: '1.15rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Ready to Schedule!</h4>
-                      <div style={{ background: '#f1f5f9', padding: '1rem', borderRadius: '14px', textAlign: 'left', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: '1.6', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
+                      <h4 style={{ marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Ready to Schedule!</h4>
+                      <div style={{ background: '#f1f5f9', padding: '1rem', borderRadius: '14px', textAlign: 'left', marginBottom: '1.5rem', lineHeight: '1.6', color: 'var(--text-primary)', wordBreak: 'break-word' }}>
                         <div><strong>Service:</strong> {bookingData.service}</div>
                         <div><strong>Load Volume:</strong> {bookingData.quantity}</div>
                         <div><strong>Window:</strong> {bookingData.timing}</div>
-                        <div style={{ marginTop: '0.6rem', color: 'var(--accent-primary)', fontWeight: '600', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        <div style={{ marginTop: '0.6rem', color: 'var(--accent-primary)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '5px' }}>
                           <Clock size={16} /> <span>Est. Turnaround: 24-36 Hours</span>
                         </div>
                       </div>
-                      <a href={getWhatsAppBookingUrl()} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '1rem', fontSize: '0.95rem', boxSizing: 'border-box', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <a href={getWhatsAppBookingUrl()} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '1rem', boxSizing: 'border-box', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         Confirm via WhatsApp <ArrowRight size={18} style={{ marginLeft: '6px', flexShrink: 0 }} />
                       </a>
                     </div>
@@ -516,12 +516,12 @@ const SVLChatbot = () => {
                 </div>
 
                 {bookingStep > 1 && bookingStep <= 3 && (
-                  <button onClick={() => setBookingStep(bookingStep - 1)} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.85rem', marginTop: '1rem', padding: '0.5rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <button onClick={() => setBookingStep(bookingStep - 1)} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', marginTop: '1rem', padding: '0.5rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <ArrowLeft size={15} /> <span>Back to previous step</span>
                   </button>
                 )}
                 {bookingStep > 3 && (
-                  <button onClick={() => { setBookingStep(1); setBookingData({ service: '', quantity: '', timing: '' }); }} style={{ background: 'transparent', border: 'none', color: 'var(--accent-secondary)', cursor: 'pointer', fontSize: '0.85rem', marginTop: '1rem', padding: '0.5rem' }}>
+                  <button onClick={() => { setBookingStep(1); setBookingData({ service: '', quantity: '', timing: '' }); }} style={{ background: 'transparent', border: 'none', color: 'var(--accent-secondary)', cursor: 'pointer', marginTop: '1rem', padding: '0.5rem' }}>
                     Start over
                   </button>
                 )}
@@ -533,10 +533,10 @@ const SVLChatbot = () => {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem', padding: '0.8rem', background: 'rgba(239, 68, 68, 0.08)', borderRadius: '12px', color: '#dc2626' }}>
                   <ShieldAlert size={22} style={{ flexShrink: 0 }} />
-                  <span style={{ fontSize: '0.8rem', fontWeight: '600', lineHeight: '1.3' }}>Stain Emergency? Take first aid immediately, then send to SVL.</span>
+                  <span style={{ fontWeight: '600', lineHeight: '1.3' }}>Stain Emergency? Take first aid immediately, then send to SVL.</span>
                 </div>
 
-                <span style={{ fontWeight: '600', fontSize: '0.85rem', display: 'block', marginBottom: '0.8rem', color: 'var(--text-primary)' }}>Select Stain Type:</span>
+                <span style={{ fontWeight: '600', display: 'block', marginBottom: '0.8rem', color: 'var(--text-primary)' }}>Select Stain Type:</span>
                 <div className="svl-grid-2" style={{ marginBottom: '1.2rem' }}>
                   {Object.keys(stainTips).map(k => (
                     <button
@@ -548,7 +548,6 @@ const SVLChatbot = () => {
                         border: selectedStain === k ? '2px solid var(--accent-primary)' : '1px solid var(--border-color)',
                         background: selectedStain === k ? 'rgba(124, 58, 237, 0.06)' : 'white',
                         fontWeight: selectedStain === k ? '600' : '500',
-                        fontSize: '0.85rem',
                         cursor: 'pointer',
                         color: selectedStain === k ? 'var(--accent-primary)' : 'var(--text-primary)',
                         width: '100%',
@@ -563,11 +562,11 @@ const SVLChatbot = () => {
 
                 {selectedStain && (
                   <div className="animate-fade-in" style={{ background: '#f8fafc', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
-                    <h5 style={{ fontSize: '0.95rem', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{stainTips[selectedStain].title} First Aid</h5>
-                    <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: '1.55', marginBottom: '1.2rem', wordBreak: 'break-word' }}>
+                    <h5 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{stainTips[selectedStain].title} First Aid</h5>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.55', marginBottom: '1.2rem', wordBreak: 'break-word' }}>
                       {stainTips[selectedStain].advice}
                     </p>
-                    <a href="https://wa.me/916351674100?text=Hello%20SVL,%20I%20have%20an%20urgent%20stain%20removal%20request!" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '0.8rem', fontSize: '0.88rem', justifyContent: 'center', boxSizing: 'border-box', display: 'flex' }}>
+                    <a href="https://wa.me/916351674100?text=Hello%20SVL,%20I%20have%20an%20urgent%20stain%20removal%20request!" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: '100%', padding: '0.8rem', justifyContent: 'center', boxSizing: 'border-box', display: 'flex' }}>
                       Book Stain Removal
                     </a>
                   </div>
