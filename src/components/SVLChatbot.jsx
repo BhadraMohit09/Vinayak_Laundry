@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
+import { Bot, X, Send, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
 import { processNaturalAIQuery } from '../utils/aiBrain';
 
 const SVLChatbot = () => {
@@ -614,7 +614,6 @@ const SVLChatbot = () => {
                   boxShadow: isThinking ? 'none' : '0 4px 12px rgba(124, 58, 237, 0.3)'
                 }}
                 disabled={isThinking}
-                aria-label="Send Message"
               >
                 <Send size={18} />
               </button>
