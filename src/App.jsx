@@ -25,16 +25,6 @@ const ScrollToTop = () => {
   useScrollReveal();
   useEffect(() => {
     window.scrollTo(0, 0);
-    const titles = {
-      '/': 'Siddhi Vinayak Laundry | Premium Garment Care',
-      '/about': 'About Us | Siddhi Vinayak Laundry',
-      '/services': 'Our Services | Siddhi Vinayak Laundry',
-      '/contact': 'Contact Us | Siddhi Vinayak Laundry',
-      '/commercial': 'Commercial | Siddhi Vinayak Laundry',
-      '/faq': 'FAQ | Siddhi Vinayak Laundry',
-      '/blog': 'Blog | Siddhi Vinayak Laundry'
-    };
-    document.title = titles[pathname] || 'Siddhi Vinayak Laundry | Premium Garment Care';
   }, [pathname]);
   return null;
 };

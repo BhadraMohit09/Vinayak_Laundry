@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone, ArrowUpRight, ShieldCheck, Clock, Award, X } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
