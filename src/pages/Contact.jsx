@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
+import RateListPreview from '../components/RateListPreview';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -244,6 +245,11 @@ const Contact = () => {
                 </button>
               </form>
             </div>
+          </div>
+          
+          {/* Rate List Preview Section */}
+          <div style={{ marginTop: '4rem' }}>
+            <RateListPreview />
           </div>
         </div>
       </section>
