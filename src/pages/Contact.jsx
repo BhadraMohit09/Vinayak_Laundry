@@ -118,6 +118,9 @@ const Contact = () => {
                   </li>
                 </ul>
               </div>
+
+              {/* Rate List Trigger */}
+              <RateListPreview />
             </div>
 
             {/* Contact Form */}
@@ -245,11 +248,6 @@ const Contact = () => {
                 </button>
               </form>
             </div>
-          </div>
-          
-          {/* Rate List Preview Section */}
-          <div style={{ marginTop: '4rem' }}>
-            <RateListPreview />
           </div>
         </div>
       </section>
