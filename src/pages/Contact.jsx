@@ -47,10 +47,10 @@ const Contact = () => {
       <section className="section" style={{ paddingTop: '8rem' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h1 style={{ marginBottom: '1.5rem' }}>
+            <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
               Get in <span className="text-gradient">Touch</span>
             </h1>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
               Whether you're looking for premium personal care or need a reliable partner for bulk commercial orders, our team is ready to assist you.
             </p>
           </div>
@@ -58,7 +58,7 @@ const Contact = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '4rem' }}>
             {/* Contact Info */}
             <div>
-              <h2 style={{ marginBottom: '2rem' }}>Contact Information</h2>
+              <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Contact Information</h2>
               <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -67,7 +67,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem' }}>Location</h4>
-                      <p style={{ color: 'var(--text-secondary)' }}>Jamnagar, Gujarat, India</p>
+                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Jamnagar, Gujarat, India</p>
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -76,7 +76,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem' }}>Phone</h4>
-                      <a href="tel:+916351674100" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>+91 6351674100</a>
+                      <a href="tel:+916351674100" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>+91 6351674100</a>
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -85,7 +85,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem' }}>WhatsApp</h4>
-                      <a href="https://wa.me/916351674100?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>+91 6351674100</a>
+                      <a href="https://wa.me/916351674100?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>+91 6351674100</a>
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -94,7 +94,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem' }}>Email</h4>
-                      <a href="mailto:svinayaklaundry@gmail.com" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>svinayaklaundry@gmail.com</a>
+                      <a href="mailto:svinayaklaundry@gmail.com" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>svinayaklaundry@gmail.com</a>
                     </div>
                   </li>
                 </ul>
@@ -102,7 +102,7 @@ const Contact = () => {
               
               <div className="glass-panel" style={{ padding: '2rem', background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.1), transparent)' }}>
                 <h3 style={{ marginBottom: '1rem' }}>Business Hours</h3>
-                <ul style={{ listStyle: 'none', color: 'var(--text-secondary)' }}>
+                <ul style={{ listStyle: 'none', color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
                   <li style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                     <span>Monday - Friday</span>
                     <span>8:00 AM - 8:00 PM</span>
@@ -121,7 +121,7 @@ const Contact = () => {
 
             {/* Contact Form */}
             <div className="glass-panel" style={{ padding: '3rem', position: 'relative' }}>
-              <h2 style={{ marginBottom: '2rem' }}>Send a Message</h2>
+              <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Send a Message</h2>
               
               {status.success && (
                 <div style={{
@@ -136,8 +136,8 @@ const Contact = () => {
                 }}>
                   <CheckCircle size={24} style={{ color: '#22c55e', flexShrink: 0, marginTop: '2px' }} />
                   <div>
-                    <h4 style={{ color: '#22c55e', marginBottom: '0.5rem' }}>Message Sent Successfully!</h4>
-                    <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>
+                    <h4 style={{ color: '#22c55e', marginBottom: '0.5rem', fontSize: '1.1rem' }}>Message Sent Successfully!</h4>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>
                       Thank you for contacting us. Your message has been sent to our team, and we've also sent a confirmation mail to your inbox. We will get back to you shortly!
                     </p>
                   </div>
@@ -156,7 +156,7 @@ const Contact = () => {
                   gap: '1rem'
                 }}>
                   <AlertCircle size={24} style={{ color: '#ef4444', flexShrink: 0 }} />
-                  <p style={{ color: '#ef4444', margin: 0 }}>{status.error}</p>
+                  <p style={{ color: '#ef4444', fontSize: '0.95rem', margin: 0 }}>{status.error}</p>
                 </div>
               )}
 

@@ -8,10 +8,10 @@ const Services = () => {
       <section className="section" style={{ paddingTop: '8rem' }}>
         <div className="container">
           <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h1 style={{ marginBottom: '1.5rem' }}>
+            <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
               Premium <span className="text-gradient">Services</span>
             </h1>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
+            <p style={{ color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto', fontSize: '1.1rem' }}>
               We don't just wash clothes; we preserve them. Explore our range of specialized services designed for modern lifestyles and business needs.
             </p>
           </div>
@@ -20,11 +20,11 @@ const Services = () => {
             {/* Service 1 */}
             <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
               <Droplets size={40} style={{ color: 'var(--accent-secondary)', marginBottom: '1.5rem' }} />
-              <h3 style={{ marginBottom: '1rem' }}>Advanced Dry Cleaning</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Advanced Dry Cleaning</h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                 Using next-generation, environmentally safe solvents that clean deeper while being incredibly gentle on delicate fabrics like silk, wool, and cashmere.
               </p>
-              <ul style={{ color: 'var(--text-secondary)', listStylePosition: 'inside' }}>
+              <ul style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', listStylePosition: 'inside' }}>
                 <li>Stain analysis & pre-treatment</li>
                 <li>Odor neutralization</li>
                 <li>Hand-finished pressing</li>
@@ -34,11 +34,11 @@ const Services = () => {
             {/* Service 2 */}
             <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
               <Wind size={40} style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }} />
-              <h3 style={{ marginBottom: '1rem' }}>Wash & Fold Precision</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Wash & Fold Precision</h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                 Your everyday garments treated with extraordinary care. We separate by color, fabric type, and washing requirements to ensure perfect results.
               </p>
-              <ul style={{ color: 'var(--text-secondary)', listStylePosition: 'inside' }}>
+              <ul style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', listStylePosition: 'inside' }}>
                 <li>Temperature-controlled washing</li>
                 <li>Premium hypoallergenic detergents</li>
                 <li>Meticulous folding and packaging</li>
@@ -48,11 +48,11 @@ const Services = () => {
             {/* Service 3 */}
             <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
               <Shirt size={40} style={{ color: 'var(--accent-secondary)', marginBottom: '1.5rem' }} />
-              <h3 style={{ marginBottom: '1rem' }}>Steam Pressing & Ironing</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Steam Pressing & Ironing</h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                 Achieve that crisp, professional look. Our advanced steam pressing equipment safely removes the toughest wrinkles without damaging fibers.
               </p>
-              <ul style={{ color: 'var(--text-secondary)', listStylePosition: 'inside' }}>
+              <ul style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', listStylePosition: 'inside' }}>
                 <li>Precision creasing</li>
                 <li>Collar and cuff detailing</li>
                 <li>Hanging or flat packaging options</li>
@@ -62,11 +62,11 @@ const Services = () => {
             {/* Service 4 */}
             <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
               <Box size={40} style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }} />
-              <h3 style={{ marginBottom: '1rem' }}>Bulk & Commercial Orders</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Bulk & Commercial Orders</h3>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
                 Dedicated solutions for hotels, restaurants, and businesses. We offer high-volume processing without compromising our rigorous quality standards.
               </p>
-              <ul style={{ color: 'var(--text-secondary)', listStylePosition: 'inside' }}>
+              <ul style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', listStylePosition: 'inside' }}>
                 <li>Dedicated account manager</li>
                 <li>Scheduled pickup & delivery</li>
                 <li>Highly competitive corporate rates</li>

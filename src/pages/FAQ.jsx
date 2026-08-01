@@ -40,10 +40,10 @@ const FAQ = () => {
             <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '60px', height: '60px', background: 'rgba(124, 58, 237, 0.1)', color: 'var(--accent-primary)', borderRadius: '50%', marginBottom: '1.5rem' }}>
               <MessageCircleQuestion size={30} />
             </div>
-            <h1 style={{ marginBottom: '1rem', letterSpacing: '-1px' }}>
+            <h1 style={{ fontSize: '3rem', marginBottom: '1rem', letterSpacing: '-1px' }}>
               Frequently Asked <span className="text-gradient">Questions</span>
             </h1>
-            <p style={{ color: 'var(--text-secondary)' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
               Everything you need to know about our services, pricing, and processes.
             </p>
           </div>
@@ -62,7 +62,7 @@ const FAQ = () => {
                 onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <h3 style={{ fontWeight: openIndex === index ? '700' : '600', color: openIndex === index ? 'var(--accent-primary)' : 'var(--text-primary)', paddingRight: '2rem' }}>
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: openIndex === index ? '700' : '600', color: openIndex === index ? 'var(--accent-primary)' : 'var(--text-primary)', paddingRight: '2rem' }}>
                     {faq.question}
                   </h3>
                   <ChevronDown 

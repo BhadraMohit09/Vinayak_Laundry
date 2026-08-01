@@ -99,6 +99,7 @@ const WhatsAppFloat = () => {
         <span style={{
           whiteSpace: 'nowrap',
           fontWeight: '600',
+          fontSize: '1rem',
           marginLeft: '10px',
           color: '#ffffff',
           opacity: isHovered ? 1 : 0,

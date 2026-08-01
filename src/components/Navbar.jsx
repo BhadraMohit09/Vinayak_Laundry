@@ -65,6 +65,7 @@ const Navbar = () => {
                 Siddhi Vinayak
               </span>
               <span className="brand-tagline" style={{ 
+                fontSize: '0.65rem', 
                 color: 'var(--text-secondary)', 
                 fontWeight: '600',
                 textTransform: 'uppercase',
@@ -97,7 +98,7 @@ const Navbar = () => {
           </div>
           
           <div className="desktop-nav">
-             <Link to="/contact" className="btn-primary" style={{ padding: '0.5rem 1.3rem', borderRadius: '30px' }}>
+             <Link to="/contact" className="btn-primary" style={{ padding: '0.5rem 1.3rem', fontSize: '0.9rem', borderRadius: '30px' }}>
                 Book Now
              </Link>
           </div>
@@ -148,6 +149,7 @@ const Navbar = () => {
                       background: isActive ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : '#ffffff',
                       color: isActive ? '#ffffff' : 'var(--text-primary)',
                       fontWeight: isActive ? '700' : '600',
+                      fontSize: '0.88rem',
                       textDecoration: 'none',
                       border: isActive ? 'none' : '1px solid rgba(0,0,0,0.06)',
                       boxShadow: isActive ? '0 6px 16px rgba(67, 56, 202, 0.3)' : '0 2px 6px rgba(0,0,0,0.02)',
@@ -179,7 +181,7 @@ const Navbar = () => {
             <Link 
               to="/contact" 
               className="btn-primary" 
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '0.75rem', borderRadius: '14px', fontWeight: '700', marginTop: '0.3rem' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '0.75rem', borderRadius: '14px', fontWeight: '700', fontSize: '0.95rem', marginTop: '0.3rem' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <span>Book Pickup Now</span>

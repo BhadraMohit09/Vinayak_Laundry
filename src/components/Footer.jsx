@@ -32,30 +32,31 @@ const Footer = () => {
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   fontWeight: '800',
+                  fontSize: '1.45rem',
                   letterSpacing: '0.3px',
                   fontFamily: "'Inter', sans-serif"
                 }}>
                   Siddhi Vinayak
                 </span>
-                <span style={{ color: 'var(--text-secondary)', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase', marginTop: '0.1rem' }}>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase', marginTop: '0.1rem' }}>
                   Premium Garment Care
                 </span>
               </div>
             </Link>
-            <p style={{ color: '#57534e', lineHeight: '1.6', marginBottom: '1.5rem' }}>
+            <p style={{ color: '#57534e', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
               Next-generation garment care powered by eco-solvent science and automated precision. We protect delicate weaves while restoring vibrant freshness.
             </p>
             
             {/* Live Plant Status Badge */}
             <div style={{ padding: '0.8rem 1rem', background: 'rgba(255,255,255,0.8)', border: '1px solid rgba(28,25,23,0.08)', borderRadius: '14px', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontWeight: '700', color: '#1c1917' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem', fontWeight: '700', color: '#1c1917' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <span style={{ width: '6px', height: '6px', background: '#059669', borderRadius: '50%' }} />
                   Jamnagar Plant: Active
                 </span>
                 <span style={{ color: 'var(--accent-secondary)' }}>Express Service</span>
               </div>
-              <div style={{ display: 'flex', gap: '1rem', color: '#78716c' }}>
+              <div style={{ display: 'flex', gap: '1rem', fontSize: '0.72rem', color: '#78716c' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Clock size={12} /> 24h Turnaround</span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><ShieldCheck size={12} /> 100% Care Guarantee</span>
               </div>
@@ -64,7 +65,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ color: '#1c1917', marginBottom: '1.4rem', fontWeight: '700', letterSpacing: '0.3px' }}>Quick Links</h4>
+            <h4 style={{ color: '#1c1917', marginBottom: '1.4rem', fontSize: '1.1rem', fontWeight: '700', letterSpacing: '0.3px' }}>Quick Links</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.85rem', padding: 0, margin: 0 }}>
               {[
                 { name: 'About Us', path: '/about' },
@@ -75,7 +76,7 @@ const Footer = () => {
                 { name: 'Contact Us', path: '/contact' }
               ].map((item) => (
                 <li key={item.name}>
-                  <Link to={item.path} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#57534e', textDecoration: 'none', fontWeight: '500', transition: 'all 0.2s', padding: '0.3rem 0' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-primary)'; e.currentTarget.style.transform = 'translateX(4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#57534e'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                  <Link to={item.path} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#57534e', textDecoration: 'none', fontSize: '0.92rem', fontWeight: '500', transition: 'all 0.2s', padding: '0.3rem 0' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-primary)'; e.currentTarget.style.transform = 'translateX(4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#57534e'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                     <span>{item.name}</span>
                     <ArrowUpRight size={14} style={{ opacity: 0.5 }} />
                   </Link>
@@ -86,41 +87,41 @@ const Footer = () => {
 
           {/* Direct Contact */}
           <div>
-            <h4 style={{ color: '#1c1917', marginBottom: '1.4rem', fontWeight: '700', letterSpacing: '0.3px' }}>Contact Us</h4>
+            <h4 style={{ color: '#1c1917', marginBottom: '1.4rem', fontSize: '1.1rem', fontWeight: '700', letterSpacing: '0.3px' }}>Contact Us</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.1rem', padding: 0, margin: 0 }}>
-              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', alignItems: 'flex-start' }}>
+              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
                 <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(67, 56, 202, 0.08)', borderRadius: '10px', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <MapPin size={18} style={{ flexShrink: 0 }} />
                 </div>
                 <div>
-                  <strong style={{ color: '#1c1917', display: 'block' }}>Facility Address</strong>
+                  <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>Facility Address</strong>
                   <span>Jamnagar, Gujarat, India</span>
                 </div>
               </li>
-              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', alignItems: 'flex-start' }}>
+              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
                 <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(2, 132, 199, 0.08)', borderRadius: '10px', color: 'var(--accent-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Phone size={18} style={{ flexShrink: 0 }} />
                 </div>
                 <div>
-                  <strong style={{ color: '#1c1917', display: 'block' }}>Direct Line & SMS</strong>
+                  <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>Direct Line & SMS</strong>
                   <a href="tel:+916351674100" style={{ color: '#57534e', textDecoration: 'none', fontWeight: '600' }}>+91 6351674100</a>
                 </div>
               </li>
-              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', alignItems: 'flex-start' }}>
+              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
                 <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(37, 211, 102, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <WhatsAppIcon size={18} color="#25D366" style={{ flexShrink: 0 }} />
                 </div>
                 <div>
-                  <strong style={{ color: '#1c1917', display: 'block' }}>WhatsApp Care</strong>
+                  <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>WhatsApp Care</strong>
                   <a href="https://wa.me/916351674100?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" style={{ color: '#15803d', textDecoration: 'none', fontWeight: '600' }}>Instant Chat Support</a>
                 </div>
               </li>
-              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', alignItems: 'flex-start' }}>
+              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
                 <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(67, 56, 202, 0.08)', borderRadius: '10px', color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Mail size={18} style={{ flexShrink: 0 }} />
                 </div>
                 <div>
-                  <strong style={{ color: '#1c1917', display: 'block' }}>Email Us</strong>
+                  <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>Email Us</strong>
                   <a href="mailto:svinayaklaundry@gmail.com" style={{ color: '#57534e', textDecoration: 'none', wordBreak: 'break-all' }}>svinayaklaundry@gmail.com</a>
                 </div>
               </li>
@@ -135,14 +136,14 @@ const Footer = () => {
         borderTop: '1px solid rgba(28, 25, 23, 0.08)',
         padding: '1.5rem 0'
       }}>
-        <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', color: '#78716c' }}>
+        <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', fontSize: '0.85rem', color: '#78716c' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexWrap: 'wrap' }}>
             <p style={{ margin: 0 }}>&copy; {new Date().getFullYear()} Siddhi Vinayak Laundry. All rights reserved.</p>
           </div>
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Award size={14} color="var(--accent-primary)" /> Premium Care</span>
-            <button type="button" onClick={() => setActiveModal('privacy')} style={{ background: 'transparent', border: 'none', color: '#78716c', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}>Privacy Policy</button>
-            <button type="button" onClick={() => setActiveModal('terms')} style={{ background: 'transparent', border: 'none', color: '#78716c', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}>Terms of Service</button>
+            <button type="button" onClick={() => setActiveModal('privacy')} style={{ background: 'transparent', border: 'none', color: '#78716c', cursor: 'pointer', fontSize: '0.85rem', padding: 0, textDecoration: 'underline' }}>Privacy Policy</button>
+            <button type="button" onClick={() => setActiveModal('terms')} style={{ background: 'transparent', border: 'none', color: '#78716c', cursor: 'pointer', fontSize: '0.85rem', padding: 0, textDecoration: 'underline' }}>Terms of Service</button>
           </div>
         </div>
       </div>
@@ -177,7 +178,7 @@ const Footer = () => {
             border: '1px solid rgba(0,0,0,0.08)'
           }} onClick={(e) => e.stopPropagation()}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.08)', paddingBottom: '1rem' }}>
-              <h3 style={{ fontWeight: '700', color: '#1c1917', margin: 0 }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: '#1c1917', margin: 0 }}>
                 {activeModal === 'privacy' ? 'Privacy Policy' : 'Terms of Service'}
               </h3>
               <button type="button" onClick={() => setActiveModal(null)} style={{ background: 'rgba(0,0,0,0.05)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#57534e' }} aria-label="Close modal">
@@ -185,7 +186,7 @@ const Footer = () => {
               </button>
             </div>
 
-            <div style={{ color: '#475569', lineHeight: '1.7' }}>
+            <div style={{ color: '#475569', fontSize: '0.95rem', lineHeight: '1.7' }}>
               {activeModal === 'privacy' ? (
                 <>
                   <p><strong>Last Updated:</strong> June 2026</p>
@@ -224,7 +225,7 @@ const Footer = () => {
             </div>
 
             <div style={{ marginTop: '2rem', textAlign: 'right' }}>
-              <button type="button" onClick={() => setActiveModal(null)} className="btn-primary" style={{ padding: '0.6rem 1.5rem' }}>
+              <button type="button" onClick={() => setActiveModal(null)} className="btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.9rem' }}>
                 Understood
               </button>
             </div>

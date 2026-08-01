@@ -89,6 +89,7 @@ const FabricScience = () => {
             color: 'var(--accent-primary)',
             border: '1px solid rgba(124, 58, 237, 0.2)',
             borderRadius: '50px',
+            fontSize: '0.85rem',
             fontWeight: '600',
             marginBottom: '1rem'
           }}>
@@ -99,7 +100,7 @@ const FabricScience = () => {
             The Science of <span className="text-gradient">Fabric Preservation</span>
           </h2>
           
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '650px', margin: '0 auto', lineHeight: '1.6' }}>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '650px', margin: '0 auto', fontSize: '1.1rem', lineHeight: '1.6' }}>
             See why ordinary home washing and local dhobis degrade your favorite outfits, and how SVL keeps them looking brand new.
           </p>
         </div>
@@ -116,6 +117,7 @@ const FabricScience = () => {
                 className={isSelected ? 'btn-primary' : 'btn-outline'}
                 style={{
                   padding: '0.85rem 2rem',
+                  fontSize: '0.98rem',
                   fontWeight: isSelected ? '700' : '600',
                   borderRadius: '14px',
                   boxShadow: isSelected ? '0 8px 20px rgba(124, 58, 237, 0.25)' : 'none',
@@ -141,8 +143,8 @@ const FabricScience = () => {
           
           {/* Subtitle Banner */}
           <div style={{ textAlign: 'center', marginBottom: '3rem', paddingBottom: '1.8rem', borderBottom: '1px solid var(--border-color)' }}>
-            <h3 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', fontWeight: '700' }}>{current.name}</h3>
-            <p style={{ color: 'var(--accent-primary)', fontWeight: '500', margin: 0 }}>{current.subtitle}</p>
+            <h3 style={{ fontSize: '1.6rem', color: 'var(--text-primary)', marginBottom: '0.5rem', fontWeight: '700' }}>{current.name}</h3>
+            <p style={{ color: 'var(--accent-primary)', fontSize: '1.05rem', fontWeight: '500', margin: 0 }}>{current.subtitle}</p>
           </div>
 
           {/* Side-by-Side Comparison Grid */}
@@ -161,12 +163,12 @@ const FabricScience = () => {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: '#dc2626' }}>
                   <AlertTriangle size={24} />
-                  <h4 style={{ fontWeight: '700', margin: 0 }}>{current.traditional.title}</h4>
+                  <h4 style={{ fontSize: '1.18rem', fontWeight: '700', margin: 0 }}>{current.traditional.title}</h4>
                 </div>
 
                 {/* Visual Health Bar */}
                 <div style={{ marginBottom: '2rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem', fontWeight: '600' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.45rem', fontWeight: '600' }}>
                     <span style={{ color: '#991b1b' }}>Fabric Health & Lifespan</span>
                     <span style={{ color: '#dc2626' }}>{current.traditional.healthScore}% (Wear Risk)</span>
                   </div>
@@ -177,7 +179,7 @@ const FabricScience = () => {
 
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.1rem', padding: 0, margin: '0 0 2rem' }}>
                   {current.traditional.points.map((pt, idx) => (
-                    <li key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', color: '#7f1d1d', lineHeight: '1.5' }}>
+                    <li key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', color: '#7f1d1d', fontSize: '0.95rem', lineHeight: '1.5' }}>
                       <XCircle size={19} style={{ color: '#ef4444', flexShrink: 0, marginTop: '2px' }} />
                       <span>{pt}</span>
                     </li>
@@ -185,7 +187,7 @@ const FabricScience = () => {
                 </ul>
               </div>
 
-              <div style={{ padding: '0.9rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', color: '#b91c1c', textAlign: 'center', fontWeight: '600' }}>
+              <div style={{ padding: '0.9rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', color: '#b91c1c', fontSize: '0.88rem', textAlign: 'center', fontWeight: '600' }}>
                 Result: Rapid fabric aging, color fading, and stiffness
               </div>
             </div>
@@ -204,12 +206,12 @@ const FabricScience = () => {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>
                   <ShieldCheck size={26} />
-                  <h4 style={{ fontWeight: '700', margin: 0 }}>{current.svl.title}</h4>
+                  <h4 style={{ fontSize: '1.18rem', fontWeight: '700', margin: 0 }}>{current.svl.title}</h4>
                 </div>
 
                 {/* Visual Health Bar */}
                 <div style={{ marginBottom: '2rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem', fontWeight: '600' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.45rem', fontWeight: '600' }}>
                     <span style={{ color: 'var(--text-primary)' }}>Fabric Health & Lifespan</span>
                     <span style={{ color: '#16a34a' }}>{current.svl.healthScore}% (Pristine Care)</span>
                   </div>
@@ -220,7 +222,7 @@ const FabricScience = () => {
 
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.1rem', padding: 0, margin: '0 0 2rem' }}>
                   {current.svl.points.map((pt, idx) => (
-                    <li key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', color: 'var(--text-primary)', lineHeight: '1.5', fontWeight: '500' }}>
+                    <li key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: '1.5', fontWeight: '500' }}>
                       <CheckCircle2 size={19} style={{ color: '#16a34a', flexShrink: 0, marginTop: '2px' }} />
                       <span>{pt}</span>
                     </li>
@@ -228,7 +230,7 @@ const FabricScience = () => {
                 </ul>
               </div>
 
-              <div style={{ padding: '0.9rem', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', borderRadius: '12px', color: 'white', textAlign: 'center', fontWeight: '600', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.25)' }}>
+              <div style={{ padding: '0.9rem', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', borderRadius: '12px', color: 'white', fontSize: '0.88rem', textAlign: 'center', fontWeight: '600', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.25)' }}>
                 Result: Keeps clothes soft, vibrant, and perfectly shaped
               </div>
             </div>
@@ -237,7 +239,7 @@ const FabricScience = () => {
 
           {/* Action Footer */}
           <div style={{ textAlign: 'center', marginTop: '3.5rem', paddingTop: '2rem', borderTop: '1px solid var(--border-color)', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-            <span style={{ color: 'var(--text-secondary)', fontWeight: '500' }}>
+            <span style={{ fontSize: '1rem', color: 'var(--text-secondary)', fontWeight: '500' }}>
               Want expert care for your precious garments?
             </span>
             <a
@@ -250,6 +252,7 @@ const FabricScience = () => {
                 alignItems: 'center',
                 gap: '8px',
                 padding: '0.8rem 1.8rem',
+                fontSize: '0.95rem',
                 textDecoration: 'none'
               }}
             >

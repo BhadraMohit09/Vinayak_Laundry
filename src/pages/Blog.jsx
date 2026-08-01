@@ -41,7 +41,7 @@ const Blog = () => {
             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>
               The SVL <span className="text-gradient">Insights</span>
             </h1>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>
               Expert advice on fabric care, industry news, and inside looks at our state-of-the-art processes.
             </p>
           </div>
@@ -57,18 +57,18 @@ const Blog = () => {
                     onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                   />
-                  <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.9)', padding: '0.4rem 1rem', borderRadius: '20px', fontWeight: '700', color: 'var(--accent-primary)', backdropFilter: 'blur(4px)' }}>
+                  <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.9)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: '700', color: 'var(--accent-primary)', backdropFilter: 'blur(4px)' }}>
                     {article.category}
                   </div>
                 </div>
                 
                 <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                  <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1rem', color: 'var(--text-secondary)' }}>
+                  <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Calendar size={14} /> {article.date}</span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><User size={14} /> {article.author}</span>
                   </div>
                   
-                  <h2 style={{ marginBottom: '1rem', lineHeight: '1.4' }}>{article.title}</h2>
+                  <h2 style={{ fontSize: '1.4rem', marginBottom: '1rem', lineHeight: '1.4' }}>{article.title}</h2>
                   <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', lineHeight: '1.6', flexGrow: 1 }}>
                     {article.excerpt}
                   </p>
