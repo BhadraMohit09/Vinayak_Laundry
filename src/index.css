@@ -30,6 +30,35 @@ html {
   outline: none;
 }
 
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(67, 56, 202, 0.3);
+  border-radius: 10px;
+  border: 2px solid var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(67, 56, 202, 0.6);
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg-main);
@@ -187,6 +216,13 @@ body {
   box-shadow: 0 2px 10px rgba(124, 58, 237, 0.2);
 }
 
+.btn-primary:disabled {
+  background: rgba(124, 58, 237, 0.5);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .btn-outline {
   background: transparent;
   color: var(--text-primary) !important;
@@ -256,6 +292,12 @@ textarea.form-control {
   min-height: 150px;
 }
 
+.form-control:disabled {
+  background: rgba(0, 0, 0, 0.04);
+  cursor: not-allowed;
+  color: var(--text-secondary);
+}
+
 /* Navbar Hover Effect */
 .nav-link {
   position: relative;
@@ -300,5 +342,13 @@ textarea.form-control {
   
   p {
     font-size: clamp(0.85rem, 2vw + 0.5rem, 1.05rem) !important;
+  }
+  
+  .footer-wrapper {
+    padding-top: 2.5rem !important;
+  }
+  
+  .footer-grid {
+    gap: 2.5rem !important;
   }
 }

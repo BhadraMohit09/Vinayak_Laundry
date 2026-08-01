@@ -7,7 +7,7 @@ const Footer = () => {
   const [activeModal, setActiveModal] = useState(null); // null | 'privacy' | 'terms'
 
   return (
-    <footer style={{
+    <footer className="footer-wrapper" style={{
       background: 'linear-gradient(180deg, rgba(250, 249, 246, 0.4) 0%, rgba(240, 238, 233, 0.9) 100%)',
       borderTop: '1px solid rgba(28, 25, 23, 0.08)',
       paddingTop: '4rem',
@@ -16,7 +16,7 @@ const Footer = () => {
     }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Main Footer Grid */}
-        <div style={{
+        <div className="footer-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
           gap: '3.5rem',
