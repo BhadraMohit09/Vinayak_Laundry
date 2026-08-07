@@ -136,11 +136,11 @@ const Footer = () => {
         borderTop: '1px solid rgba(28, 25, 23, 0.08)',
         padding: '1.5rem 0'
       }}>
-        <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', fontSize: '0.85rem', color: '#78716c' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexWrap: 'wrap' }}>
-            <p style={{ margin: 0 }}>&copy; {new Date().getFullYear()} Siddhi Vinayak Laundry. All rights reserved.</p>
+        <div className="container footer-bottom" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', fontSize: '0.85rem', color: '#78716c' }}>
+          <div className="footer-copyright" style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <p style={{ margin: 0, textAlign: 'center' }}>&copy; {new Date().getFullYear()} Siddhi Vinayak Laundry. All rights reserved.</p>
           </div>
-          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+          <div className="footer-bottom-links" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Award size={14} color="var(--accent-primary)" /> Premium Care</span>
             <button type="button" onClick={() => setActiveModal('privacy')} style={{ background: 'transparent', border: 'none', color: '#78716c', cursor: 'pointer', fontSize: '0.85rem', padding: 0, textDecoration: 'underline' }}>Privacy Policy</button>
             <button type="button" onClick={() => setActiveModal('terms')} style={{ background: 'transparent', border: 'none', color: '#78716c', cursor: 'pointer', fontSize: '0.85rem', padding: 0, textDecoration: 'underline' }}>Terms of Service</button>
@@ -165,7 +165,7 @@ const Footer = () => {
           justifyContent: 'center',
           padding: '1.5rem'
         }} onClick={() => setActiveModal(null)}>
-          <div style={{
+          <div className="legal-modal-content" style={{
             background: '#ffffff',
             borderRadius: '24px',
             maxWidth: '650px',

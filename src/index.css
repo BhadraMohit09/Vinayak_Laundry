@@ -351,4 +351,14 @@ textarea.form-control {
   .footer-grid {
     gap: 2.5rem !important;
   }
+  
+  .footer-bottom {
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+  }
+  
+  .legal-modal-content {
+    padding: 1.5rem !important;
+  }
 }
