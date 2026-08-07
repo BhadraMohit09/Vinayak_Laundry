@@ -6,6 +6,7 @@ import RateListPreview from '../components/RateListPreview';
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
+    phone: '',
     email: '',
     subject: '',
     message: ''
@@ -36,7 +37,7 @@ const Contact = () => {
       }
 
       setStatus({ loading: false, success: true, error: '' });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
     } catch (err) {
       console.error('Submit error:', err);
       setStatus({ loading: false, success: false, error: err.message || 'Something went wrong. Please try again or call us directly.' });
@@ -164,10 +165,10 @@ const Contact = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1.5rem' }}>
                   <div>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Name</label>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Name *</label>
                     <input 
                       type="text" 
                       name="name"
@@ -177,10 +178,28 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       disabled={status.loading}
+                      style={{ marginBottom: 0 }}
                     />
                   </div>
                   <div>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Email</label>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Phone Number *</label>
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      className="form-control" 
+                      placeholder="+91 98765 43210" 
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      disabled={status.loading}
+                      style={{ marginBottom: 0 }}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1.5rem' }}>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Email *</label>
                     <input 
                       type="email" 
                       name="email"
@@ -190,26 +209,27 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       disabled={status.loading}
+                      style={{ marginBottom: 0 }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Subject *</label>
+                    <input 
+                      type="text" 
+                      name="subject"
+                      className="form-control" 
+                      placeholder="How can we help?" 
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      disabled={status.loading}
+                      style={{ marginBottom: 0 }}
                     />
                   </div>
                 </div>
-                
-                <div style={{ marginTop: '0.5rem' }}>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Subject</label>
-                  <input 
-                    type="text" 
-                    name="subject"
-                    className="form-control" 
-                    placeholder="How can we help?" 
-                    required
-                    value={formData.subject}
-                    onChange={handleChange}
-                    disabled={status.loading}
-                  />
-                </div>
 
-                <div style={{ marginTop: '0.5rem' }}>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Message</label>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Message *</label>
                   <textarea 
                     name="message"
                     className="form-control" 
@@ -218,6 +238,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     disabled={status.loading}
+                    style={{ marginBottom: 0, minHeight: '120px' }}
                   ></textarea>
                 </div>
 

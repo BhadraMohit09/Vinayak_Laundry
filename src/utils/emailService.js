@@ -7,9 +7,9 @@ const EMAILJS_PRIVATE_KEY = (typeof process !== 'undefined' && process.env && pr
 /**
  * Sends notification and confirmation emails using EmailJS REST API
  */
-export async function sendFormEmails({ name, email, subject, message }) {
-  if (!name || !email || !subject || !message) {
-    throw new Error('All fields (name, email, subject, message) are required.');
+export async function sendFormEmails({ name, phone, email, subject, message }) {
+  if (!name || !phone || !email || !subject || !message) {
+    throw new Error('All fields (name, phone, email, subject, message) are required.');
   }
 
   const serviceId = EMAILJS_SERVICE_ID.trim();
@@ -24,6 +24,7 @@ export async function sendFormEmails({ name, email, subject, message }) {
 
   const templateParams = {
     name,
+    phone,
     email,
     subject,
     message
