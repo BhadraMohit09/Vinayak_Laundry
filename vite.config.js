@@ -30,6 +30,10 @@ const resendApiPlugin = (env) => ({
           } catch (error) {
             res.setHeader('Content-Type', 'application/json');
             res.statusCode = 500;
+            res.end(JSON.stringify({ error: error.message || 'Error sending email' }));
+          }
+        });
+      }
     });
   }
 });
