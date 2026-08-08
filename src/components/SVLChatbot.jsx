@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
 import { processNaturalAIQuery } from '../utils/aiBrain';
+import ReactMarkdown from 'react-markdown';
 
 const SVLChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,52 +89,6 @@ const SVLChatbot = () => {
     wine: { title: "Red Wine / Fruit Juice", advice: "Blot immediately with a clean cloth. Club soda helps lift pigments temporarily. Bring to SVL within 24 hours for complete oxidation treatment." }
   };
 
-  // Helper to render basic markdown bold (**bold**) and italic (*italic*) and links nicely inside chat bubbles
-  const renderFormattedText = (text) => {
-    const lines = text.split('\n');
-    return lines.map((line, lIdx) => {
-      const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-      const parts = [];
-      let lastIdx = 0;
-      let match;
-
-      while ((match = linkRegex.exec(line)) !== null) {
-        if (match.index > lastIdx) {
-          parts.push(line.substring(lastIdx, match.index));
-        }
-        parts.push(
-          <a
-            key={`link-${lastIdx}`}
-            href={match[2]}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#2563eb', fontWeight: '700', textDecoration: 'underline', display: 'inline-block', margin: '4px 0' }}
-          >
-            {match[1]}
-          </a>
-        );
-        lastIdx = linkRegex.lastIndex;
-      }
-      if (lastIdx < line.length) {
-        parts.push(line.substring(lastIdx));
-      }
-
-      const contentToFormat = parts.length > 0 ? parts : [line];
-
-      return (
-        <React.Fragment key={lIdx}>
-          {contentToFormat.map((chunk, _cIdx) => {
-            if (typeof chunk !== 'string') return chunk;
-            return chunk.split('**').map((subChunk, sIdx) => {
-              if (sIdx % 2 === 1) return <strong key={sIdx}>{subChunk}</strong>;
-              return subChunk.split('*').map((italicChunk, iIdx) => iIdx % 2 === 1 ? <em key={`${sIdx}-${iIdx}`}>{italicChunk}</em> : italicChunk);
-            });
-          })}
-          {lIdx < lines.length - 1 && <br />}
-        </React.Fragment>
-      );
-    });
-  };
 
   return (
     <>
@@ -267,6 +222,11 @@ const SVLChatbot = () => {
             max-height: 94dvh;
           }
         }
+        
+        .markdown-body p { margin-bottom: 0.5rem; margin-top: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body ul { margin-top: 0.2rem; margin-bottom: 0.5rem; padding-left: 1.2rem; }
+        .markdown-body a { color: #2563eb; font-weight: 600; text-decoration: underline; }
       `}</style>
 
       {/* Floating Launcher Button */}
@@ -395,7 +355,7 @@ const SVLChatbot = () => {
                     wordBreak: 'break-word',
                     overflowWrap: 'break-word'
                   }}>
-                    {msg.sender === 'user' ? msg.text : renderFormattedText(msg.text)}
+                    {msg.sender === 'user' ? msg.text : <div className="markdown-body"><ReactMarkdown>{msg.text}</ReactMarkdown></div>}
                   </div>
                 ))}
                 
