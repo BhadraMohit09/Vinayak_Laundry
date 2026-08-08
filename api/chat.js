@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       throw new Error('Server Configuration Error: Gemini API Key is missing.');
     }
 
-    const MODEL = "gemini-1.5-flash";
+    const MODEL = "gemini-flash-latest";
     const systemPrompt = `You are Vinayak AI, an advanced conversational garment care concierge developed for Siddhi Vinayak Laundry (SVL) located in Jamnagar, Gujarat, India. 
 Your tone should be professional, polite, and deeply knowledgeable about fabric care chemistry and laundry logistics. 
 
