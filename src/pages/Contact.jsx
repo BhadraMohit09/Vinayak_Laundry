@@ -73,21 +73,12 @@ const Contact = () => {
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <div style={{ background: 'rgba(124, 58, 237, 0.1)', width: '48px', height: '48px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--accent-primary)' }}>
-                      <Phone size={24} />
-                    </div>
-                    <div>
-                      <h4 style={{ marginBottom: '0.2rem' }}>Phone</h4>
-                      <a href="tel:+916351674100" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>+91 6351674100</a>
-                    </div>
-                  </li>
-                  <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                     <div style={{ background: 'rgba(37, 211, 102, 0.1)', width: '48px', height: '48px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: '#25D366' }}>
                       <WhatsAppIcon size={24} color="#25D366" />
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem' }}>WhatsApp</h4>
-                      <a href="https://wa.me/916351674100?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>+91 6351674100</a>
+                      <a href="https://wa.me/916351674100?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textDecoration: 'none' }}>Click to Chat</a>
                     </div>
                   </li>
                   <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -121,7 +112,7 @@ const Contact = () => {
               </div>
 
               {/* Rate List Trigger */}
-              <RateListPreview />
+              {/* <RateListPreview /> */}
             </div>
 
             {/* Contact Form */}

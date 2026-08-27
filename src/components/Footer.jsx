@@ -98,15 +98,7 @@ const Footer = () => {
                   <span>Jamnagar, Gujarat, India</span>
                 </div>
               </li>
-              <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
-                <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(2, 132, 199, 0.08)', borderRadius: '10px', color: 'var(--accent-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Phone size={18} style={{ flexShrink: 0 }} />
-                </div>
-                <div>
-                  <strong style={{ color: '#1c1917', display: 'block', fontSize: '0.85rem' }}>Direct Line & SMS</strong>
-                  <a href="tel:+916351674100" style={{ color: '#57534e', textDecoration: 'none', fontWeight: '600' }}>+91 6351674100</a>
-                </div>
-              </li>
+
               <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
                 <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(37, 211, 102, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <WhatsAppIcon size={18} color="#25D366" style={{ flexShrink: 0 }} />
@@ -202,7 +194,7 @@ const Footer = () => {
                   <p>We implement strict security measures to keep your data confidential. We do not sell, rent, or trade your customer information to any third-party marketing agencies. Data is only shared with authorized delivery personnel solely for completing your order.</p>
 
                   <h4 style={{ color: '#1c1917', marginTop: '1.2rem', marginBottom: '0.4rem' }}>4. Contact Us</h4>
-                  <p>If you have any questions regarding our privacy practices or wish to update your information, please contact us at <strong>svinayaklaundry@gmail.com</strong> or call our direct line at <strong>+91 6351674100</strong>.</p>
+                  <p>If you have any questions regarding our privacy practices or wish to update your information, please contact us at <strong>svinayaklaundry@gmail.com</strong> or via WhatsApp.</p>
                 </>
               ) : (
                 <>
