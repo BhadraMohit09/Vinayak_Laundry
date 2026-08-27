@@ -11,6 +11,8 @@ import SplashScreen from './components/SplashScreen';
 import CustomCursor from './components/CustomCursor';
 import AmbientBackground from './components/AmbientBackground';
 import { useScrollReveal } from './utils/useScrollReveal';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Lazy load routes
 const About = lazy(() => import('./pages/About'));
@@ -63,6 +65,8 @@ function App() {
         <Footer />
         <SVLChatbot />
         <WhatsAppFloat />
+        <Analytics />
+        <SpeedInsights />
       </div>
     </Router>
   );
