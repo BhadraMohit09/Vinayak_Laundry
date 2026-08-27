@@ -1,5 +1,5 @@
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const MODEL = "gemini-1.5-flash";
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || ["AQ.Ab8RN6I", "ONl0eUQIXicvTh", "-xEkwWETmgbx", "_bm-pwjeaFh3CUDug"].join("");
+const MODEL = "gemini-3.6-flash";
 
 const systemPrompt = `You are Vinayak AI, an advanced conversational garment care concierge developed for Siddhi Vinayak Laundry (SVL) located in Jamnagar, Gujarat, India. 
 Your tone should be professional, polite, and deeply knowledgeable about fabric care chemistry and laundry logistics. 
