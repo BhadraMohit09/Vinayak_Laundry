@@ -20,7 +20,13 @@ export async function processNaturalAIQuery(userQuery, history = []) {
   const trimmed = userQuery.trim();
   if (!trimmed) return "Please type a question or select one of the quick options!";
 
-  const contents = history.map(msg => ({
+  // Gemini requires the conversation to start with a 'user' role
+  let validHistory = [...history];
+  if (validHistory.length > 0 && validHistory[0].sender !== 'user') {
+    validHistory = validHistory.slice(1);
+  }
+
+  const contents = validHistory.map(msg => ({
     role: msg.sender === 'user' ? 'user' : 'model',
     parts: [{ text: msg.text }]
   }));
@@ -43,7 +49,7 @@ export async function processNaturalAIQuery(userQuery, history = []) {
         contents: contents,
         generationConfig: {
           temperature: 0.4,
-          maxOutputTokens: 250,
+          maxOutputTokens: 800,
         }
       })
     });
