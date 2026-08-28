@@ -121,7 +121,7 @@ export default async function handler(req) {
     let response;
     
     while (attempt <= MAX_RETRIES) {
-        response = await fetch(\`https://generativelanguage.googleapis.com/v1beta/models/\${MODEL}:generateContent?key=\${GEMINI_API_KEY}\`, {
+        response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
