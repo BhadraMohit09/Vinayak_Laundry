@@ -19,11 +19,13 @@ If you are developing a production application, we recommend using TypeScript wi
 
 For the AI chatbot to work, you must configure the following environment variable in Vercel:
 
-\\\`nGEMINI_API_KEY=YOUR_NEW_GEMINI_API_KEY
-\\\`n
-Important: The key must NOT have the \VITE_\ prefix.
+```
+GROQ_API_KEY=YOUR_NEW_GROQ_API_KEY
+```
 
-VITE_GEMINI_API_KEY :x:
-GEMINI_API_KEY :white_check_mark:
+Important: The key must NOT have the `VITE_` prefix.
+
+VITE_GROQ_API_KEY :x:
+GROQ_API_KEY :white_check_mark:
 
 After adding the environment variable in Vercel, a new deployment may be required.
