@@ -64,8 +64,8 @@ const SVLChatbot = () => {
     try {
       const botReply = await processNaturalAIQuery(query, messages);
       setMessages(prev => [...prev, { sender: 'bot', text: botReply }]);
-    } catch {
-      setMessages(prev => [...prev, { sender: 'bot', text: "I apologize, my neural link experienced a momentary hiccup! Please connect with our team directly on WhatsApp via our quick link." }]);
+    } catch (error) {
+      setMessages(prev => [...prev, { sender: 'bot', text: error.message || "I'm temporarily unable to connect to the AI assistant. Please try again in a moment, or contact our SVL team directly on [WhatsApp](https://wa.me/916351674100)." }]);
     } finally {
       setIsThinking(false);
     }
