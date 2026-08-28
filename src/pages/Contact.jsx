@@ -51,34 +51,28 @@ const Contact = () => {
           gap: 1.2rem;
           align-items: center;
           padding: 1.2rem;
-          border-radius: 16px;
+          border-radius: 12px;
           background: rgba(255, 255, 255, 0.5);
           border: 1px solid rgba(0, 0, 0, 0.04);
-          transition: all 0.3s ease;
+          transition: background 0.2s ease, border-color 0.2s ease;
           text-decoration: none;
           color: inherit;
         }
         .contact-card:hover {
           background: white;
-          transform: translateY(-4px);
-          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-          border-color: var(--accent-secondary);
+          border-color: rgba(0, 0, 0, 0.1);
         }
         .contact-icon-wrapper {
-          width: 52px;
-          height: 52px;
+          width: 48px;
+          height: 48px;
           flex-shrink: 0;
           display: flex;
           align-items: center;
-          justifyContent: center;
+          justify-content: center;
           border-radius: 50%;
-          transition: transform 0.3s ease;
-        }
-        .contact-card:hover .contact-icon-wrapper {
-          transform: scale(1.1);
         }
       `}</style>
-      <section className="section" style={{ paddingTop: '8rem' }}>
+      <section className="section" style={{ paddingTop: '8rem', paddingBottom: '4rem' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
@@ -89,9 +83,9 @@ const Contact = () => {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '4rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '3rem', alignItems: 'start' }}>
             {/* Contact Info */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               
               <div className="glass-panel" style={{ padding: '2rem' }}>
                 <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Contact Information</h2>
@@ -99,7 +93,7 @@ const Contact = () => {
                   
                   <a href="https://maps.google.com/?q=Jamnagar,+Gujarat,+India" target="_blank" rel="noopener noreferrer" className="contact-card">
                     <div className="contact-icon-wrapper" style={{ background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-secondary)' }}>
-                      <MapPin size={24} />
+                      <MapPin size={22} />
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem', fontSize: '1.05rem' }}>Location</h4>
@@ -109,17 +103,17 @@ const Contact = () => {
 
                   <a href="https://wa.me/916351674100?text=Hello%20Siddhi%20Vinayak%20Laundry,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer" className="contact-card">
                     <div className="contact-icon-wrapper" style={{ background: 'rgba(37, 211, 102, 0.1)', color: '#25D366' }}>
-                      <WhatsAppIcon size={24} color="#25D366" />
+                      <WhatsAppIcon size={22} color="#25D366" />
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem', fontSize: '1.05rem' }}>WhatsApp</h4>
-                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>+91 63516 74100 (Click to Chat)</p>
+                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>Message our Support Team</p>
                     </div>
                   </a>
 
                   <a href="mailto:svinayaklaundry@gmail.com" className="contact-card">
                     <div className="contact-icon-wrapper" style={{ background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-secondary)' }}>
-                      <Mail size={24} />
+                      <Mail size={22} />
                     </div>
                     <div>
                       <h4 style={{ marginBottom: '0.2rem', fontSize: '1.05rem' }}>Email</h4>
@@ -132,7 +126,7 @@ const Contact = () => {
               
               <div className="glass-panel" style={{ padding: '2rem', background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.05), transparent)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                  <Clock size={24} style={{ color: 'var(--accent-primary)' }} />
+                  <Clock size={22} style={{ color: 'var(--accent-primary)' }} />
                   <h3 style={{ margin: 0 }}>Business Hours</h3>
                 </div>
                 <ul style={{ listStyle: 'none', color: 'var(--text-secondary)', fontSize: '0.95rem', margin: 0, padding: 0 }}>
@@ -152,12 +146,12 @@ const Contact = () => {
               </div>
 
               {/* Map Embed */}
-              <div className="glass-panel hover-lift" style={{ overflow: 'hidden', padding: '0.5rem' }}>
+              <div className="glass-panel" style={{ overflow: 'hidden', padding: '0.5rem' }}>
                 <iframe 
                   title="SVL Location Map"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117924.96637372134!2d70.04838634999999!3d22.4578136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39571549d443bdcd%3A0xc6fc1e048d085938!2sJamnagar%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
                   width="100%" 
-                  height="200" 
+                  height="220" 
                   style={{ border: 0, borderRadius: '12px' }} 
                   allowFullScreen="" 
                   loading="lazy" 
@@ -168,12 +162,12 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="glass-panel" style={{ padding: '3rem', position: 'relative' }}>
+            <div className="glass-panel" style={{ padding: '2.5rem', position: 'relative' }}>
               <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Send a Message</h2>
               
               {status.success && (
                 <div className="animate-fade-in" style={{
-                  padding: '1.5rem',
+                  padding: '1.25rem',
                   backgroundColor: 'rgba(34, 197, 94, 0.1)',
                   border: '1px solid rgba(34, 197, 94, 0.3)',
                   borderRadius: '12px',
@@ -182,11 +176,11 @@ const Contact = () => {
                   alignItems: 'flex-start',
                   gap: '1rem'
                 }}>
-                  <CheckCircle size={24} style={{ color: '#22c55e', flexShrink: 0, marginTop: '2px' }} />
+                  <CheckCircle size={22} style={{ color: '#16a34a', flexShrink: 0, marginTop: '2px' }} />
                   <div>
-                    <h4 style={{ color: '#16a34a', marginBottom: '0.5rem', fontSize: '1.1rem' }}>Message Sent Successfully!</h4>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>
-                      Thank you for contacting us. Your message has been sent to our team. We will get back to you shortly!
+                    <h4 style={{ color: '#16a34a', marginBottom: '0.25rem', fontSize: '1.05rem' }}>Message Sent!</h4>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>
+                      Thank you for contacting us. Our team will get back to you shortly.
                     </p>
                   </div>
                 </div>
@@ -203,15 +197,15 @@ const Contact = () => {
                   alignItems: 'center',
                   gap: '1rem'
                 }}>
-                  <AlertCircle size={24} style={{ color: '#ef4444', flexShrink: 0 }} />
+                  <AlertCircle size={22} style={{ color: '#dc2626', flexShrink: 0 }} />
                   <p style={{ color: '#dc2626', fontSize: '0.95rem', margin: 0, fontWeight: 500 }}>{status.error}</p>
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1.5rem' }}>
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '1.25rem' }}>
                   <div>
-                    <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)', fontWeight: 500 }}>Name <span style={{ color: '#ef4444' }}>*</span></label>
+                    <label htmlFor="name" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Full Name <span style={{ color: '#ef4444' }}>*</span></label>
                     <input 
                       type="text" 
                       id="name"
@@ -219,32 +213,37 @@ const Contact = () => {
                       className="form-control" 
                       placeholder="John Doe" 
                       required
+                      minLength={2}
+                      pattern="^[a-zA-Z\s]+$"
+                      title="Please enter a valid full name (letters and spaces only)"
                       value={formData.name}
                       onChange={handleChange}
                       disabled={status.loading}
-                      style={{ marginBottom: 0, transition: 'all 0.2s', borderColor: formData.name ? 'rgba(0,0,0,0.1)' : '' }}
+                      style={{ marginBottom: 0, padding: '0.75rem 1rem' }}
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)', fontWeight: 500 }}>Phone Number <span style={{ color: '#ef4444' }}>*</span></label>
+                    <label htmlFor="phone" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Mobile Number <span style={{ color: '#ef4444' }}>*</span></label>
                     <input 
                       type="tel" 
                       id="phone"
                       name="phone"
                       className="form-control" 
-                      placeholder="+91 98765 43210" 
+                      placeholder="9876543210" 
                       required
+                      pattern="[0-9]{10}"
+                      title="Please enter a valid 10-digit mobile number"
                       value={formData.phone}
                       onChange={handleChange}
                       disabled={status.loading}
-                      style={{ marginBottom: 0 }}
+                      style={{ marginBottom: 0, padding: '0.75rem 1rem' }}
                     />
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '1.25rem' }}>
                   <div>
-                    <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)', fontWeight: 500 }}>Email Address <span style={{ color: '#ef4444' }}>*</span></label>
+                    <label htmlFor="email" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Email Address <span style={{ color: '#ef4444' }}>*</span></label>
                     <input 
                       type="email" 
                       id="email"
@@ -255,38 +254,44 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       disabled={status.loading}
-                      style={{ marginBottom: 0 }}
+                      style={{ marginBottom: 0, padding: '0.75rem 1rem' }}
                     />
                   </div>
                   <div>
-                    <label htmlFor="subject" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)', fontWeight: 500 }}>Subject <span style={{ color: '#ef4444' }}>*</span></label>
-                    <input 
-                      type="text" 
+                    <label htmlFor="subject" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Subject <span style={{ color: '#ef4444' }}>*</span></label>
+                    <select 
                       id="subject"
                       name="subject"
                       className="form-control" 
-                      placeholder="How can we help?" 
                       required
                       value={formData.subject}
                       onChange={handleChange}
                       disabled={status.loading}
-                      style={{ marginBottom: 0 }}
-                    />
+                      style={{ marginBottom: 0, padding: '0.75rem 1rem', cursor: 'pointer', appearance: 'none', background: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") no-repeat right 1rem top 50%', backgroundSize: '0.65rem auto' }}
+                    >
+                      <option value="" disabled>Select a subject...</option>
+                      <option value="General Inquiry">General Inquiry</option>
+                      <option value="Bulk/Commercial Order">Bulk/Commercial Order</option>
+                      <option value="Pricing Information">Pricing Information</option>
+                      <option value="Pickup/Delivery Issue">Pickup/Delivery Issue</option>
+                      <option value="Others">Others</option>
+                    </select>
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)', fontWeight: 500 }}>Message <span style={{ color: '#ef4444' }}>*</span></label>
+                  <label htmlFor="message" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Message <span style={{ color: '#ef4444' }}>*</span></label>
                   <textarea 
                     id="message"
                     name="message"
                     className="form-control" 
-                    placeholder="Tell us about your requirements (e.g. bulk order, specific care needs)..."
+                    placeholder="Tell us about your requirements..."
                     required
+                    minLength={10}
                     value={formData.message}
                     onChange={handleChange}
                     disabled={status.loading}
-                    style={{ marginBottom: 0, minHeight: '140px', resize: 'vertical' }}
+                    style={{ marginBottom: 0, minHeight: '120px', resize: 'vertical', padding: '0.75rem 1rem' }}
                   ></textarea>
                 </div>
 
