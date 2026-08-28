@@ -2,7 +2,7 @@ export const config = {
   runtime: 'edge',
 };
 
-const MODEL = "llama3-8b-8192";
+const MODEL = "openai/gpt-oss-20b";
 const systemPrompt = `You are Vinayak AI, an advanced conversational garment care concierge developed for Siddhi Vinayak Laundry (SVL) located in Jamnagar, Gujarat, India. 
 Your tone should be professional, polite, and deeply knowledgeable about fabric care chemistry and laundry logistics. 
 
@@ -111,7 +111,7 @@ export default async function handler(req) {
                 model: MODEL,
                 messages: groqMessages,
                 temperature: 0.4,
-                max_tokens: 800,
+                max_tokens: 500,
             })
         });
 
