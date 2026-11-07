@@ -18,6 +18,7 @@ import GarmentCareAnimation from '../components/GarmentCareAnimation';
 import TypewriterHeading from '../components/TypewriterHeading';
 import ReviewsSection from '../components/ReviewsSection';
 import BookPickupModal from '../components/BookPickupModal';
+import ToastNotification from '../components/ToastNotification';
 
 
 // Animated Counter Component
@@ -109,6 +110,7 @@ const bentoServices = [
 
 const Home = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [activeToast, setActiveToast] = useState(null);
 
   return (
   <div className="home-page animate-fade-in">
@@ -358,6 +360,13 @@ const Home = () => {
     <BookPickupModal
       isOpen={isBookingOpen}
       onClose={() => setIsBookingOpen(false)}
+      onSuccessToast={(toastData) => setActiveToast(toastData)}
+    />
+
+    {/* Floating Unique Toast Notification */}
+    <ToastNotification
+      toast={activeToast}
+      onClose={() => setActiveToast(null)}
     />
   </div>
   );

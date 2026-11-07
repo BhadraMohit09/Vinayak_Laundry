@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CalendarDays, Home, Shirt, Building2, CircleHelp, Phone } from 'lucide-react';
 import BookPickupModal from './BookPickupModal';
+import ToastNotification from './ToastNotification';
 
 const links = [
   { name: 'Home', path: '/', icon: Home },
@@ -15,6 +16,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [activeToast, setActiveToast] = useState(null);
   const location = useLocation();
 
   // Handle scroll state & progress
@@ -92,6 +94,13 @@ const Navbar = () => {
       <BookPickupModal
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
+        onSuccessToast={(toastData) => setActiveToast(toastData)}
+      />
+
+      {/* Floating Unique Toast Notification */}
+      <ToastNotification
+        toast={activeToast}
+        onClose={() => setActiveToast(null)}
       />
     </>
   );
