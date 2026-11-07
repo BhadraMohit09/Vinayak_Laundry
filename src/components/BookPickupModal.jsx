@@ -1,5 +1,5 @@
-import React, { useState, useId } from 'react';
-import { X, Send, CheckCircle, AlertCircle, Loader2, Sparkles, Truck } from 'lucide-react';
+import React, { useState, useRef, useEffect, useId } from 'react';
+import { X, Send, CheckCircle, AlertCircle, Loader2, Truck, ChevronDown, Check } from 'lucide-react';
 
 const SUBJECT_OPTIONS = [
   'Doorstep Pickup Booking',
@@ -19,6 +19,18 @@ const BookPickupModal = ({ isOpen, onClose }) => {
     message: ''
   });
   const [status, setStatus] = useState({ loading: false, success: false, error: '' });
+  const [isSubjectOpen, setIsSubjectOpen] = useState(false);
+  const subjectDropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (subjectDropdownRef.current && !subjectDropdownRef.current.contains(e.target)) {
+        setIsSubjectOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const nameId = useId();
   const phoneId = useId();
@@ -198,23 +210,103 @@ const BookPickupModal = ({ isOpen, onClose }) => {
               />
             </div>
 
-            <div>
+            <div ref={subjectDropdownRef} style={{ position: 'relative' }}>
               <label htmlFor={subjectId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
                 Service / Subject*
               </label>
-              <select
+              <button
+                type="button"
                 id={subjectId}
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className="form-control custom-theme-select"
+                onClick={() => setIsSubjectOpen(!isSubjectOpen)}
+                className="form-control"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  cursor: 'pointer',
+                  background: 'var(--bg-card)',
+                  color: 'var(--ink)',
+                  textAlign: 'left',
+                  borderColor: isSubjectOpen ? 'var(--accent-rust)' : 'var(--border-subtle)',
+                  boxShadow: isSubjectOpen ? '0 0 0 3px var(--accent-rust-light)' : 'none',
+                  borderRadius: 'var(--radius-sm)',
+                  padding: '11px 14px'
+                }}
               >
-                {SUBJECT_OPTIONS.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
+                <span style={{ fontSize: '14px', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {formData.subject}
+                </span>
+                <ChevronDown
+                  size={16}
+                  style={{
+                    color: isSubjectOpen ? 'var(--accent-rust)' : 'var(--text-tertiary)',
+                    transform: isSubjectOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.2s ease',
+                    flexShrink: 0
+                  }}
+                />
+              </button>
+
+              {isSubjectOpen && (
+                <div
+                  role="listbox"
+                  style={{
+                    position: 'absolute',
+                    top: 'calc(100% + 6px)',
+                    left: 0,
+                    right: 0,
+                    background: '#ffffff',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: 'var(--radius-sm)',
+                    boxShadow: 'var(--shadow-float)',
+                    zIndex: 100,
+                    overflow: 'hidden',
+                    padding: '6px',
+                    animation: 'fadeIn 0.15s ease-out'
+                  }}
+                >
+                  {SUBJECT_OPTIONS.map((opt) => {
+                    const isSelected = formData.subject === opt;
+                    return (
+                      <button
+                        key={opt}
+                        type="button"
+                        role="option"
+                        aria-selected={isSelected}
+                        onClick={() => {
+                          setFormData({ ...formData, subject: opt });
+                          setIsSubjectOpen(false);
+                        }}
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '10px 14px',
+                          border: 'none',
+                          borderRadius: '8px',
+                          background: isSelected ? 'var(--accent-rust-light)' : 'transparent',
+                          color: isSelected ? 'var(--accent-rust)' : 'var(--ink)',
+                          fontWeight: isSelected ? 600 : 500,
+                          fontSize: '13.5px',
+                          cursor: 'pointer',
+                          textAlign: 'left',
+                          transition: 'background 0.15s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isSelected) e.currentTarget.style.background = 'var(--bg-card-subtle)';
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isSelected) e.currentTarget.style.background = 'transparent';
+                        }}
+                      >
+                        <span>{opt}</span>
+                        {isSelected && <Check size={16} color="var(--accent-rust)" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
 
