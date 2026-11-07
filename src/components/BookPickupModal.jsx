@@ -39,6 +39,22 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
   const subjectId = useId();
   const messageId = useId();
 
+  // Reset state when modal is opened or closed
+  useEffect(() => {
+    if (!isOpen) {
+      setFieldErrors({});
+      setStatus({ loading: false, error: '' });
+      setIsSubjectOpen(false);
+    }
+  }, [isOpen]);
+
+  const handleModalClose = () => {
+    setFieldErrors({});
+    setStatus({ loading: false, error: '' });
+    setIsSubjectOpen(false);
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   const validateField = (field, value) => {
@@ -68,21 +84,22 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (fieldErrors[name]) {
+    
+    // Live validation as user types
+    if (value.trim().length > 0) {
+      const liveErr = validateField(name, value);
+      setFieldErrors((prev) => ({ ...prev, [name]: liveErr }));
+    } else {
+      // If user clears the field, clear error until submit or further typing
       setFieldErrors((prev) => ({ ...prev, [name]: '' }));
     }
-  };
-
-  const handleBlur = (field) => {
-    const err = validateField(field, formData[field]);
-    setFieldErrors((prev) => ({ ...prev, [field]: err }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ loading: false, error: '' });
 
-    // Validate all fields
+    // Validate all fields on submit
     const errors = {
       name: validateField('name', formData.name),
       phone: validateField('phone', formData.phone),
@@ -145,7 +162,7 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
   };
 
   return (
-    <div className="review-modal-backdrop" onClick={onClose}>
+    <div className="review-modal-backdrop" onClick={handleModalClose}>
       <div
         className="review-modal-content"
         onClick={(e) => e.stopPropagation()}
@@ -153,7 +170,7 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
       >
         <button
           type="button"
-          onClick={onClose}
+          onClick={handleModalClose}
           style={{
             position: 'absolute',
             top: '20px',
@@ -224,7 +241,6 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
                   placeholder="e.g. Ramesh Patel"
                   value={formData.name}
                   onChange={handleChange}
-                  onBlur={() => handleBlur('name')}
                   className="form-control"
                   style={{
                     paddingLeft: '38px',
@@ -253,7 +269,6 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
                   placeholder="10-digit mobile number"
                   value={formData.phone}
                   onChange={handleChange}
-                  onBlur={() => handleBlur('phone')}
                   className="form-control"
                   style={{
                     paddingLeft: '38px',
@@ -284,7 +299,6 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
                   placeholder="name@example.com"
                   value={formData.email}
                   onChange={handleChange}
-                  onBlur={() => handleBlur('email')}
                   className="form-control"
                   style={{
                     paddingLeft: '38px',
@@ -414,7 +428,6 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
                 placeholder="Enter your doorstep address in Jamnagar, preferred pickup time, or fabric care notes..."
                 value={formData.message}
                 onChange={handleChange}
-                onBlur={() => handleBlur('message')}
                 className="form-control"
                 style={{
                   paddingLeft: '38px',
@@ -439,7 +452,7 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center', width: 'fit-content' }}>
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleModalClose}
                 className="soft-button"
                 style={{ border: 'none' }}
               >
