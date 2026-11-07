@@ -154,13 +154,14 @@ const Footer = () => {
         {/*
           Text clip container: position:relative + overflow:hidden.
           The text uses position:absolute + left:50% + translateX(-50%)
-          which GUARANTEES symmetric centering — overflow clips equally left & right.
-          Font size is calibrated to ~75% viewport width so side spacing shows.
+          which GUARANTEES symmetric centering.
+          Font size is calibrated to ~68% width on desktop and ~75% on mobile
+          leaving generous, elegant margins on both sides.
         */}
         <div style={{
           position: 'relative',
           overflow: 'hidden',
-          height: 'clamp(68px, 10.5vw, 140px)',
+          height: 'clamp(55px, 8vw, 110px)',
           width: '100%',
         }}>
           <span style={{
@@ -170,10 +171,10 @@ const Footer = () => {
             transform: 'translateX(-50%)',
             display: 'block',
             fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: 'clamp(88px, 14vw, 190px)',
+            fontSize: 'clamp(60px, 9.5vw, 138px)',
             fontWeight: 700,
             color: 'rgba(26, 24, 21, 0.09)',
-            letterSpacing: '0.01em',
+            letterSpacing: '0.04em',
             textTransform: 'lowercase',
             whiteSpace: 'nowrap',
             lineHeight: 1,
