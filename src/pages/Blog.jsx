@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Calendar, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import TypewriterHeading from '../components/TypewriterHeading';
 
 const articles = [
   {
@@ -34,15 +35,25 @@ const articles = [
 
 const Blog = () => {
   return (
-    <div className="animate-fade-in">
-      <section className="section" style={{ paddingTop: '8rem', minHeight: '100vh' }}>
+    <div className="animate-fade-in" style={{ paddingBottom: '96px' }}>
+      <section className="page-header-standard">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>
-              The SVL <span className="text-gradient">Insights</span>
-            </h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>
-              Expert advice on fabric care, industry news, and inside looks at our state-of-the-art processes.
+          <div className="page-title-block">
+            <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '12px' }}>
+              01 · FABRIC JOURNAL
+            </div>
+            <TypewriterHeading
+              as="h1"
+              className="page-main-heading"
+              speed={32}
+              delay={140}
+              segments={[
+                { text: 'Fabric insights & ' },
+                { text: 'garment care.', italic: true, accent: true }
+              ]}
+            />
+            <p className="page-main-subtext">
+              Expert advice on preserving delicate silks and wools, commercial linen hygiene standards, and inside looks at our Jamnagar garment care facility.
             </p>
           </div>
 

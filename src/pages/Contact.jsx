@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2, Clock, ChevronDown, Check } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
+import TypewriterHeading from '../components/TypewriterHeading';
 
 const SUBJECT_OPTIONS = [
   'General Inquiry',
@@ -92,16 +93,23 @@ const Contact = () => {
           border-radius: 50%;
         }
       `}</style>
-      <section className="section" style={{ paddingTop: '32px', paddingBottom: '72px' }}>
+      <section className="page-header-standard">
         <div className="container">
-          <div style={{ maxWidth: '720px', marginBottom: '40px' }}>
+          <div className="page-title-block">
             <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '12px' }}>
               01 · REACH OUT
             </div>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(38px, 4.8vw, 64px)', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: '16px' }}>
-              Let’s arrange your <i>care.</i>
-            </h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '18px', lineHeight: 1.6 }}>
+            <TypewriterHeading
+              as="h1"
+              className="page-main-heading"
+              speed={32}
+              delay={140}
+              segments={[
+                { text: 'Let’s arrange your ' },
+                { text: 'care.', italic: true, accent: true }
+              ]}
+            />
+            <p className="page-main-subtext">
               Whether you need an express doorstep pickup in Jamnagar, advice on delicate saree restoration, or a contract quote for hotel linens, we are here to help.
             </p>
           </div>

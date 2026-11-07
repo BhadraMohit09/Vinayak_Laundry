@@ -1,17 +1,28 @@
 import React from 'react';
 import { Target, Users, Award } from 'lucide-react';
+import TypewriterHeading from '../components/TypewriterHeading';
 
 const About = () => {
   return (
-    <div className="animate-fade-in">
-      <section className="section" style={{ paddingTop: '8rem' }}>
+    <div className="animate-fade-in" style={{ paddingBottom: '96px' }}>
+      <section className="page-header-standard">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
-              Redefining <span className="text-gradient">Garment Care</span>
-            </h1>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto', fontSize: '1.1rem' }}>
-              Founded on the principles of precision and quality, SVL leverages state-of-the-art methodology to deliver a laundry experience unlike any other. Welcome to the standard of 2026.
+          <div className="page-title-block">
+            <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '12px' }}>
+              01 · OUR PHILOSOPHY
+            </div>
+            <TypewriterHeading
+              as="h1"
+              className="page-main-heading"
+              speed={32}
+              delay={140}
+              segments={[
+                { text: 'Redefining garment care in ' },
+                { text: 'Jamnagar.', italic: true, accent: true }
+              ]}
+            />
+            <p className="page-main-subtext">
+              Founded on the principles of precision, fabric science, and non-toxic formulations, SVL delivers a garment care standard built for precious fabrics and everyday living.
             </p>
           </div>
 

@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import GarmentCareAnimation from '../components/GarmentCareAnimation';
 import TypewriterHeading from '../components/TypewriterHeading';
+import ReviewsSection from '../components/ReviewsSection';
 
 
 // Animated Counter Component
@@ -295,6 +296,9 @@ const Home = () => (
         </div>
       </div>
     </section>
+
+    {/* Customer Ratings & Reviews */}
+    <ReviewsSection />
 
     {/* Editorial Booking Banner */}
     <section className="container">
