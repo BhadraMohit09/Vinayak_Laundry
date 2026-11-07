@@ -2,21 +2,31 @@
 
 /**
  * TypewriterHeading
- * Types out segments at natural human speed with subtle variability,
- * interactive blinking cursor, and replay upon click/tap.
+ * - Can accept a single phrase (`segments`) OR an array of phrases (`phrases: Array<Array<Segment>>`).
+ * - When `phrases` is provided, it loops infinitely (typing -> pause -> backspacing -> next phrase).
+ * - Retains block layout and minHeight to prevent layout shifts.
+ * - Interactive: clicking skips to the next phrase.
  */
 export default function TypewriterHeading({
   as: Tag = "h1",
   className = "",
   style = {},
-  segments = [],
-  speed = 70, // Human typing speed (~60-90ms)
-  delay = 250,
+  segments = null,
+  phrases = null,
+  typeSpeed = 65,
+  backSpeed = 35,
+  holdDelay = 2600,
+  startDelay = 200,
+  minHeight = "auto",
 }) {
+  // Normalize phrases list
+  const phraseList = phrases && phrases.length > 0 ? phrases : segments ? [segments] : [];
+  const isMultiPhrase = phraseList.length > 1;
+
+  const [phraseIdx, setPhraseIdx] = useState(0);
   const [displayedSegments, setDisplayedSegments] = useState([]);
-  const [hasStarted, setHasStarted] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [playCount, setPlayCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -26,7 +36,7 @@ export default function TypewriterHeading({
           setHasStarted(true);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     if (containerRef.current) {
@@ -37,79 +47,127 @@ export default function TypewriterHeading({
   }, [hasStarted]);
 
   useEffect(() => {
-    if (!hasStarted) return;
+    if (!hasStarted || phraseList.length === 0) return;
 
     if (
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
-      setDisplayedSegments(segments.map((s) => s.text || ""));
+      setDisplayedSegments(phraseList[phraseIdx].map((s) => s.text || ""));
       setIsTyping(false);
       return;
     }
 
+    const currentPhrase = phraseList[phraseIdx];
+    let isCancelled = false;
+
+    // Helper: calculate total characters across all segments
+    const totalChars = currentPhrase.reduce((sum, s) => sum + (s.text ? s.text.length : 0), 0);
+
+    // Build segments from a flat character count
+    const buildFromCharCount = (count) => {
+      let remaining = count;
+      return currentPhrase.map((seg) => {
+        const text = seg.text || "";
+        if (remaining <= 0) return "";
+        if (remaining >= text.length) {
+          remaining -= text.length;
+          return text;
+        }
+        const slice = text.slice(0, remaining);
+        remaining = 0;
+        return slice;
+      });
+    };
+
+    let currentCharCount = 0;
     setIsTyping(true);
-    let segIdx = 0;
-    let charIdx = 0;
-    const currentTexts = segments.map(() => "");
-    setDisplayedSegments([...currentTexts]);
 
-    let timeoutId;
+    const stepForward = () => {
+      if (isCancelled) return;
+      if (currentCharCount < totalChars) {
+        currentCharCount++;
+        setDisplayedSegments(buildFromCharCount(currentCharCount));
 
-    const typeNextChar = () => {
-      if (segIdx >= segments.length) {
-        setIsTyping(false);
-        return;
-      }
+        // Natural cadence
+        const lastChar =
+          currentCharCount > 0 ? currentPhrase.map((s) => s.text || "").join("")[currentCharCount - 1] : "";
+        let cadence = typeSpeed + Math.random() * 20 - 10;
+        if (lastChar === "," || lastChar === ";") cadence += 150;
+        if (lastChar === "." || lastChar === "!" || lastChar === "?") cadence += 200;
 
-      const targetText = segments[segIdx].text || "";
-      if (charIdx < targetText.length) {
-        charIdx++;
-        currentTexts[segIdx] = targetText.slice(0, charIdx);
-        setDisplayedSegments([...currentTexts]);
-
-        // Human cadence: punctuation has longer pause, slight random jitter
-        const char = targetText[charIdx - 1];
-        let cadence = speed + Math.random() * 25 - 12;
-        if (char === "," || char === ";") cadence += 140;
-        if (char === "." || char === "!" || char === "?") cadence += 220;
-
-        timeoutId = setTimeout(typeNextChar, Math.max(30, cadence));
+        setTimeout(stepForward, Math.max(25, cadence));
       } else {
-        segIdx++;
-        charIdx = 0;
-        timeoutId = setTimeout(typeNextChar, 100);
+        setIsTyping(false);
+
+        if (isMultiPhrase) {
+          // Pause then backspace
+          setTimeout(stepBackward, holdDelay);
+        }
       }
     };
 
-    timeoutId = setTimeout(typeNextChar, delay);
-    return () => clearTimeout(timeoutId);
-  }, [hasStarted, segments, speed, delay, playCount]);
+    const stepBackward = () => {
+      if (isCancelled) return;
+      setIsTyping(true);
+      if (currentCharCount > 0) {
+        currentCharCount--;
+        setDisplayedSegments(buildFromCharCount(currentCharCount));
+        setTimeout(stepBackward, backSpeed);
+      } else {
+        setIsTyping(false);
+        // Advance to next phrase
+        setPhraseIdx((prev) => (prev + 1) % phraseList.length);
+      }
+    };
 
-  // Click/tap to replay typing animation interactively
-  const handleReplay = () => {
-    if (isTyping) return;
-    setPlayCount((c) => c + 1);
+    const initialTimer = setTimeout(stepForward, startDelay);
+
+    return () => {
+      isCancelled = true;
+      clearTimeout(initialTimer);
+    };
+  }, [hasStarted, phraseIdx, phrases, segments, isMultiPhrase]);
+
+  const currentPhrase = phraseList[phraseIdx] || [];
+
+  const handleSkipOrReplay = () => {
+    if (isMultiPhrase) {
+      setPhraseIdx((prev) => (prev + 1) % phraseList.length);
+    }
   };
 
   return (
     <Tag
       ref={containerRef}
       className={`typewriter-heading-root ${className} ${isTyping ? "is-typing" : ""}`}
-      style={{ cursor: "pointer", ...style }}
-      onClick={handleReplay}
-      title="Click to replay animation"
+      style={{
+        display: "block",
+        minHeight: minHeight !== "auto" ? minHeight : undefined,
+        cursor: isMultiPhrase ? "pointer" : "default",
+        ...style,
+      }}
+      onClick={handleSkipOrReplay}
+      title={isMultiPhrase ? "Click to see next phrase" : undefined}
     >
-      {segments.map((seg, i) => {
+      {currentPhrase.map((seg, i) => {
         const text = hasStarted ? displayedSegments[i] || "" : "";
         const isItalic = seg.italic;
         const isAccent = seg.accent;
 
         let content = text;
         if (isItalic) {
-          content = <i key={i} style={isAccent ? { color: "var(--accent-rust)" } : {}}>{text}</i>;
+          content = (
+            <i key={i} style={isAccent ? { color: "var(--accent-rust)" } : {}}>
+              {text}
+            </i>
+          );
         } else if (isAccent) {
-          content = <span key={i} style={{ color: "var(--accent-rust)" }}>{text}</span>;
+          content = (
+            <span key={i} style={{ color: "var(--accent-rust)" }}>
+              {text}
+            </span>
+          );
         }
 
         return (

@@ -1629,22 +1629,23 @@ section,
 
 /* Typewriter Heading & Cursor */
 .typewriter-heading-root {
-  display: inline-block;
+  display: block;
+  width: 100%;
   user-select: none;
   transition: opacity 0.2s ease;
 }
 
 .typewriter-heading-root:hover {
-  opacity: 0.94;
+  opacity: 0.96;
 }
 
 .typewriter-cursor {
   display: inline-block;
-  width: 2px;
-  height: 0.85em;
+  width: 2.5px;
+  height: 0.82em;
   background-color: var(--accent-rust);
-  margin-left: 3px;
-  vertical-align: -0.05em;
+  margin-left: 4px;
+  vertical-align: -0.04em;
   border-radius: 1px;
 }
 

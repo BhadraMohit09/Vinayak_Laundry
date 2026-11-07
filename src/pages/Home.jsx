@@ -123,12 +123,31 @@ const Home = () => (
               <TypewriterHeading
                 as="h1"
                 className="hero-heading"
-                speed={36}
-                delay={180}
-                segments={[
-                  { text: 'Care for clothes', br: true },
-                  { text: 'you ' },
-                  { text: 'love.', italic: true, accent: true }
+                typeSpeed={55}
+                backSpeed={30}
+                holdDelay={2800}
+                minHeight="2.1em"
+                phrases={[
+                  [
+                    { text: 'Care for clothes', br: true },
+                    { text: 'you ' },
+                    { text: 'love.', italic: true, accent: true }
+                  ],
+                  [
+                    { text: 'Artisan cleaning', br: true },
+                    { text: 'for your ' },
+                    { text: 'finest fabrics.', italic: true, accent: true }
+                  ],
+                  [
+                    { text: 'Doorstep pickup,', br: true },
+                    { text: 'restored to ' },
+                    { text: 'perfection.', italic: true, accent: true }
+                  ],
+                  [
+                    { text: 'Eco-solvent science,', br: true },
+                    { text: 'zero ' },
+                    { text: 'harsh percs.', italic: true, accent: true }
+                  ]
                 ]}
               />
 
