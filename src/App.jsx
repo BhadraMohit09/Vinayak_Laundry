@@ -20,11 +20,22 @@ const Commercial = lazy(() => import('./pages/Commercial'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Blog = lazy(() => import('./pages/Blog'));
 
+const routeTitles = {
+  '/': "Jamnagar's Most Trusted Laundry Service | Siddhi Vinayak Laundry",
+  '/services': "Garment Care & Dry Cleaning Services | Siddhi Vinayak Laundry Jamnagar",
+  '/commercial': "B2B & Commercial Linen Care Contracts | Siddhi Vinayak Laundry Jamnagar",
+  '/about': "Our Fabric Science Philosophy | Siddhi Vinayak Laundry Jamnagar",
+  '/faq': "Frequently Asked Questions & Care Guide | Siddhi Vinayak Laundry Jamnagar",
+  '/blog': "Fabric Insights & Garment Care Journal | Siddhi Vinayak Laundry Jamnagar",
+  '/contact': "Book Doorstep Pickup & Contact | Siddhi Vinayak Laundry Jamnagar",
+};
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useScrollReveal();
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = routeTitles[pathname] || "Jamnagar's Most Trusted Laundry Service | Siddhi Vinayak Laundry";
   }, [pathname]);
   return null;
 };
