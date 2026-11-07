@@ -17,6 +17,7 @@ import {
 import GarmentCareAnimation from '../components/GarmentCareAnimation';
 import TypewriterHeading from '../components/TypewriterHeading';
 import ReviewsSection from '../components/ReviewsSection';
+import BookPickupModal from '../components/BookPickupModal';
 
 
 // Animated Counter Component
@@ -106,7 +107,10 @@ const bentoServices = [
   },
 ];
 
-const Home = () => (
+const Home = () => {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  return (
   <div className="home-page animate-fade-in">
 
     {/* Modular Hero Section */}
@@ -322,9 +326,14 @@ const Home = () => (
         </div>
 
         <div className="booking-action-buttons">
-          <Link className="ink-button" to="/contact" style={{ padding: '14px 26px' }}>
+          <button
+            type="button"
+            onClick={() => setIsBookingOpen(true)}
+            className="ink-button"
+            style={{ padding: '14px 26px', cursor: 'pointer' }}
+          >
             Book a pickup online <ArrowUpRight size={18} />
-          </Link>
+          </button>
           <a
             href="https://wa.me/916351674100"
             target="_blank"
@@ -344,8 +353,15 @@ const Home = () => (
         <span><Sparkle size={19} /> 100% Satisfaction guarantee</span>
       </div>
     </section>
+
+    {/* Instant Booking Modal */}
+    <BookPickupModal
+      isOpen={isBookingOpen}
+      onClose={() => setIsBookingOpen(false)}
+    />
   </div>
-);
+  );
+};
 
 export default Home;
 

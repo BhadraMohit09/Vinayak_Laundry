@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, CalendarDays, Home, Shirt, Building2, CircleHelp, Phone, Search } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { CalendarDays, Home, Shirt, Building2, CircleHelp, Phone } from 'lucide-react';
+import BookPickupModal from './BookPickupModal';
 
 const links = [
   { name: 'Home', path: '/', icon: Home },
@@ -11,11 +12,10 @@ const links = [
 ];
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   // Handle scroll state & progress
   useEffect(() => {
@@ -30,28 +30,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Lock body scroll on mobile when drawer is open & handle Esc key
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-      const handleKeyDown = (e) => {
-        if (e.key === 'Escape') setOpen(false);
-      };
-      window.addEventListener('keydown', handleKeyDown);
-      return () => {
-        document.body.style.overflow = '';
-        window.removeEventListener('keydown', handleKeyDown);
-      };
-    } else {
-      document.body.style.overflow = '';
-    }
-  }, [open]);
-
-  // Close drawer on navigation
-  useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
 
   return (
     <>
@@ -81,13 +59,18 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* Right Portion: Book pickup CTA */}
+        {/* Right Portion: Book pickup CTA button opening modal */}
         <div className="header-actions">
-          <Link to="/contact" className="header-cta">
+          <button
+            type="button"
+            onClick={() => setIsBookingOpen(true)}
+            className="header-cta"
+            aria-label="Book instant pickup"
+          >
             <CalendarDays size={15} />
             <span className="cta-full-label">Book pickup</span>
             <span className="cta-short-label">Book</span>
-          </Link>
+          </button>
         </div>
       </header>
 
@@ -104,6 +87,12 @@ const Navbar = () => {
           </Link>
         ))}
       </nav>
+
+      {/* Instant Pickup Booking Modal */}
+      <BookPickupModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </>
   );
 };
