@@ -2194,10 +2194,18 @@ section,
   box-shadow: var(--shadow-float);
   width: min(100%, 560px);
   max-height: 90vh;
-  overflow-y: auto;
+  overflow: visible;
   padding: 36px;
   position: relative;
   animation: scaleUp 0.25s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-modal-scroll {
+  overflow-y: auto;
+  overflow-x: visible;
+  flex: 1;
 }
 
 @keyframes fadeIn {

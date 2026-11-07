@@ -184,61 +184,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Crafted by MBTech attribution */}
-      <div
-        style={{
-          width: '100%',
-          textAlign: 'center',
-          padding: '12px 16px 20px',
-          position: 'relative',
-          zIndex: 5,
-        }}
-      >
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontSize: '11.5px',
-            fontFamily: "'DM Mono', monospace",
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            color: 'var(--text-tertiary)',
-            padding: '5px 14px',
-            borderRadius: '999px',
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border-subtle)',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)',
-            transition: 'all 0.2s ease'
-          }}
-        >
-          <span>Crafted with precision by</span>
-          <a
-            href="https://bhadramohit.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: 'var(--ink)',
-              fontWeight: 600,
-              textDecoration: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '3px',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--accent-rust)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'var(--ink)';
-            }}
-          >
-            MBTech
-            <ArrowUpRight size={12} style={{ opacity: 0.7 }} />
-          </a>
-        </div>
-      </div>
-
       {/* 
       <div style={{
         background: 'rgba(28, 25, 23, 0.04)',

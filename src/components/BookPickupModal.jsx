@@ -184,7 +184,8 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            transition: 'background 0.2s ease, color 0.2s ease'
+            transition: 'background 0.2s ease, color 0.2s ease',
+            zIndex: 10,
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = 'var(--bg-panel-light)';
@@ -199,34 +200,36 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
           <X size={20} />
         </button>
 
-        <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '8px' }}>
-          DOORSTEP CARE · JAMNAGAR
-        </div>
-        <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '28px', fontWeight: 600, color: 'var(--ink)', marginBottom: '8px' }}>
-          Book an Instant Pickup
-        </h3>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '14.5px', marginBottom: '22px', lineHeight: 1.5 }}>
-          Fill in your details below and our Jamnagar logistics coordinator will arrange an express doorstep pickup window for your garments.
-        </p>
-
-        {status.error && (
-          <div style={{
-            background: '#fef2f2',
-            border: '1px solid #fecaca',
-            borderRadius: 'var(--radius-sm)',
-            padding: '12px 16px',
-            color: '#b91c1c',
-            fontSize: '13.5px',
-            marginBottom: '18px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
-          }}>
-            <AlertCircle size={16} /> {status.error}
+        {/* Scroll wrapper — overflow:visible on outer allows dropdown to escape */}
+        <div className="review-modal-scroll">
+          <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '8px' }}>
+            DOORSTEP CARE · JAMNAGAR
           </div>
-        )}
+          <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '28px', fontWeight: 600, color: 'var(--ink)', marginBottom: '8px' }}>
+            Book an Instant Pickup
+          </h3>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '14.5px', marginBottom: '22px', lineHeight: 1.5 }}>
+            Fill in your details below and our Jamnagar logistics coordinator will arrange an express doorstep pickup window for your garments.
+          </p>
 
-        <form onSubmit={handleSubmit} noValidate>
+          {status.error && (
+            <div style={{
+              background: '#fef2f2',
+              border: '1px solid #fecaca',
+              borderRadius: 'var(--radius-sm)',
+              padding: '12px 16px',
+              color: '#b91c1c',
+              fontSize: '13.5px',
+              marginBottom: '18px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <AlertCircle size={16} /> {status.error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} noValidate>
           {/* Name & Phone */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 230px), 1fr))', gap: '16px', marginBottom: '14px' }}>
             <div>
@@ -477,6 +480,7 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
             </div>
           </div>
         </form>
+        </div>{/* end review-modal-scroll */}
       </div>
     </div>
   );
