@@ -1521,14 +1521,18 @@ section,
     color: var(--accent-rust);
   }
 
-  /* Ensure bottom clearance so dock never obscures content */
+  /* Attach footer directly to the bottom — zero space below watermark just like desktop/laptop */
   .footer-wrapper {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: 0 !important;
   }
 
   /* Footer watermark: calibrated font size for generous side margins on mobile */
+  .footer-watermark-wrap {
+    padding-bottom: 0 !important;
+  }
   .footer-watermark-wrap > div:last-child {
     height: clamp(34px, 9vw, 55px) !important;
+    margin-bottom: 0 !important;
   }
   .footer-watermark-wrap > div:last-child span {
     font-size: clamp(40px, 9.5vw, 64px) !important;

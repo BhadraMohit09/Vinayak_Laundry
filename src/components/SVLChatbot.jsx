@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
+import { Sparkles, X, Send, MessageCircleMore, Calendar, Droplets, HelpCircle, ArrowRight, CheckCircle2, ShieldAlert, Clock, ArrowLeft } from 'lucide-react';
 import { processNaturalAIQuery } from '../utils/aiBrain';
 import ReactMarkdown from 'react-markdown';
 
@@ -134,11 +134,9 @@ const SVLChatbot = () => {
           flex-direction: column;
           z-index: 1000;
           overflow: hidden;
-          background: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+          background: #ffffff;
           box-shadow: 0 25px 50px -12px rgba(26, 24, 21, 0.22);
-          border: 1px solid rgba(26, 24, 21, 0.1);
+          border: 1px solid var(--border-subtle);
           border-radius: 20px;
         }
 
@@ -262,42 +260,46 @@ const SVLChatbot = () => {
           {/* Header */}
           <div style={{
             padding: '1.1rem 1.4rem',
-            background: '#1a1815',
-            color: 'white',
+            background: 'var(--ink, #1a1815)',
+            color: '#ffffff',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexShrink: 0,
-            borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            borderBottom: 'none'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{
-                width: '38px',
-                height: '38px',
-                borderRadius: '12px',
-                background: 'rgba(255, 255, 255, 0.1)',
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
+                background: 'linear-gradient(135deg, rgba(178, 83, 26, 0.22) 0%, rgba(26, 24, 21, 0.4) 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'var(--accent-rust)',
                 flexShrink: 0,
-                border: '1px solid rgba(255, 255, 255, 0.15)'
+                border: '1px solid rgba(178, 83, 26, 0.35)'
               }}>
-                <Bot size={20} />
+                {/* Unique SVL Concierge Monogram: Fabric weave & AI pulse */}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L4 6V12C4 16.5 7.5 20.6 12 22C16.5 20.6 20 16.5 20 12V6L12 2Z" stroke="var(--accent-rust, #b2531a)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M9 12C9 10.34 10.34 9 12 9C13.66 9 15 10.34 15 12C15 13.66 13.66 15 12 15" stroke="#ffffff" strokeWidth="1.75" strokeLinecap="round"/>
+                  <circle cx="12" cy="12" r="1.5" fill="var(--accent-rust, #b2531a)"/>
+                </svg>
               </div>
               <div>
-                <h3 style={{ fontSize: '0.95rem', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem', letterSpacing: '0.3px' }}>
-                  SVL Concierge <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', flexShrink: 0 }}></span>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: '600', margin: 0, display: 'flex', alignItems: 'center', gap: '0.45rem', letterSpacing: '-0.01em', color: '#ffffff' }}>
+                  SVL Concierge <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', flexShrink: 0 }}></span>
                 </h3>
-                <span style={{ fontSize: '0.72rem', color: '#e0e7ff', display: 'block' }}>Online Assistant</span>
+                <span style={{ fontSize: '0.72rem', color: '#a8a29e', display: 'block', letterSpacing: '0.02em' }}>Garment Care Assistant</span>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: '#e2e8f0', borderRadius: '50%', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              style={{ background: 'rgba(255,255,255,0.08)', border: 'none', color: '#e7e5e4', borderRadius: '50%', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.2s' }}
               aria-label="Close Assistant"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
           </div>
 
@@ -387,7 +389,7 @@ const SVLChatbot = () => {
                 {!isThinking && messages.length < 12 && (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
                     {[
-                      "Piece-wise pricing & rates",
+                      "Request custom quote via WhatsApp",
                       "Contact details (email & phone)",
                       "Free Jamnagar pickup areas",
                       "Express urgent turnaround",
