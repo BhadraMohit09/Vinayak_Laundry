@@ -8,8 +8,8 @@ const WhatsAppFloat = () => {
     <>
       <style>{`
         @keyframes pulse-whatsapp {
-          0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-          70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+          0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+          70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
           100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
@@ -20,17 +20,18 @@ const WhatsAppFloat = () => {
           position: fixed;
           bottom: 2rem;
           right: 2rem;
-          height: 60px;
-          width: 60px;
-          border-radius: 30px;
+          height: 54px;
+          width: 54px;
+          border-radius: 9999px;
           background-color: #25D366;
           color: #ffffff !important;
           display: flex;
           align-items: center;
-          padding: 0 14px;
-          box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+          padding: 0 12px;
+          box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+          border: 1.5px solid rgba(255, 255, 255, 0.6);
           z-index: 1000;
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
           overflow: hidden;
           text-decoration: none !important;
@@ -39,37 +40,42 @@ const WhatsAppFloat = () => {
 
         .svl-wa-float.hovered,
         .svl-wa-float:hover {
-          width: 190px;
-          background-color: #22c55e !important;
+          width: 175px;
+          background-color: #20ba5a !important;
           color: #ffffff !important;
-          box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+          box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45);
         }
 
         .svl-wa-pulse {
           position: absolute;
           top: 0;
           left: 0;
-          width: 60px;
-          height: 60px;
+          width: 54px;
+          height: 54px;
           border-radius: 50%;
-          animation: pulse-whatsapp 2s infinite;
+          animation: pulse-whatsapp 2.5s infinite;
           z-index: -1;
         }
 
         @media (max-width: 640px) {
           .svl-wa-float {
-            bottom: 1.5rem;
-            right: 1.5rem;
-            height: 52px;
-            width: 52px;
-            padding: 0 10px;
+            height: 48px !important;
+            width: 48px !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: visible !important;
           }
           .svl-wa-float.hovered {
-            width: 165px;
+            width: 48px !important;
+          }
+          .svl-wa-float span {
+            display: none !important;
           }
           .svl-wa-pulse {
-            width: 52px;
-            height: 52px;
+            width: 48px !important;
+            height: 48px !important;
           }
         }
       `}</style>
@@ -84,16 +90,16 @@ const WhatsAppFloat = () => {
         aria-label="Contact us on WhatsApp"
       >
         <div style={{ 
-          minWidth: '32px', 
-          height: '32px', 
+          width: '28px', 
+          height: '28px', 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center',
-          transform: isHovered ? 'rotate(-10deg) scale(1.1)' : 'rotate(0) scale(1)',
+          transform: isHovered ? 'rotate(-10deg) scale(1.08)' : 'rotate(0) scale(1)',
           transition: 'transform 0.3s ease',
           flexShrink: 0
         }}>
-          <WhatsAppIcon size={32} color="#ffffff" />
+          <WhatsAppIcon size={28} color="#ffffff" />
         </div>
         
         <span style={{

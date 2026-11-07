@@ -1,85 +1,230 @@
-import React from 'react';
-import { Shirt, Box, Wind, Droplets } from 'lucide-react';
+import React, { useState } from 'react';
+import { Shirt, Box, Wind, Droplets, CheckCircle2, ArrowUpRight, Search, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import TypewriterHeading from '../components/TypewriterHeading';
+
+const serviceCatalog = [
+  {
+    id: 'dry-cleaning',
+    moduleNo: '01',
+    category: 'delicates',
+    tag: 'ECO SOLVENT',
+    icon: Droplets,
+    title: 'Advanced Dry Cleaning',
+    subtitle: 'Zero percs · Pure fiber restoration',
+    description: 'Using gentle next-generation solvents that preserve natural sheen, fabric elasticity, and delicate hand embroidery on silk, wool, and occasion wear.',
+    features: ['Stain pre-spotting & fiber testing', 'Odor neutralization', 'Hand-finished steam pressing'],
+    turnaround: '36-48 Hours',
+    rateNote: 'From ₹120 / piece',
+  },
+  {
+    id: 'wash-fold',
+    moduleNo: '02',
+    category: 'everyday',
+    tag: 'DAILY ESSENTIAL',
+    icon: Wind,
+    title: 'Wash & Fold Precision',
+    subtitle: 'Color separated · Hypoallergenic care',
+    description: 'Your weekly wardrobe treated with precision. Sorted meticulously by color and weave, washed at optimal temperatures with mild German detergents.',
+    features: ['Temperature-controlled drum washing', 'Anti-static gentle tumble drying', 'Crisp bundle folding & bag packaging'],
+    turnaround: '24 Hours Express',
+    rateNote: 'By weight or piece',
+  },
+  {
+    id: 'steam-pressing',
+    moduleNo: '03',
+    category: 'everyday',
+    tag: 'PROFESSIONAL',
+    icon: Shirt,
+    title: 'Steam Pressing & Detailing',
+    subtitle: 'Crisp creases · No fiber scorching',
+    description: 'Industrial steam tension presses safely eliminate stubborn creases without the fiber-flattening shine or heat scorch marks caused by domestic irons.',
+    features: ['Lapel, collar & cuff detailing', 'Crease memory alignment', 'Hanger or flat delivery options'],
+    turnaround: 'Same-day available',
+    rateNote: 'From ₹25 / piece',
+  },
+  {
+    id: 'commercial',
+    moduleNo: '04',
+    category: 'commercial',
+    tag: 'B2B CONTRACT',
+    icon: Box,
+    title: 'Bulk & Commercial Linens',
+    subtitle: 'Dedicated plant line · Scheduled logistics',
+    description: 'High-volume linen management for boutique hotels, medical clinics, and corporate enterprises requiring strict hygiene standards and guaranteed SLAs.',
+    features: ['Dedicated client account coordinator', 'RFID / barcode tracking per batch', 'Custom monthly billing cycles'],
+    turnaround: 'Daily / bi-weekly cycles',
+    rateNote: 'Contract rates upon quote',
+  },
+];
 
 const Services = () => {
+  const [filter, setFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredServices = serviceCatalog.filter((item) => {
+    const matchesFilter = filter === 'all' || item.category === filter;
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          item.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
+
   return (
-    <div className="animate-fade-in">
-      <section className="section" style={{ paddingTop: '8rem' }}>
+    <div className="animate-fade-in" style={{ paddingBottom: '96px' }}>
+      {/* Services Header */}
+      <section className="services-page-header">
         <div className="container">
-          <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
-              Premium <span className="text-gradient">Services</span>
-            </h1>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto', fontSize: '1.1rem' }}>
-              We don't just wash clothes; we preserve them. Explore our range of specialized services designed for modern lifestyles and business needs.
+          <div className="services-title-block">
+            <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '12px' }}>
+              01 · CARE DIRECTORY
+            </div>
+            <TypewriterHeading
+              as="h1"
+              className="services-main-heading"
+              speed={34}
+              delay={150}
+              segments={[
+                { text: 'Care standards for ' },
+                { text: 'every garment.', italic: true, accent: true }
+              ]}
+            />
+            <p className="services-main-subtext">
+              We do not merely wash clothes; we restore and preserve their original weave. Explore our specialized services built for daily living and corporate standards.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem', marginBottom: '4rem' }}>
-            {/* Service 1 */}
-            <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
-              <Droplets size={40} style={{ color: 'var(--accent-secondary)', marginBottom: '1.5rem' }} />
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Advanced Dry Cleaning</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                Using next-generation, environmentally safe solvents that clean deeper while being incredibly gentle on delicate fabrics like silk, wool, and cashmere.
-              </p>
-              <ul style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', listStylePosition: 'inside' }}>
-                <li>Stain analysis & pre-treatment</li>
-                <li>Odor neutralization</li>
-                <li>Hand-finished pressing</li>
-              </ul>
+          {/* Search & Filter Bar (Curriculum Catalog Style) */}
+          <div className="services-filter-bar">
+            <div className="services-search-box">
+              <Search size={18} style={{ color: 'var(--text-tertiary)', flexShrink: 0 }} />
+              <input
+                type="text"
+                placeholder="Search services, fabrics, or care methods..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="services-search-input"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: '13px', padding: '4px' }}
+                >
+                  Clear
+                </button>
+              )}
             </div>
 
-            {/* Service 2 */}
-            <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
-              <Wind size={40} style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }} />
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Wash & Fold Precision</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                Your everyday garments treated with extraordinary care. We separate by color, fabric type, and washing requirements to ensure perfect results.
-              </p>
-              <ul style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', listStylePosition: 'inside' }}>
-                <li>Temperature-controlled washing</li>
-                <li>Premium hypoallergenic detergents</li>
-                <li>Meticulous folding and packaging</li>
-              </ul>
-            </div>
-
-            {/* Service 3 */}
-            <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
-              <Shirt size={40} style={{ color: 'var(--accent-secondary)', marginBottom: '1.5rem' }} />
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Steam Pressing & Ironing</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                Achieve that crisp, professional look. Our advanced steam pressing equipment safely removes the toughest wrinkles without damaging fibers.
-              </p>
-              <ul style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', listStylePosition: 'inside' }}>
-                <li>Precision creasing</li>
-                <li>Collar and cuff detailing</li>
-                <li>Hanging or flat packaging options</li>
-              </ul>
-            </div>
-
-            {/* Service 4 */}
-            <div className="glass-panel reveal-scale" style={{ padding: '2.5rem' }}>
-              <Box size={40} style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }} />
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Bulk & Commercial Orders</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                Dedicated solutions for hotels, restaurants, and businesses. We offer high-volume processing without compromising our rigorous quality standards.
-              </p>
-              <ul style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', listStylePosition: 'inside' }}>
-                <li>Dedicated account manager</li>
-                <li>Scheduled pickup & delivery</li>
-                <li>Highly competitive corporate rates</li>
-              </ul>
+            <div className="services-filter-pills">
+              {['all', 'everyday', 'delicates', 'commercial'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className={`services-pill-btn ${filter === cat ? 'is-active' : ''}`}
+                >
+                  {cat === 'all' ? 'All Services' : cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </button>
+              ))}
             </div>
           </div>
 
-          <div className="glass-panel reveal-scale" style={{ padding: '3rem', textAlign: 'center', background: 'rgba(0,0,0,0.02)' }}>
-            <h2 style={{ marginBottom: '1rem' }}>Affordable Pricing for Unmatched Quality</h2>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 2rem' }}>
-              We believe premium care shouldn't come at an exorbitant cost. Contact us with your specific requirements, and we'll provide a tailored, highly competitive quote.
+          {/* Modular Grid of Cards */}
+          {filteredServices.length > 0 ? (
+            <div className="services-grid">
+              {filteredServices.map((service) => {
+                const Icon = service.icon;
+                return (
+                  <div key={service.id} className="service-bento-card">
+                    <div>
+                      <div className="service-card-top-row">
+                        <span className="service-module-code">
+                          MODULE {service.moduleNo}
+                        </span>
+                        <span className="service-category-tag">
+                          {service.tag}
+                        </span>
+                      </div>
+
+                      <div className="service-card-heading-row">
+                        <div className="service-icon-pod">
+                          <Icon size={22} />
+                        </div>
+                        <div>
+                          <h3 className="service-card-title">
+                            {service.title}
+                          </h3>
+                          <div className="service-card-subtitle">{service.subtitle}</div>
+                        </div>
+                      </div>
+
+                      <p className="service-card-desc">
+                        {service.description}
+                      </p>
+
+                      <div className="service-feature-list">
+                        {service.features.map((feat, i) => (
+                          <div key={i} className="service-feature-item">
+                            <CheckCircle2 size={15} style={{ color: 'var(--accent-rust)', flexShrink: 0 }} />
+                            <span>{feat}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="service-card-footer">
+                      <div>
+                        <div className="service-rate-label">
+                          Turnaround · {service.rateNote}
+                        </div>
+                        <div className="service-rate-val">
+                          {service.turnaround}
+                        </div>
+                      </div>
+
+                      <Link to="/contact" className="ink-button service-book-btn">
+                        Book now <ArrowUpRight size={14} />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="services-empty-state">
+              <p style={{ color: 'var(--text-secondary)', fontSize: '16px', marginBottom: '16px' }}>
+                No care services match "{searchQuery}".
+              </p>
+              <button
+                type="button"
+                className="soft-button"
+                onClick={() => { setSearchQuery(''); setFilter('all'); }}
+              >
+                Reset catalog filter
+              </button>
+            </div>
+          )}
+
+          {/* Pricing Guarantee Banner */}
+          <div className="services-quote-pod">
+            <h2 className="services-quote-heading">
+              Transparent pricing with zero compromise.
+            </h2>
+            <p className="services-quote-desc">
+              Have specific garments, designer lehengas, or high-volume commercial linen needs? Request an instant tailored quote via WhatsApp or online booking.
             </p>
-            <Link to="/contact" className="btn-primary">Request a Quote</Link>
+            <div className="services-quote-btn-row">
+              <Link to="/contact" className="ink-button">
+                Schedule a pickup <ArrowUpRight size={16} />
+              </Link>
+              <a
+                href="https://wa.me/916351674100"
+                target="_blank"
+                rel="noreferrer"
+                className="soft-button"
+              >
+                Chat on WhatsApp →
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -88,3 +233,4 @@ const Services = () => {
 };
 
 export default Services;
+

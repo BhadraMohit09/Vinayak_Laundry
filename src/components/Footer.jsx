@@ -8,38 +8,35 @@ const Footer = () => {
 
   return (
     <footer className="footer-wrapper" style={{
-      background: 'linear-gradient(180deg, rgba(250, 249, 246, 0.4) 0%, rgba(240, 238, 233, 0.9) 100%)',
-      borderTop: '1px solid rgba(28, 25, 23, 0.08)',
-      paddingTop: '4rem',
+      background: 'transparent',
+      paddingTop: '3rem',
+      paddingBottom: '0',
       marginTop: 'auto',
       position: 'relative'
     }}>
+      {/* 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        {/* Main Footer Grid */}
         <div className="footer-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
           gap: '3.5rem',
           marginBottom: '3.5rem'
         }}>
-          {/* Brand & Mission */}
           <div>
             <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', textDecoration: 'none', marginBottom: '1.2rem' }}>
-              <img src="/assets/logo-small.png" alt="Siddhi Vinayak Laundry Logo" style={{ height: '46px', width: '46px', borderRadius: '12px', objectFit: 'contain', boxShadow: '0 4px 10px rgba(0,0,0,0.06)' }} />
+              <img src="/assets/logo-small.png" alt="Siddhi Vinayak Laundry Logo" style={{ height: '42px', width: '42px', borderRadius: '10px', objectFit: 'contain', background: '#ffffff', padding: '3px', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-subtle)' }} />
               <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2' }}>
                 <span style={{
-                  background: 'linear-gradient(135deg, var(--accent-secondary), var(--accent-primary))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontWeight: '800',
-                  fontSize: '1.45rem',
-                  letterSpacing: '0.3px',
-                  fontFamily: "'Inter', sans-serif"
+                  color: 'var(--ink)',
+                  fontWeight: '600',
+                  fontSize: '1.35rem',
+                  letterSpacing: '-0.02em',
+                  fontFamily: "'Playfair Display', serif"
                 }}>
-                  Siddhi Vinayak
+                  Siddhi Vinayak <i style={{ fontWeight: 400, color: 'var(--accent-rust)' }}>Laundry</i>
                 </span>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase', marginTop: '0.1rem' }}>
-                  Premium Garment Care
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase', marginTop: '0.1rem', fontFamily: "'DM Mono', monospace" }}>
+                  Garment Care Studio · Jamnagar
                 </span>
               </div>
             </Link>
@@ -47,7 +44,6 @@ const Footer = () => {
               Next-generation garment care powered by eco-solvent science and automated precision. We protect delicate weaves while restoring vibrant freshness.
             </p>
             
-            {/* Live Plant Status Badge */}
             <div style={{ padding: '0.8rem 1rem', background: 'rgba(255,255,255,0.8)', border: '1px solid rgba(28,25,23,0.08)', borderRadius: '14px', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem', fontWeight: '700', color: '#1c1917' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -63,7 +59,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 style={{ color: '#1c1917', marginBottom: '1.4rem', fontSize: '1.1rem', fontWeight: '700', letterSpacing: '0.3px' }}>Quick Links</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.85rem', padding: 0, margin: 0 }}>
@@ -76,7 +71,7 @@ const Footer = () => {
                 { name: 'Contact Us', path: '/contact' }
               ].map((item) => (
                 <li key={item.name}>
-                  <Link to={item.path} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#57534e', textDecoration: 'none', fontSize: '0.92rem', fontWeight: '500', transition: 'all 0.2s', padding: '0.3rem 0' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-primary)'; e.currentTarget.style.transform = 'translateX(4px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#57534e'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                  <Link to={item.path} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#57534e', textDecoration: 'none', fontSize: '0.92rem', fontWeight: '500', transition: 'all 0.2s', padding: '0.3rem 0' }}>
                     <span>{item.name}</span>
                     <ArrowUpRight size={14} style={{ opacity: 0.5 }} />
                   </Link>
@@ -85,7 +80,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Direct Contact */}
           <div>
             <h4 style={{ color: '#1c1917', marginBottom: '1.4rem', fontSize: '1.1rem', fontWeight: '700', letterSpacing: '0.3px' }}>Contact Us</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.1rem', padding: 0, margin: 0 }}>
@@ -98,7 +92,6 @@ const Footer = () => {
                   <span>Jamnagar, Gujarat, India</span>
                 </div>
               </li>
-
               <li style={{ display: 'flex', gap: '0.8rem', color: '#57534e', fontSize: '0.92rem', alignItems: 'flex-start' }}>
                 <div style={{ width: '36px', height: '36px', minWidth: '36px', minHeight: '36px', background: 'rgba(37, 211, 102, 0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <WhatsAppIcon size={18} color="#25D366" style={{ flexShrink: 0 }} />
@@ -121,11 +114,79 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      */}
 
-      {/* Bottom Bar */}
+      {/* Giant Editorial Watermark Brand Display — Pebble-style */}
+      <div
+        className="footer-watermark-wrap"
+        style={{
+          userSelect: 'none',
+          pointerEvents: 'none',
+          width: '100%',
+          textAlign: 'center',
+          paddingTop: '36px',
+          paddingBottom: '0',
+        }}
+      >
+        {/* 7-block icon: 3 dark + 4 lighter, 2-row staggered arrangement */}
+        <div style={{
+          display: 'inline-flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          gap: '4px',
+          marginBottom: '16px',
+        }}>
+          {/* Row 1: lighter · dark · dark · lighter  (4 blocks) */}
+          <div style={{ display: 'flex', gap: '4px' }}>
+            <span style={{ width: '11px', height: '11px', background: 'rgba(26,24,21,0.22)', borderRadius: '3px' }} />
+            <span style={{ width: '11px', height: '11px', background: 'rgba(26,24,21,0.55)', borderRadius: '3px' }} />
+            <span style={{ width: '11px', height: '11px', background: 'rgba(26,24,21,0.55)', borderRadius: '3px' }} />
+            <span style={{ width: '11px', height: '11px', background: 'rgba(26,24,21,0.22)', borderRadius: '3px' }} />
+          </div>
+          {/* Row 2: dark · lighter · lighter  (3 blocks, offset left) */}
+          <div style={{ display: 'flex', gap: '4px' }}>
+            <span style={{ width: '11px', height: '11px', background: 'rgba(26,24,21,0.55)', borderRadius: '3px' }} />
+            <span style={{ width: '11px', height: '11px', background: 'rgba(26,24,21,0.22)', borderRadius: '3px' }} />
+            <span style={{ width: '11px', height: '11px', background: 'rgba(26,24,21,0.22)', borderRadius: '3px' }} />
+          </div>
+        </div>
+
+        {/*
+          Text clip container: position:relative + overflow:hidden.
+          The text uses position:absolute + left:50% + translateX(-50%)
+          which GUARANTEES symmetric centering — overflow clips equally left & right.
+          Font size is calibrated to ~75% viewport width so side spacing shows.
+        */}
+        <div style={{
+          position: 'relative',
+          overflow: 'hidden',
+          height: 'clamp(68px, 10.5vw, 140px)',
+          width: '100%',
+        }}>
+          <span style={{
+            position: 'absolute',
+            left: '50%',
+            top: 0,
+            transform: 'translateX(-50%)',
+            display: 'block',
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontSize: 'clamp(88px, 14vw, 190px)',
+            fontWeight: 700,
+            color: 'rgba(26, 24, 21, 0.09)',
+            letterSpacing: '0.01em',
+            textTransform: 'lowercase',
+            whiteSpace: 'nowrap',
+            lineHeight: 1,
+          }}>
+            siddhi vinayak
+          </span>
+        </div>
+      </div>
+
+      {/* 
       <div style={{
         background: 'rgba(28, 25, 23, 0.04)',
-        borderTop: '1px solid rgba(28, 25, 23, 0.08)',
+        borderTop: '1px solid var(--border-subtle)',
         padding: '1.5rem 0'
       }}>
         <div className="container footer-bottom" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', fontSize: '0.85rem', color: '#78716c' }}>
@@ -139,6 +200,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      */}
 
       {/* Legal Modals */}
       {activeModal && (

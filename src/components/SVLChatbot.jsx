@@ -97,25 +97,26 @@ const SVLChatbot = () => {
           position: fixed;
           bottom: 6.75rem;
           right: 2rem;
-          width: 64px;
-          height: 64px;
+          width: 54px;
+          height: 54px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #4338ca, #0284c7);
+          background: #1a1815;
           color: white;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          box-shadow: 0 10px 30px rgba(67, 56, 202, 0.45), 0 0 20px rgba(2, 132, 199, 0.3);
+          border: 1.5px solid rgba(255, 255, 255, 0.4);
+          box-shadow: 0 8px 24px rgba(26, 24, 21, 0.28);
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
           z-index: 999;
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
           box-sizing: border-box;
         }
 
         .svl-chat-launcher:hover {
-          transform: scale(1.1) translateY(-2px);
-          box-shadow: 0 12px 30px rgba(67, 56, 202, 0.5);
+          transform: scale(1.08) translateY(-2px);
+          box-shadow: 0 12px 28px rgba(26, 24, 21, 0.36);
+          background: #2b2722;
         }
 
         .svl-chat-backdrop {
@@ -133,12 +134,12 @@ const SVLChatbot = () => {
           flex-direction: column;
           z-index: 1000;
           overflow: hidden;
-          background: rgba(255, 255, 255, 0.96);
+          background: rgba(255, 255, 255, 0.98);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-          border: 1px solid rgba(124, 58, 237, 0.2);
-          border-radius: 24px;
+          box-shadow: 0 25px 50px -12px rgba(26, 24, 21, 0.22);
+          border: 1px solid rgba(26, 24, 21, 0.1);
+          border-radius: 20px;
         }
 
         .svl-grid-2 {
@@ -150,12 +151,18 @@ const SVLChatbot = () => {
         .svl-chat-input {
           flex: 1;
           padding: 0.75rem 1rem;
-          border: 1px solid var(--border-color);
+          border: 1px solid var(--border-subtle);
           border-radius: 50px;
           font-size: 0.9rem;
           outline: none;
-          background: #f8fafc;
+          background: var(--bg-card-subtle);
+          color: var(--ink);
           font-family: inherit;
+          transition: border-color 0.2s ease;
+        }
+
+        .svl-chat-input:focus {
+          border-color: var(--ink);
         }
 
         @keyframes svlBounce {
@@ -167,24 +174,24 @@ const SVLChatbot = () => {
           display: inline-block;
           width: 6px;
           height: 6px;
-          background-color: #94a3b8;
+          background-color: var(--text-tertiary);
           border-radius: 50%;
           animation: svlBounce 1.4s infinite ease-in-out both;
         }
 
         @media (max-width: 640px) {
           .svl-chat-launcher {
-            bottom: 5.5rem;
-            right: 1.5rem;
-            width: 52px;
-            height: 52px;
+            bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+            right: 14px !important;
+            width: 48px !important;
+            height: 48px !important;
           }
 
           .svl-chat-backdrop {
             display: block;
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.45);
+            background: rgba(26, 24, 21, 0.45);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             z-index: 99998;
@@ -202,9 +209,9 @@ const SVLChatbot = () => {
             max-height: 88dvh;
             border-radius: 24px 24px 0 0;
             border: none;
-            border-top: 1px solid rgba(124, 58, 237, 0.25);
+            border-top: 1px solid var(--border-strong);
             z-index: 99999;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 -10px 40px rgba(26, 24, 21, 0.2);
           }
 
           .svl-grid-2 {
@@ -226,7 +233,7 @@ const SVLChatbot = () => {
         .markdown-body p { margin-bottom: 0.5rem; margin-top: 0; }
         .markdown-body p:last-child { margin-bottom: 0; }
         .markdown-body ul { margin-top: 0.2rem; margin-bottom: 0.5rem; padding-left: 1.2rem; }
-        .markdown-body a { color: #2563eb; font-weight: 600; text-decoration: underline; }
+        .markdown-body a { color: var(--accent-rust); font-weight: 600; text-decoration: underline; }
       `}</style>
 
       {/* Floating Launcher Button */}
@@ -254,28 +261,27 @@ const SVLChatbot = () => {
           
           {/* Header */}
           <div style={{
-            padding: '1rem 1.4rem',
-            background: 'linear-gradient(135deg, #4338ca, #0284c7)',
+            padding: '1.1rem 1.4rem',
+            background: '#1a1815',
             color: 'white',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexShrink: 0,
-            boxShadow: '0 4px 15px rgba(67, 56, 202, 0.2)'
+            borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div style={{
                 width: '38px',
                 height: '38px',
                 borderRadius: '12px',
-                background: 'rgba(255, 255, 255, 0.2)',
-                backdropFilter: 'blur(8px)',
+                background: 'rgba(255, 255, 255, 0.1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#ffffff',
+                color: 'var(--accent-rust)',
                 flexShrink: 0,
-                border: '1px solid rgba(255,255,255,0.3)'
+                border: '1px solid rgba(255, 255, 255, 0.15)'
               }}>
                 <Bot size={20} />
               </div>
@@ -298,8 +304,8 @@ const SVLChatbot = () => {
           {/* Navigation Tabs */}
           <div style={{
             display: 'flex',
-            borderBottom: '1px solid var(--border-color)',
-            background: '#f8fafc',
+            borderBottom: '1px solid var(--border-subtle)',
+            background: 'var(--bg-card-subtle)',
             padding: '0.4rem',
             gap: '0.3rem',
             flexShrink: 0
@@ -316,8 +322,8 @@ const SVLChatbot = () => {
                   flex: 1,
                   padding: '0.6rem 0.3rem',
                   border: 'none',
-                  background: activeTab === tab.id ? 'white' : 'transparent',
-                  color: activeTab === tab.id ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                  background: activeTab === tab.id ? 'var(--bg-card)' : 'transparent',
+                  color: activeTab === tab.id ? 'var(--ink)' : 'var(--text-secondary)',
                   fontWeight: activeTab === tab.id ? '600' : '500',
                   fontSize: 'clamp(0.75rem, 2vw, 0.82rem)',
                   borderRadius: '10px',
@@ -326,12 +332,12 @@ const SVLChatbot = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '0.35rem',
-                  boxShadow: activeTab === tab.id ? '0 2px 8px rgba(0,0,0,0.06)' : 'none',
+                  boxShadow: activeTab === tab.id ? '0 2px 8px rgba(26,24,21,0.06)' : 'none',
                   transition: 'all 0.2s ease',
                   whiteSpace: 'nowrap'
                 }}
               >
-                <tab.icon size={15} style={{ flexShrink: 0 }} /> <span>{tab.label}</span>
+                <tab.icon size={15} style={{ flexShrink: 0, color: activeTab === tab.id ? 'var(--accent-rust)' : 'inherit' }} /> <span>{tab.label}</span>
               </button>
             ))}
           </div>
@@ -348,11 +354,11 @@ const SVLChatbot = () => {
                     maxWidth: '88%',
                     padding: '0.8rem 1.05rem',
                     borderRadius: msg.sender === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
-                    background: msg.sender === 'user' ? 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' : '#f1f5f9',
-                    color: msg.sender === 'user' ? 'white' : 'var(--text-primary)',
+                    background: msg.sender === 'user' ? 'var(--ink)' : 'var(--bg-panel-light)',
+                    color: msg.sender === 'user' ? '#ffffff' : 'var(--ink)',
                     fontSize: 'clamp(0.85rem, 2.5vw, 0.92rem)',
                     lineHeight: '1.5',
-                    boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+                    boxShadow: '0 2px 6px rgba(26,24,21,0.04)',
                     wordBreak: 'break-word',
                     overflowWrap: 'break-word'
                   }}>
@@ -366,7 +372,7 @@ const SVLChatbot = () => {
                     alignSelf: 'flex-start',
                     padding: '0.7rem 1rem',
                     borderRadius: '18px 18px 18px 4px',
-                    background: '#f1f5f9',
+                    background: 'var(--bg-panel-light)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px'
@@ -395,16 +401,17 @@ const SVLChatbot = () => {
                         onClick={() => handleSend(pill)}
                         style={{
                           padding: '0.45rem 0.85rem',
-                          background: 'rgba(124, 58, 237, 0.08)',
-                          color: 'var(--accent-primary)',
-                          border: '1px solid rgba(124, 58, 237, 0.22)',
+                          background: 'var(--bg-card)',
+                          color: 'var(--ink)',
+                          border: '1px solid var(--border-subtle)',
                           borderRadius: '50px',
                           fontSize: 'clamp(0.72rem, 2vw, 0.78rem)',
                           fontWeight: '500',
                           cursor: 'pointer',
-                          transition: 'background 0.2s',
+                          transition: 'all 0.2s',
                           whiteSpace: 'normal',
-                          textAlign: 'left'
+                          textAlign: 'left',
+                          boxShadow: 'var(--shadow-subtle)'
                         }}
                       >
                         {pill}
@@ -506,15 +513,16 @@ const SVLChatbot = () => {
                       style={{
                         padding: '0.75rem 0.5rem',
                         borderRadius: '12px',
-                        border: selectedStain === k ? '2px solid var(--accent-primary)' : '1px solid var(--border-color)',
-                        background: selectedStain === k ? 'rgba(124, 58, 237, 0.06)' : 'white',
+                        border: selectedStain === k ? '2px solid var(--ink)' : '1px solid var(--border-subtle)',
+                        background: selectedStain === k ? 'var(--bg-panel-light)' : 'var(--bg-card)',
                         fontWeight: selectedStain === k ? '600' : '500',
                         fontSize: '0.85rem',
                         cursor: 'pointer',
-                        color: selectedStain === k ? 'var(--accent-primary)' : 'var(--text-primary)',
+                        color: selectedStain === k ? 'var(--ink)' : 'var(--text-secondary)',
                         width: '100%',
                         wordBreak: 'break-word',
-                        transition: 'all 0.2s'
+                        transition: 'all 0.2s',
+                        boxShadow: selectedStain === k ? 'var(--shadow-subtle)' : 'none'
                       }}
                     >
                       {stainTips[k].title}
@@ -523,8 +531,8 @@ const SVLChatbot = () => {
                 </div>
 
                 {selectedStain && (
-                  <div className="animate-fade-in" style={{ background: '#f8fafc', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--border-color)' }}>
-                    <h5 style={{ fontSize: '0.95rem', color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{stainTips[selectedStain].title} First Aid</h5>
+                  <div className="animate-fade-in" style={{ background: 'var(--bg-card-subtle)', padding: '1.2rem', borderRadius: '16px', border: '1px solid var(--border-subtle)' }}>
+                    <h5 style={{ fontSize: '0.95rem', color: 'var(--ink)', marginBottom: '0.5rem', fontWeight: 600 }}>{stainTips[selectedStain].title} First Aid</h5>
                     <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: '1.55', marginBottom: '1.2rem', wordBreak: 'break-word' }}>
                       {stainTips[selectedStain].advice}
                     </p>
@@ -543,8 +551,8 @@ const SVLChatbot = () => {
             <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} style={{
               display: 'flex',
               padding: '0.8rem 1rem',
-              borderTop: '1px solid var(--border-color)',
-              background: 'white',
+              borderTop: '1px solid var(--border-subtle)',
+              background: 'var(--bg-card)',
               gap: '0.6rem',
               flexShrink: 0,
               alignItems: 'center'
@@ -565,20 +573,20 @@ const SVLChatbot = () => {
                   width: '42px',
                   height: '42px',
                   borderRadius: '50%',
-                  background: isThinking ? '#cbd5e1' : 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
-                  color: 'white',
+                  background: isThinking ? '#d5c8b5' : 'var(--ink)',
+                  color: '#ffffff',
                   border: 'none',
                   cursor: isThinking ? 'not-allowed' : 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
-                  boxShadow: isThinking ? 'none' : '0 4px 12px rgba(124, 58, 237, 0.3)'
+                  boxShadow: isThinking ? 'none' : '0 4px 12px rgba(26, 24, 21, 0.2)',
+                  transition: 'background 0.2s ease, transform 0.2s ease'
                 }}
                 disabled={isThinking}
-                aria-label="Send Message"
               >
-                <Send size={18} />
+                <Send size={17} />
               </button>
             </form>
           )}

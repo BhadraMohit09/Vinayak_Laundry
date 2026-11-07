@@ -1,6 +1,14 @@
-import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2, Clock } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2, Clock, ChevronDown, Check } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
+
+const SUBJECT_OPTIONS = [
+  'General Inquiry',
+  'Bulk/Commercial Order',
+  'Pricing Information',
+  'Pickup/Delivery Issue',
+  'Others'
+];
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +19,18 @@ const Contact = () => {
     message: ''
   });
   const [status, setStatus] = useState({ loading: false, success: false, error: '' });
+  const [isSubjectOpen, setIsSubjectOpen] = useState(false);
+  const subjectDropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (subjectDropdownRef.current && !subjectDropdownRef.current.contains(e.target)) {
+        setIsSubjectOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -72,24 +92,33 @@ const Contact = () => {
           border-radius: 50%;
         }
       `}</style>
-      <section className="section" style={{ paddingTop: '8rem', paddingBottom: '4rem' }}>
+      <section className="section" style={{ paddingTop: '32px', paddingBottom: '72px' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>
-              Get in <span className="text-gradient">Touch</span>
+          <div style={{ maxWidth: '720px', marginBottom: '40px' }}>
+            <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '12px' }}>
+              01 · REACH OUT
+            </div>
+            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(38px, 4.8vw, 64px)', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: '16px' }}>
+              Let’s arrange your <i>care.</i>
             </h1>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
-              Whether you're looking for premium personal care or need a reliable partner for bulk commercial orders, our team is ready to assist you.
+            <p style={{ color: 'var(--text-secondary)', fontSize: '18px', lineHeight: 1.6 }}>
+              Whether you need an express doorstep pickup in Jamnagar, advice on delicate saree restoration, or a contract quote for hotel linens, we are here to help.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '3rem', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))', gap: '32px', alignItems: 'start' }}>
             {/* Contact Info */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               
-              <div className="glass-panel" style={{ padding: '2rem' }}>
-                <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem' }}>Contact Information</h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div className="glass-panel" style={{ padding: '32px', background: 'var(--bg-card)', borderRadius: 'var(--radius-lg)' }}>
+                <div className="font-mono-tag" style={{ color: 'var(--text-tertiary)', marginBottom: '10px' }}>
+                  DIRECT CHANNELS
+                </div>
+                <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '24px', fontWeight: 600, marginBottom: '24px' }}>
+                  Contact Information
+                </h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+
                   
                   <a href="https://maps.google.com/?q=Jamnagar,+Gujarat,+India" target="_blank" rel="noopener noreferrer" className="contact-card">
                     <div className="contact-icon-wrapper" style={{ background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-secondary)' }}>
@@ -258,24 +287,131 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="subject" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Subject <span style={{ color: '#ef4444' }}>*</span></label>
-                    <select 
-                      id="subject"
-                      name="subject"
-                      className="form-control" 
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                      disabled={status.loading}
-                      style={{ marginBottom: 0, padding: '0.75rem 1rem', cursor: 'pointer', appearance: 'none', background: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") no-repeat right 1rem top 50%', backgroundSize: '0.65rem auto' }}
-                    >
-                      <option value="" disabled>Select a subject...</option>
-                      <option value="General Inquiry">General Inquiry</option>
-                      <option value="Bulk/Commercial Order">Bulk/Commercial Order</option>
-                      <option value="Pricing Information">Pricing Information</option>
-                      <option value="Pickup/Delivery Issue">Pickup/Delivery Issue</option>
-                      <option value="Others">Others</option>
-                    </select>
+                    <label htmlFor="subject" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>
+                      Subject <span style={{ color: '#ef4444' }}>*</span>
+                    </label>
+                    <div ref={subjectDropdownRef} style={{ position: 'relative' }}>
+                      <button
+                        type="button"
+                        id="subject"
+                        onClick={() => !status.loading && setIsSubjectOpen(!isSubjectOpen)}
+                        disabled={status.loading}
+                        aria-haspopup="listbox"
+                        aria-expanded={isSubjectOpen}
+                        className="form-control"
+                        style={{
+                          marginBottom: 0,
+                          padding: '0.75rem 1rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          cursor: 'pointer',
+                          background: 'var(--bg-card)',
+                          textAlign: 'left',
+                          fontFamily: 'inherit',
+                          fontSize: '0.92rem',
+                          color: formData.subject ? 'var(--ink)' : 'var(--text-tertiary)',
+                          borderColor: isSubjectOpen ? 'var(--ink)' : 'var(--border-subtle)',
+                          boxShadow: isSubjectOpen ? '0 0 0 2px rgba(26, 24, 21, 0.08)' : 'none',
+                          transition: 'all 0.2s ease',
+                          borderRadius: 'var(--radius-sm)'
+                        }}
+                      >
+                        <span>{formData.subject || 'Select a subject...'}</span>
+                        <ChevronDown 
+                          size={16} 
+                          style={{ 
+                            color: 'var(--text-secondary)', 
+                            transform: isSubjectOpen ? 'rotate(180deg)' : 'rotate(0)', 
+                            transition: 'transform 0.2s ease',
+                            flexShrink: 0
+                          }} 
+                        />
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      {isSubjectOpen && (
+                        <div
+                          role="listbox"
+                          style={{
+                            position: 'absolute',
+                            top: 'calc(100% + 6px)',
+                            left: 0,
+                            right: 0,
+                            background: '#ffffff',
+                            border: '1px solid var(--border-subtle)',
+                            borderRadius: '12px',
+                            boxShadow: '0 12px 32px -4px rgba(26, 24, 21, 0.14)',
+                            zIndex: 50,
+                            overflow: 'hidden',
+                            padding: '6px',
+                            animation: 'fadeIn 0.18s ease forwards'
+                          }}
+                        >
+                          {SUBJECT_OPTIONS.map((option) => {
+                            const isSelected = formData.subject === option;
+                            return (
+                              <button
+                                key={option}
+                                type="button"
+                                role="option"
+                                aria-selected={isSelected}
+                                onClick={() => {
+                                  setFormData({ ...formData, subject: option });
+                                  setIsSubjectOpen(false);
+                                }}
+                                style={{
+                                  width: '100%',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'space-between',
+                                  padding: '10px 14px',
+                                  border: 'none',
+                                  background: isSelected ? 'var(--bg-panel-light)' : 'transparent',
+                                  color: isSelected ? 'var(--accent-rust)' : 'var(--ink)',
+                                  fontWeight: isSelected ? 600 : 500,
+                                  fontSize: '0.9rem',
+                                  borderRadius: '8px',
+                                  cursor: 'pointer',
+                                  textAlign: 'left',
+                                  transition: 'background 0.15s ease, color 0.15s ease'
+                                }}
+                                onMouseEnter={(e) => {
+                                  if (!isSelected) {
+                                    e.currentTarget.style.background = 'var(--bg-card-subtle)';
+                                  }
+                                }}
+                                onMouseLeave={(e) => {
+                                  if (!isSelected) {
+                                    e.currentTarget.style.background = 'transparent';
+                                  }
+                                }}
+                              >
+                                <span>{option}</span>
+                                {isSelected && <Check size={15} style={{ color: 'var(--accent-rust)' }} />}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* Hidden input to ensure HTML form validation passes */}
+                      <input 
+                        type="text" 
+                        name="subject" 
+                        value={formData.subject} 
+                        required 
+                        tabIndex={-1}
+                        style={{ 
+                          opacity: 0, 
+                          height: 0, 
+                          width: 0, 
+                          position: 'absolute', 
+                          pointerEvents: 'none' 
+                        }} 
+                        readOnly 
+                      />
+                    </div>
                   </div>
                 </div>
 

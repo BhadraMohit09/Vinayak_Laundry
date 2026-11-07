@@ -8,8 +8,6 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import ErrorBoundary from './components/ErrorBoundary';
 import SVLChatbot from './components/SVLChatbot';
 import SplashScreen from './components/SplashScreen';
-import CustomCursor from './components/CustomCursor';
-import AmbientBackground from './components/AmbientBackground';
 import { useScrollReveal } from './utils/useScrollReveal';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -41,13 +39,11 @@ function App() {
 
   return (
     <Router>
-      <CustomCursor />
-      <AmbientBackground />
       {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
       <ScrollToTop />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
         <Navbar />
-        <main style={{ flex: 1, paddingTop: '70px' }}>
+        <main style={{ flex: 1 }}>
           <ErrorBoundary>
             <Suspense fallback={<div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading...</div>}>
               <Routes>

@@ -1,216 +1,328 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Award, ShieldCheck, Clock, Zap } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Clock3,
+  MapPin,
+  Sparkles,
+  Truck,
+  ShieldCheck,
+  CheckCircle2,
+  Droplets,
+  Wind,
+  Shirt,
+  Building2,
+  Sparkle,
+} from 'lucide-react';
+import GarmentCareAnimation from '../components/GarmentCareAnimation';
+import TypewriterHeading from '../components/TypewriterHeading';
 
-// Lazy load components
-const FabricScience = React.lazy(() => import('../components/FabricScience'));
 
-const Home = () => {
+// Animated Counter Component
+const CountUpStat = ({ target, suffix = '', duration = 1200 }) => {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !hasStarted) {
+        setHasStarted(true);
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          setCount(Math.floor(progress * target));
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            setCount(target);
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+    }, { threshold: 0.3 });
+
+    if (elementRef.current) observer.observe(elementRef.current);
+    return () => observer.disconnect();
+  }, [hasStarted, target, duration]);
+
   return (
-    <div className="animate-fade-in">
-      {/* Hero Section */}
-      <section style={{
-        minHeight: '80vh',
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        paddingTop: '6rem'
-      }}>
-        {/* Background glow effects */}
-        <div style={{
-          position: 'absolute',
-          top: '-10%',
-          right: '-5%',
-          width: '500px',
-          height: '500px',
-          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%)',
-          zIndex: -1
-        }}></div>
-        <div style={{
-          position: 'absolute',
-          bottom: '-10%',
-          left: '-5%',
-          width: '400px',
-          height: '400px',
-          background: 'radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%)',
-          zIndex: -1
-        }}></div>
-
-        <div className="container" style={{ zIndex: 1 }}>
-          <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-            <div style={{
-              display: 'inline-block',
-              padding: '0.5rem 1.2rem',
-              background: 'rgba(255, 255, 255, 0.8)',
-              border: '1px solid var(--border-color)',
-              borderRadius: '2rem',
-              marginBottom: '2rem',
-              color: 'var(--text-secondary)',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.02)'
-            }}>
-              <span className="text-gradient" style={{ fontWeight: '600' }}>Jamnagar's Finest</span> - Premium Garment Care
-            </div>
-            
-            <h1 style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-              lineHeight: '1.1',
-              marginBottom: '1.5rem',
-              fontWeight: '700',
-              letterSpacing: '-1px'
-            }}>
-              The Future of <br />
-              <span className="text-gradient">Garment Care</span>
-            </h1>
-            
-            <p style={{
-              fontSize: '1.2rem',
-              color: 'var(--text-secondary)',
-              marginBottom: '2.5rem',
-              maxWidth: '600px',
-              margin: '0 auto 2.5rem'
-            }}>
-              Experience unprecedented quality with SVL. We leverage advanced technology to provide meticulous cleaning, ensuring your garments look flawless. Affordable excellence, tailored for you.
-            </p>
-            
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <Link to="/services" className="btn-primary">
-                Explore Services
-              </Link>
-              <Link to="/contact" className="btn-outline">
-                Book Bulk Order
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="section">
-        <div className="container">
-          <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>Why Choose Siddhi Vinayak?</h2>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-              We set the standard for modern laundry services, focusing entirely on quality, precision, and customer satisfaction.
-            </p>
-          </div>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
-            gap: '2rem'
-          }}>
-            {[
-              { icon: Award, title: 'Premium Quality', desc: 'Meticulous attention to detail ensuring every fiber is perfectly cleaned and restored.', color: 'var(--accent-primary)', bg: 'rgba(124, 58, 237, 0.08)' },
-              { icon: Zap, title: 'Advanced Tech', desc: 'Utilizing state-of-the-art equipment for efficient and fabric-safe washing processes.', color: 'var(--accent-secondary)', bg: 'rgba(37, 99, 235, 0.08)' },
-              { icon: ShieldCheck, title: 'Garment Protection', desc: 'Advanced eco-friendly solvents that protect your clothes and extend their lifespan.', color: 'var(--accent-primary)', bg: 'rgba(124, 58, 237, 0.08)' },
-              { icon: Clock, title: 'Reliable Delivery', desc: 'On-time pickup and delivery tailored to your busy schedule with precision.', color: 'var(--accent-secondary)', bg: 'rgba(37, 99, 235, 0.08)' }
-            ].map((feature, i) => (
-              <div key={i} className="glass-panel reveal-scale" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
-                <div style={{ 
-                  background: feature.bg, 
-                  width: '64px', 
-                  height: '64px', 
-                  borderRadius: '16px', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  margin: '0 auto 1.5rem',
-                  color: feature.color,
-                  transform: 'rotate(-5deg)'
-                }}>
-                  <feature.icon size={32} />
-                </div>
-                <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem' }}>{feature.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* Advanced Fabric Science Showcase */}
-      <React.Suspense fallback={<div style={{ height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Molecular Science Showcase...</div>}>
-        <FabricScience />
-      </React.Suspense>
-
-      {/* How It Works Section */}
-      <section className="section" style={{ background: 'rgba(0,0,0,0.02)' }}>
-        <div className="container">
-          <div className="reveal-on-scroll" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '-0.5px' }}>How It Works</h2>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-              Three simple steps to pristine garments. We handle the complexity so you don't have to.
-            </p>
-          </div>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-            gap: '3rem',
-            position: 'relative'
-          }}>
-            <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
-              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.3)' }}>1</div>
-              <h3 style={{ marginBottom: '1rem' }}>Book & Schedule</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Contact us via WhatsApp, phone, or email to schedule a pickup or drop off your garments at our Jamnagar facility.</p>
-            </div>
-            <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
-              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-secondary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)' }}>2</div>
-              <h3 style={{ marginBottom: '1rem' }}>Advanced Cleaning</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Our experts analyze your fabrics and use state-of-the-art tech and premium solvents to safely remove stains and dirt.</p>
-            </div>
-            <div className="reveal-on-scroll" style={{ textAlign: 'center', position: 'relative' }}>
-              <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'var(--accent-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', margin: '0 auto 1.5rem', boxShadow: '0 4px 15px rgba(124, 58, 237, 0.3)' }}>3</div>
-              <h3 style={{ marginBottom: '1rem' }}>Fresh Delivery</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Your garments are meticulously pressed, folded or hung, and returned to you feeling completely renewed.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section">
-        <div className="container">
-          <div className="glass-panel reveal-scale" style={{ 
-            padding: '5rem 2rem', 
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.95))',
-            position: 'relative',
-            overflow: 'hidden',
-            border: '1px solid rgba(124, 58, 237, 0.1)'
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '100%',
-              height: '100%',
-              background: 'radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 60%)',
-              zIndex: 0
-            }}></div>
-            
-            <div style={{ position: 'relative', zIndex: 1 }}>
-              <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', letterSpacing: '-0.5px' }}>Ready for a Flawless Clean?</h2>
-              <p style={{ 
-                color: 'var(--text-secondary)', 
-                maxWidth: '600px', 
-                margin: '0 auto 2.5rem',
-                fontSize: '1.1rem'
-              }}>
-                Whether you need everyday garment care or specialized bulk orders for your business, we offer unparalleled service at affordable rates.
-              </p>
-              <Link to="/contact" className="btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
-                Contact Us Today
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    <span ref={elementRef}>
+      {count}{suffix}
+    </span>
   );
 };
 
+const processSteps = [
+  {
+    num: '01',
+    label: 'REQUEST & SCHEDULE',
+    title: 'Select care & doorstep window',
+    desc: 'Pick your items, specify fabric sensitivities or stain alerts, and schedule a convenient Jamnagar doorstep pickup.',
+  },
+  {
+    num: '02',
+    label: 'INSPECT & PROCESS',
+    title: 'Eco-solvent precision wash',
+    desc: 'Each garment is barcoded, examined fiber-by-fiber, and treated with temperature-regulated, pH-balanced German solvents.',
+  },
+  {
+    num: '03',
+    label: 'STEAM FINISH & RETURN',
+    title: 'Hand-pressed to perfection',
+    desc: 'Garments receive custom steam creasing, breathable dust-free packaging, and are returned promptly to your doorstep.',
+  },
+];
+
+const bentoServices = [
+  {
+    num: '01',
+    tag: 'MOST POPULAR',
+    title: 'Everyday Laundry Care',
+    desc: 'Separate colors, temperature-controlled wash, hypoallergenic detergents, and crisp steam folding for daily wear.',
+    specs: ['24-36h turnaround', 'Weight or piece-based'],
+    link: '/services',
+    featured: true,
+  },
+  {
+    num: '02',
+    tag: 'PREMIUM FIBERS',
+    title: 'Delicate & Dry Clean',
+    desc: 'Specialized low-impact non-toxic solvents protecting pure silks, wools, designer sarees, sherwanis, and blazers.',
+    specs: ['Individual stain check', 'Fiber restore'],
+    link: '/services',
+    featured: false,
+  },
+  {
+    num: '03',
+    tag: 'HOSPITALITY & B2B',
+    title: 'Commercial Linen Care',
+    desc: 'High-volume scheduled processing for hotels, clinics, gyms, and corporate offices with dedicated SLA guarantees.',
+    specs: ['Bulk contract pricing', 'Dedicated account'],
+    link: '/commercial',
+    featured: false,
+  },
+];
+
+const Home = () => (
+  <div className="home-page animate-fade-in">
+
+    {/* Modular Hero Section */}
+    <section className="home-hero-wrap">
+      <div className="container">
+        <div className="home-hero-grid">
+          {/* Main Hero Pod */}
+          <div className="hero-main-pod">
+            <div>
+              <div className="eyebrow-pill">
+                <span className="eyebrow-dot" />
+                JAMNAGAR’S GARMENT CARE STUDIO
+              </div>
+
+              <TypewriterHeading
+                as="h1"
+                className="hero-heading"
+                speed={36}
+                delay={180}
+                segments={[
+                  { text: 'Care for clothes', br: true },
+                  { text: 'you ' },
+                  { text: 'love.', italic: true, accent: true }
+                ]}
+              />
+
+              <p className="hero-subtext">
+                Thoughtful, fabric-first laundry and eco-dry-cleaning for your daily staples, luxury occasion wear, and business linens.
+              </p>
+
+              <div className="hero-btn-row">
+                <Link className="ink-button" to="/contact">
+                  Schedule a pickup <ArrowUpRight size={17} />
+                </Link>
+                <Link className="soft-button" to="/services">
+                  Browse catalog & rates <ArrowUpRight size={16} />
+                </Link>
+              </div>
+            </div>
+
+            <div className="hero-metrics-strip">
+              <span className="hero-metric-item">
+                <MapPin size={16} /> Serving Jamnagar & Suburbs
+              </span>
+              <span className="hero-metric-item">
+                <Clock3 size={16} /> 24–36 Hour Express Return
+              </span>
+              <span className="hero-metric-item">
+                <ShieldCheck size={16} /> 100% Eco-Solvent Care
+              </span>
+            </div>
+          </div>
+
+          {/* Right Hero Stack / Spec Pods */}
+          <div className="hero-side-stack">
+            {/* Garment Care Brand Animation */}
+            <div className="hero-visual-pod" aria-label="Siddhi Vinayak Garment Care">
+              <GarmentCareAnimation />
+            </div>
+
+
+            {/* Quick Stats Pod */}
+            <div className="hero-card-pod hero-stats-container">
+              <div className="hero-stats-grid">
+                <div className="hero-stat-col">
+                  <div className="hero-stat-num">
+                    <CountUpStat target={10} suffix="k+" duration={1400} />
+                  </div>
+                  <div className="hero-stat-label">
+                    Pieces Cleaned
+                  </div>
+                </div>
+                <div className="hero-stat-col has-borders">
+                  <div className="hero-stat-num">
+                    <CountUpStat target={99} suffix=".4%" duration={1400} />
+                  </div>
+                  <div className="hero-stat-label">
+                    Stain Clearance
+                  </div>
+                </div>
+                <div className="hero-stat-col">
+                  <div className="hero-stat-num accent">
+                    <CountUpStat target={24} suffix="h" duration={1000} />
+                  </div>
+                  <div className="hero-stat-label">
+                    Fast Delivery
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Editorial Numbered Process Section (Bandobast inspired) */}
+    <section className="editorial-process-wrap">
+      <div className="container">
+        <div className="process-header-row">
+          <div>
+            <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '8px' }}>
+              02 · OUR METHODOLOGY
+            </div>
+            <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(32px, 3.8vw, 48px)', fontWeight: 500, letterSpacing: '-0.03em' }}>
+              Clean clothes. <i>Clear mind.</i>
+            </h2>
+          </div>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '440px', fontSize: '15px', lineHeight: 1.6 }}>
+            From the initial barcode tagging to final pressurized steam detailing, every piece is cleaned with personalized care.
+          </p>
+        </div>
+
+        <div className="process-columns-grid">
+          {processSteps.map((step) => (
+            <article key={step.num} className="process-column-item">
+              <div className="step-numeral">{step.num}</div>
+              <div className="step-label">{step.label}</div>
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Bento Services Catalog (Curriculum Dashboard inspired) */}
+    <section className="catalog-bento-section">
+      <div className="container">
+        <div className="catalog-header-bar">
+          <div>
+            <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '8px' }}>
+              03 · SERVICE SUITE
+            </div>
+            <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(32px, 3.8vw, 48px)', fontWeight: 500, letterSpacing: '-0.03em' }}>
+              Tailored care for every fiber.
+            </h2>
+          </div>
+
+          <Link to="/services" className="soft-button">
+            View complete price catalog <ArrowUpRight size={16} />
+          </Link>
+        </div>
+
+        <div className="bento-grid">
+          {bentoServices.map((service) => (
+            <Link
+              key={service.num}
+              to={service.link}
+              className={`bento-card ${service.featured ? 'featured-dark' : ''}`}
+            >
+              <div>
+                <div className="bento-top-row">
+                  <span className="bento-num">{service.num}</span>
+                  <span className="bento-tag">{service.tag}</span>
+                </div>
+                <h3 className="bento-title">{service.title}</h3>
+                <p className="bento-desc">{service.desc}</p>
+              </div>
+
+              <div className="bento-specs">
+                {service.specs.map((spec, i) => (
+                  <span key={i}>• {spec}</span>
+                ))}
+                <ArrowUpRight className="bento-action-arrow" size={20} />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Editorial Booking Banner */}
+    <section className="container">
+      <div className="editorial-booking-pod">
+        <div>
+          <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '12px' }}>
+            READY WHEN YOU ARE
+          </div>
+          <TypewriterHeading
+            as="h2"
+            speed={32}
+            delay={100}
+            segments={[
+              { text: 'Your laundry,', br: true },
+              { text: 'handled effortlessly.', italic: true, accent: true }
+            ]}
+          />
+          <p>
+            Message us on WhatsApp to schedule an express doorstep pickup, request stain assistance, or book custom corporate laundry service.
+          </p>
+        </div>
+
+        <div className="booking-action-buttons">
+          <Link className="ink-button" to="/contact" style={{ padding: '14px 26px' }}>
+            Book a pickup online <ArrowUpRight size={18} />
+          </Link>
+          <a
+            href="https://wa.me/916351674100"
+            target="_blank"
+            rel="noreferrer"
+            className="soft-button"
+            style={{ border: 'none', background: 'rgba(255, 255, 255, 0.7)' }}
+          >
+            Chat directly on WhatsApp →
+          </a>
+        </div>
+      </div>
+
+      <div className="reassurance-strip">
+        <span><Truck size={19} /> Doorstep pickup & delivery</span>
+        <span><ShieldCheck size={19} /> Fabric-safe eco formulations</span>
+        <span><CheckCircle2 size={19} /> Barcode tracking per piece</span>
+        <span><Sparkle size={19} /> 100% Satisfaction guarantee</span>
+      </div>
+    </section>
+  </div>
+);
+
 export default Home;
+
