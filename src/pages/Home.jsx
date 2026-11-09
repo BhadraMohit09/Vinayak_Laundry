@@ -12,7 +12,7 @@ import {
   Wind,
   Shirt,
   Building2,
-  Sparkle,
+  BadgeCheck,
 } from 'lucide-react';
 import GarmentCareAnimation from '../components/GarmentCareAnimation';
 import TypewriterHeading from '../components/TypewriterHeading';
@@ -352,7 +352,7 @@ const Home = () => {
         <span><Truck size={19} /> Doorstep pickup & delivery</span>
         <span><ShieldCheck size={19} /> Fabric-safe eco formulations</span>
         <span><CheckCircle2 size={19} /> Barcode tracking per piece</span>
-        <span><Sparkle size={19} /> 100% Satisfaction guarantee</span>
+        <span><BadgeCheck size={19} /> 100% Satisfaction guarantee</span>
       </div>
     </section>
 
