@@ -1,55 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
-  <!-- Definitions for gradients -->
-  <defs>
-    <!-- Warm Editorial Rust Gradient -->
-    <linearGradient id="svlRustGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#b2531a" />
-      <stop offset="100%" stop-color="#8a3c0f" />
-    </linearGradient>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%" fill="none">
+  <!-- Minimal, Pure Vector SVG — 100% Transparent Background -->
+  <!-- Modern Artisan Laundry Emblem in Theme Rust (#b2531a) -->
+  
+  <!-- Hanger Hook with organic flow -->
+  <path d="M 32 8 C 36 8, 38.5 11, 38.5 14 C 38.5 18, 32 19, 32 23" 
+        stroke="#b2531a" 
+        stroke-width="3" 
+        stroke-linecap="round" />
 
-    <!-- Deep Warm Ink Base -->
-    <linearGradient id="svlInkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#24211d" />
-      <stop offset="100%" stop-color="#141311" />
-    </linearGradient>
-  </defs>
+  <!-- Architectural Shoulder Line (Garment Frame) -->
+  <path d="M 12 36 L 32 23 L 52 36" 
+        stroke="#b2531a" 
+        stroke-width="3" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
 
-  <!-- Squircle Base Canvas: Crisp & prominent in both Dark and Light browser tabs -->
-  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#svlInkGrad)" stroke="#b2531a" stroke-width="1.5" stroke-opacity="0.4" />
+  <!-- Lower Bar of Hanger -->
+  <path d="M 16 36 L 48 36" 
+        stroke="#b2531a" 
+        stroke-width="2.2" 
+        stroke-linecap="round" 
+        opacity="0.85" />
 
-  <!-- Inner Soft Accent Ring (Laundry Drum & Artisan Precision motif) -->
-  <circle cx="32" cy="33" r="23" stroke="#b2531a" stroke-width="1.8" stroke-dasharray="3 2.5" fill="none" opacity="0.35" />
+  <!-- Center Water Care Droplet suspended from the hanger -->
+  <path d="M 32 27 C 32 27, 26 35, 26 38.5 C 26 41.8, 28.7 44.5, 32 44.5 C 35.3 44.5, 38 41.8, 38 38.5 C 38 35, 32 27, 32 27 Z" 
+        fill="#b2531a" />
 
-  <!-- Artisan Coat Hanger & Garment Form (Iconic SVL emblem) -->
-  <g transform="translate(0, 1)">
-    <!-- Hanger Hook (Gold / Rust) -->
-    <path d="M 32 15 C 32 10.5, 37.5 10.5, 37.5 14.5 C 37.5 18, 32 19, 32 23.5" 
-          fill="none" 
-          stroke="url(#svlRustGrad)" 
-          stroke-width="3" 
-          stroke-linecap="round" />
+  <!-- Inner Water Ripple / Garment Pleat -->
+  <path d="M 29.5 39 C 30.5 41, 33.5 41, 34.5 39" 
+        stroke="#ffffff" 
+        stroke-width="1.4" 
+        stroke-linecap="round" />
 
-    <!-- Hanger Shoulder Triangular Contour -->
-    <path d="M 32 23.5 L 14 36.5 C 13.5 37, 14 38, 15 38 L 49 38 C 50 38, 50.5 37, 50 36.5 Z" 
-          fill="none" 
-          stroke="url(#svlRustGrad)" 
-          stroke-width="3" 
-          stroke-linejoin="round" 
-          stroke-linecap="round" />
-
-    <!-- Precision Lapel / Garment Collar Fold V-accent -->
-    <path d="M 26 38 L 32 46 L 38 38" 
-          fill="none" 
-          stroke="#f6f3ed" 
-          stroke-width="2.2" 
-          stroke-linecap="round" 
-          stroke-linejoin="round" />
-  </g>
-
-  <!-- Fabric Sparkle / Eco Steam droplet star (Top Right) -->
-  <path d="M 47 13 Q 48.5 17 52.5 18.5 Q 48.5 20 47 24 Q 45.5 20 41.5 18.5 Q 45.5 17 47 13 Z" 
-        fill="#fbeee6" />
-
-  <!-- Micro Pristine Bubble (Bottom Center) -->
-  <circle cx="32" cy="52" r="2.2" fill="#b2531a" />
+  <!-- Delicate Fabric Steam Wave Curves (Gentle, authentic laundry care) -->
+  <path d="M 23 51 C 24 47.5, 22 45, 23 42" 
+        stroke="#b2531a" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        opacity="0.6" />
+  <path d="M 32 54 C 33 50, 31 48, 32 45.5" 
+        stroke="#b2531a" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        opacity="0.85" />
+  <path d="M 41 51 C 42 47.5, 40 45, 41 42" 
+        stroke="#b2531a" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        opacity="0.6" />
 </svg>
