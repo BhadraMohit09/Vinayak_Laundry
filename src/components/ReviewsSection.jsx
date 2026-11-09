@@ -275,6 +275,7 @@ const ReviewsSection = () => {
             className="review-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Close button — always visible, above scroll area */}
             <button
               type="button"
               onClick={handleCloseModal}
@@ -286,262 +287,280 @@ const ReviewsSection = () => {
                 border: 'none',
                 color: 'var(--text-tertiary)',
                 cursor: 'pointer',
-                padding: '4px'
+                padding: '6px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background 0.2s ease, color 0.2s ease',
+                zIndex: 10,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'var(--bg-panel-light)';
+                e.currentTarget.style.color = 'var(--ink)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.color = 'var(--text-tertiary)';
               }}
               aria-label="Close dialog"
             >
               <X size={22} />
             </button>
 
-            <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '8px' }}>
-              CLIENT SATISFACTION INDEX
-            </div>
-            <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '26px', fontWeight: 600, color: 'var(--ink)', marginBottom: '8px' }}>
-              Rate Your Experience with SVL
-            </h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '14.5px', marginBottom: '20px', lineHeight: 1.5 }}>
-              Share your honest rating and thoughts on our garment washing, dry cleaning, or pressing quality.
-            </p>
-
-            {formError && (
-              <div style={{
-                background: '#fef2f2',
-                border: '1px solid #fecaca',
-                borderRadius: 'var(--radius-sm)',
-                padding: '12px 16px',
-                color: '#b91c1c',
-                fontSize: '13.5px',
-                marginBottom: '18px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
-                {formError}
+            {/* Scroll wrapper — allows dropdown to float above without layout shift */}
+            <div className="review-modal-scroll">
+              <div className="font-mono-tag" style={{ color: 'var(--accent-rust)', marginBottom: '8px' }}>
+                CLIENT SATISFACTION INDEX
               </div>
-            )}
+              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(20px, 4vw, 26px)', fontWeight: 600, color: 'var(--ink)', marginBottom: '8px', paddingRight: '36px' }}>
+                Rate Your Experience with SVL
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '20px', lineHeight: 1.5 }}>
+                Share your honest rating and thoughts on our garment washing, dry cleaning, or pressing quality.
+              </p>
 
-            {formSuccess && (
-              <div style={{
-                background: 'var(--accent-olive-light)',
-                border: '1px solid rgba(72, 99, 73, 0.25)',
-                borderRadius: 'var(--radius-sm)',
-                padding: '12px 16px',
-                color: 'var(--accent-olive)',
-                fontSize: '13.5px',
-                marginBottom: '18px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}>
-                <CheckCircle size={16} /> {formSuccess}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmitReview}>
-              {/* Star Picker */}
-              <div style={{ marginBottom: '22px' }}>
-                <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '8px' }}>
-                  Select Star Rating (1 to 5 Stars)*
-                </label>
-                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                  {[1, 2, 3, 4, 5].map((star) => {
-                    const isFilled = (hoverRating || ratingInput) >= star;
-                    return (
-                      <button
-                        key={star}
-                        type="button"
-                        className={`star-interactive-btn ${isFilled ? 'filled' : ''}`}
-                        onMouseEnter={() => setHoverRating(star)}
-                        onMouseLeave={() => setHoverRating(0)}
-                        onClick={() => setRatingInput(star)}
-                        aria-label={`${star} star`}
-                      >
-                        <Star
-                          size={32}
-                          fill={isFilled ? '#f59e0b' : 'none'}
-                          stroke={isFilled ? '#f59e0b' : '#9ca3af'}
-                        />
-                      </button>
-                    );
-                  })}
-                  <span style={{ marginLeft: '12px', fontSize: '14px', fontWeight: 600, color: '#f59e0b' }}>
-                    {ratingInput} of 5 Stars
-                  </span>
+              {formError && (
+                <div style={{
+                  background: '#fef2f2',
+                  border: '1px solid #fecaca',
+                  borderRadius: 'var(--radius-sm)',
+                  padding: '12px 16px',
+                  color: '#b91c1c',
+                  fontSize: '13.5px',
+                  marginBottom: '18px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  {formError}
                 </div>
-              </div>
+              )}
 
-              {/* Name & Phone */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginBottom: '16px' }}>
-                <div>
-                  <label htmlFor={nameInputId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
-                    Your Name*
+              {formSuccess && (
+                <div style={{
+                  background: 'var(--accent-olive-light)',
+                  border: '1px solid rgba(72, 99, 73, 0.25)',
+                  borderRadius: 'var(--radius-sm)',
+                  padding: '12px 16px',
+                  color: 'var(--accent-olive)',
+                  fontSize: '13.5px',
+                  marginBottom: '18px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  <CheckCircle size={16} /> {formSuccess}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmitReview}>
+                {/* Star Picker */}
+                <div style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '10px' }}>
+                    Select Star Rating (1 to 5)*
                   </label>
-                  <input
-                    id={nameInputId}
-                    type="text"
-                    required
-                    placeholder="e.g. Ramesh Patel"
-                    value={authorName}
-                    onChange={(e) => setAuthorName(e.target.value)}
-                    className="form-control"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor={phoneInputId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
-                    Mobile Number (Optional)
-                  </label>
-                  <input
-                    id={phoneInputId}
-                    type="tel"
-                    maxLength={10}
-                    placeholder="10-digit number"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="form-control"
-                  />
-                </div>
-              </div>
-
-              {/* Themed Custom Dropdown for Service Selection */}
-              <div ref={serviceDropdownRef} style={{ marginBottom: '16px', position: 'relative' }}>
-                <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
-                  Service Availed
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setIsServiceOpen(!isServiceOpen)}
-                  className="form-control"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    cursor: 'pointer',
-                    background: 'var(--bg-card)',
-                    color: 'var(--ink)',
-                    textAlign: 'left',
-                    borderColor: isServiceOpen ? 'var(--accent-rust)' : 'var(--border-subtle)',
-                    boxShadow: isServiceOpen ? '0 0 0 3px var(--accent-rust-light)' : 'none',
-                    borderRadius: 'var(--radius-sm)',
-                    padding: '11px 14px'
-                  }}
-                >
-                  <span style={{ fontSize: '14px', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {serviceUsed}
-                  </span>
-                  <ChevronDown
-                    size={16}
-                    style={{
-                      color: isServiceOpen ? 'var(--accent-rust)' : 'var(--text-tertiary)',
-                      transform: isServiceOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.2s ease',
-                      flexShrink: 0
-                    }}
-                  />
-                </button>
-
-                {isServiceOpen && (
-                  <div
-                    role="listbox"
-                    style={{
-                      position: 'absolute',
-                      top: 'calc(100% + 6px)',
-                      left: 0,
-                      right: 0,
-                      background: '#ffffff',
-                      border: '1px solid var(--border-subtle)',
-                      borderRadius: 'var(--radius-sm)',
-                      boxShadow: 'var(--shadow-float)',
-                      zIndex: 100,
-                      overflow: 'hidden',
-                      padding: '6px',
-                      animation: 'fadeIn 0.15s ease-out'
-                    }}
-                  >
-                    {SERVICE_OPTIONS.map((opt) => {
-                      const isSelected = serviceUsed === opt;
+                  <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+                    {[1, 2, 3, 4, 5].map((star) => {
+                      const isFilled = (hoverRating || ratingInput) >= star;
                       return (
                         <button
-                          key={opt}
+                          key={star}
                           type="button"
-                          role="option"
-                          aria-selected={isSelected}
-                          onClick={() => {
-                            setServiceUsed(opt);
-                            setIsServiceOpen(false);
-                          }}
-                          style={{
-                            width: '100%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '10px 14px',
-                            border: 'none',
-                            borderRadius: '8px',
-                            background: isSelected ? 'var(--accent-rust-light)' : 'transparent',
-                            color: isSelected ? 'var(--accent-rust)' : 'var(--ink)',
-                            fontWeight: isSelected ? 600 : 500,
-                            fontSize: '13.5px',
-                            cursor: 'pointer',
-                            textAlign: 'left',
-                            transition: 'background 0.15s ease'
-                          }}
-                          onMouseEnter={(e) => {
-                            if (!isSelected) e.currentTarget.style.background = 'var(--bg-card-subtle)';
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!isSelected) e.currentTarget.style.background = 'transparent';
-                          }}
+                          className={`star-interactive-btn ${isFilled ? 'filled' : ''}`}
+                          onMouseEnter={() => setHoverRating(star)}
+                          onMouseLeave={() => setHoverRating(0)}
+                          onClick={() => setRatingInput(star)}
+                          aria-label={`${star} star`}
                         >
-                          <span>{opt}</span>
-                          {isSelected && <Check size={16} color="var(--accent-rust)" />}
+                          <Star
+                            size={30}
+                            fill={isFilled ? '#f59e0b' : 'none'}
+                            stroke={isFilled ? '#f59e0b' : '#9ca3af'}
+                          />
                         </button>
                       );
                     })}
+                    <span style={{ marginLeft: '8px', fontSize: '13.5px', fontWeight: 600, color: '#f59e0b' }}>
+                      {ratingInput} / 5
+                    </span>
                   </div>
-                )}
-              </div>
+                </div>
 
-              {/* Review Text */}
-              <div style={{ marginBottom: '18px' }}>
-                <label htmlFor={commentInputId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
-                  Your Review / Suggestions*
-                </label>
-                <textarea
-                  id={commentInputId}
-                  required
-                  rows={3}
-                  placeholder="Tell us what you liked or any areas we can enhance in our fabric care..."
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  className="form-control"
-                  style={{ resize: 'vertical' }}
-                />
-              </div>
+                {/* Name & Phone — stack on small screens */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '14px', marginBottom: '14px' }}>
+                  <div>
+                    <label htmlFor={nameInputId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
+                      Your Name*
+                    </label>
+                    <input
+                      id={nameInputId}
+                      type="text"
+                      required
+                      placeholder="e.g. Ramesh Patel"
+                      value={authorName}
+                      onChange={(e) => setAuthorName(e.target.value)}
+                      className="form-control"
+                    />
+                  </div>
 
-              {/* Short professional confidentiality footnote */}
-              <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginBottom: '20px', fontFamily: 'DM Mono, monospace' }}>
-                * All customer feedback is kept strictly confidential.
-              </div>
+                  <div>
+                    <label htmlFor={phoneInputId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
+                      Mobile Number <span style={{ fontWeight: 400, color: 'var(--text-tertiary)' }}>(Optional)</span>
+                    </label>
+                    <input
+                      id={phoneInputId}
+                      type="tel"
+                      maxLength={10}
+                      placeholder="10-digit number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      className="form-control"
+                    />
+                  </div>
+                </div>
 
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', alignItems: 'center' }}>
-                <button
-                  type="button"
-                  onClick={handleCloseModal}
-                  className="soft-button"
-                  style={{ border: 'none' }}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="ink-button"
-                  style={{ padding: '12px 28px' }}
-                >
-                  Submit Feedback
-                </button>
-              </div>
-            </form>
+                {/* Service Dropdown */}
+                <div ref={serviceDropdownRef} style={{ marginBottom: '14px', position: 'relative' }}>
+                  <label style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
+                    Service Availed
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setIsServiceOpen(!isServiceOpen)}
+                    className="form-control"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      cursor: 'pointer',
+                      background: 'var(--bg-card)',
+                      color: 'var(--ink)',
+                      textAlign: 'left',
+                      borderColor: isServiceOpen ? 'var(--accent-rust)' : 'var(--border-subtle)',
+                      boxShadow: isServiceOpen ? '0 0 0 3px var(--accent-rust-light)' : 'none',
+                      borderRadius: 'var(--radius-sm)',
+                      padding: '11px 14px'
+                    }}
+                  >
+                    <span style={{ fontSize: '14px', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {serviceUsed}
+                    </span>
+                    <ChevronDown
+                      size={16}
+                      style={{
+                        color: isServiceOpen ? 'var(--accent-rust)' : 'var(--text-tertiary)',
+                        transform: isServiceOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.2s ease',
+                        flexShrink: 0
+                      }}
+                    />
+                  </button>
+
+                  {isServiceOpen && (
+                    <div
+                      role="listbox"
+                      style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 6px)',
+                        left: 0,
+                        right: 0,
+                        background: '#ffffff',
+                        border: '1px solid var(--border-subtle)',
+                        borderRadius: 'var(--radius-sm)',
+                        boxShadow: 'var(--shadow-float)',
+                        zIndex: 100,
+                        overflow: 'hidden',
+                        padding: '6px',
+                        animation: 'fadeIn 0.15s ease-out'
+                      }}
+                    >
+                      {SERVICE_OPTIONS.map((opt) => {
+                        const isSelected = serviceUsed === opt;
+                        return (
+                          <button
+                            key={opt}
+                            type="button"
+                            role="option"
+                            aria-selected={isSelected}
+                            onClick={() => {
+                              setServiceUsed(opt);
+                              setIsServiceOpen(false);
+                            }}
+                            style={{
+                              width: '100%',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              padding: '10px 14px',
+                              border: 'none',
+                              borderRadius: '8px',
+                              background: isSelected ? 'var(--accent-rust-light)' : 'transparent',
+                              color: isSelected ? 'var(--accent-rust)' : 'var(--ink)',
+                              fontWeight: isSelected ? 600 : 500,
+                              fontSize: '13.5px',
+                              cursor: 'pointer',
+                              textAlign: 'left',
+                              transition: 'background 0.15s ease'
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!isSelected) e.currentTarget.style.background = 'var(--bg-card-subtle)';
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!isSelected) e.currentTarget.style.background = 'transparent';
+                            }}
+                          >
+                            <span>{opt}</span>
+                            {isSelected && <Check size={16} color="var(--accent-rust)" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {/* Review Text */}
+                <div style={{ marginBottom: '14px' }}>
+                  <label htmlFor={commentInputId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
+                    Your Review / Suggestions*
+                  </label>
+                  <textarea
+                    id={commentInputId}
+                    required
+                    rows={3}
+                    placeholder="Tell us what you liked or any areas we can enhance in our fabric care..."
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    className="form-control"
+                    style={{ resize: 'vertical' }}
+                  />
+                </div>
+
+                {/* Confidentiality note */}
+                <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)', marginBottom: '20px', fontFamily: 'DM Mono, monospace' }}>
+                  * All customer feedback is kept strictly confidential.
+                </div>
+
+                {/* Action buttons — responsive */}
+                <div className="review-modal-actions">
+                  <button
+                    type="button"
+                    onClick={handleCloseModal}
+                    className="soft-button"
+                    style={{ border: 'none' }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="ink-button"
+                    style={{ padding: '12px 28px' }}
+                  >
+                    Submit Feedback
+                  </button>
+                </div>
+              </form>
+            </div>{/* end review-modal-scroll */}
           </div>
         </div>
       )}
