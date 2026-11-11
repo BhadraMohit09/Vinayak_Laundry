@@ -144,7 +144,7 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
 
     try {
       const locationText = formData.location_url 
-        ? `\n\n📍 Pinned GPS / Google Maps (Zomato-style):\n${formData.location_url}` 
+        ? `\n\nPinned Doorstep Map Location:\n${formData.location_url}` 
         : '';
 
       const payload = {
@@ -484,7 +484,7 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
                   }}
                 >
                   <Navigation size={13} />
-                  <span>{formData.location_url ? '✓ Location Pinned on Map' : '📍 Pin Location on Map (Zomato)'}</span>
+                  <span>{formData.location_url ? 'Location Pinned on Map' : 'Pin Location on Map'}</span>
                 </button>
               </div>
 
@@ -507,16 +507,17 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
 
               {formData.location_url && (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px', padding: '6px 12px', background: 'rgba(34, 197, 94, 0.08)', borderRadius: '6px', border: '1px solid rgba(34, 197, 94, 0.2)' }}>
-                  <span style={{ fontSize: '12px', color: '#166534', fontWeight: 500 }}>
-                    📍 Map GPS Point saved ({pinnedCoords ? `${pinnedCoords[0].toFixed(4)}, ${pinnedCoords[1].toFixed(4)}` : 'Marked'})
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#166534', fontWeight: 500 }}>
+                    <Check size={14} color="#15803d" />
+                    <span>Doorstep pin marked on map</span>
+                  </div>
                   <a
                     href={formData.location_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ fontSize: '11.5px', color: 'var(--accent-rust)', textDecoration: 'underline', fontWeight: 600 }}
                   >
-                    View Pinned Point
+                    View on Map
                   </a>
                 </div>
               )}

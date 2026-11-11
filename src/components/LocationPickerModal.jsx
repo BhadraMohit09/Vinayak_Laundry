@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Locate, MapPin, Check, Loader2 } from 'lucide-react';
+import { Locate, MapPin, Check, Loader2, Navigation } from 'lucide-react';
 
 // Jamnagar default center
 const DEFAULT_COORDS = [22.4707, 70.0577];
@@ -51,13 +51,13 @@ export default function LocationPickerModal({
       );
       if (response.ok) {
         const data = await response.json();
-        const fullAddr = data.display_name || `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+        const fullAddr = data.display_name || 'Marked Doorstep Location';
         setAddressPreview(fullAddr);
       } else {
-        setAddressPreview(`${lat.toFixed(5)}, ${lng.toFixed(5)}`);
+        setAddressPreview('Marked Doorstep Location');
       }
     } catch {
-      setAddressPreview(`${lat.toFixed(5)}, ${lng.toFixed(5)}`);
+      setAddressPreview('Marked Doorstep Location');
     } finally {
       setIsResolving(false);
     }
@@ -215,11 +215,11 @@ export default function LocationPickerModal({
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <MapPin size={18} color="var(--accent-rust)" />
               <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 600, color: 'var(--ink)' }}>
-                Pin Pickup Location (Zomato Style)
+                Pin Pickup Location
               </h3>
             </div>
             <p style={{ margin: '4px 0 0', fontSize: '0.82rem', color: 'var(--text-tertiary)' }}>
-              Click or drag the red pin to your exact doorstep or building
+              Click or drag the pin to your exact doorstep or building
             </p>
           </div>
 
@@ -255,7 +255,7 @@ export default function LocationPickerModal({
         <div style={{ position: 'relative', width: '100%', height: '360px', background: '#f1f1f1' }}>
           <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
 
-          {/* Floating hint pill */}
+          {/* Floating hint pill with proper Lucide icon */}
           <div
             style={{
               position: 'absolute',
@@ -270,10 +270,14 @@ export default function LocationPickerModal({
               fontWeight: 600,
               color: 'var(--ink)',
               zIndex: 1000,
-              pointerEvents: 'none'
+              pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
             }}
           >
-            📍 Tap anywhere on map or drag pin
+            <Navigation size={13} color="var(--accent-rust)" />
+            <span>Tap anywhere on map or drag pin</span>
           </div>
         </div>
 
@@ -281,7 +285,7 @@ export default function LocationPickerModal({
         <div style={{ padding: '16px 20px', background: '#fafaf9', borderTop: '1px solid var(--border-subtle)' }}>
           <div style={{ marginBottom: '14px' }}>
             <span style={{ fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', color: 'var(--accent-rust)', letterSpacing: '0.5px' }}>
-              Selected Pickup Coordinates
+              Selected Pickup Location
             </span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
               <div style={{ fontSize: '0.88rem', color: 'var(--ink)', fontWeight: 500, lineHeight: 1.4, flex: 1 }}>
@@ -290,12 +294,9 @@ export default function LocationPickerModal({
                     Resolving nearby address...
                   </span>
                 ) : (
-                  addressPreview || `${coords[0].toFixed(5)}, ${coords[1].toFixed(5)}`
+                  addressPreview || 'Marked Doorstep Location'
                 )}
               </div>
-            </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginTop: '2px', fontFamily: 'monospace' }}>
-              Lat: {coords[0].toFixed(6)}, Lng: {coords[1].toFixed(6)}
             </div>
           </div>
 

@@ -42,7 +42,7 @@ export async function sendFormEmails(data) {
     messageParts.push(`Pickup / Doorstep Address:\n${address.trim()}`);
   }
   if (location_url && location_url.trim()) {
-    messageParts.push(`📍 Pinned GPS / Google Maps Location (Zomato-style):\n${location_url.trim()}`);
+    messageParts.push(`Pinned Doorstep Google Maps Location:\n${location_url.trim()}`);
   }
   if (message && message.trim() && message.trim() !== address?.trim() && message.trim() !== items?.trim()) {
     messageParts.push(`Additional Instructions / Message:\n${message.trim()}`);

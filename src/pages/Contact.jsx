@@ -62,7 +62,7 @@ const Contact = () => {
         // message field ensures backward compatibility for templates that only print {{message}}
         message: [
           formData.address ? `Pickup / Doorstep Address:\n${formData.address.trim()}` : '',
-          formData.location_url ? `📍 Pinned GPS / Google Maps Location (Zomato-style):\n${formData.location_url.trim()}` : '',
+          formData.location_url ? `Pinned Doorstep Map Location:\n${formData.location_url.trim()}` : '',
           formData.items ? `Items / Clothes Details:\n${formData.items.trim()}` : '',
           formData.message ? `Additional Notes / Message:\n${formData.message.trim()}` : ''
         ].filter(Boolean).join('\n\n')
@@ -482,7 +482,7 @@ const Contact = () => {
                       }}
                     >
                       <Navigation size={12} />
-                      <span>{formData.location_url ? '✓ Pinned on Map' : '📍 Pin on Map (Zomato)'}</span>
+                      <span>{formData.location_url ? 'Location Pinned on Map' : 'Pin Location on Map'}</span>
                     </button>
                   </div>
                   <input 
@@ -498,16 +498,17 @@ const Contact = () => {
                   />
                   {formData.location_url && (
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px', padding: '6px 12px', background: 'rgba(34, 197, 94, 0.08)', borderRadius: '6px', border: '1px solid rgba(34, 197, 94, 0.2)' }}>
-                      <span style={{ fontSize: '12px', color: '#166534', fontWeight: 500 }}>
-                        📍 Map GPS Point saved ({pinnedCoords ? `${pinnedCoords[0].toFixed(4)}, ${pinnedCoords[1].toFixed(4)}` : 'Marked'})
-                      </span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#166534', fontWeight: 500 }}>
+                        <Check size={14} color="#15803d" />
+                        <span>Doorstep pin marked on map</span>
+                      </div>
                       <a
                         href={formData.location_url}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{ fontSize: '11.5px', color: 'var(--accent-rust)', textDecoration: 'underline', fontWeight: 600 }}
                       >
-                        View Pinned Point
+                        View on Map
                       </a>
                     </div>
                   )}
