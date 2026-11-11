@@ -7,9 +7,19 @@ const EMAILJS_PRIVATE_KEY = (typeof process !== 'undefined' && process.env && pr
 /**
  * Sends notification and confirmation emails using EmailJS REST API
  */
-export async function sendFormEmails({ name, phone, email, subject, message }) {
-  if (!name || !phone || !email || !subject || !message) {
-    throw new Error('All fields (name, phone, email, subject, message) are required.');
+export async function sendFormEmails(data) {
+  const {
+    name,
+    phone,
+    email,
+    subject = 'Doorstep Pickup Booking',
+    address,
+    items,
+    message
+  } = data;
+
+  if (!name || !phone || !email) {
+    throw new Error('Name, phone number, and email are required.');
   }
 
   const serviceId = EMAILJS_SERVICE_ID.trim();
@@ -22,12 +32,43 @@ export async function sendFormEmails({ name, phone, email, subject, message }) {
     throw new Error('Server Configuration Error: EmailJS IDs or Public Key are missing.');
   }
 
+  // Construct structured detailed message content for templates that display {{message}}
+  const messageParts = [];
+  if (items && items.trim()) {
+    messageParts.push(`Estimated Items / Clothes:\n${items.trim()}`);
+  }
+  if (address && address.trim()) {
+    messageParts.push(`Pickup / Doorstep Address:\n${address.trim()}`);
+  }
+  if (message && message.trim() && message.trim() !== address?.trim() && message.trim() !== items?.trim()) {
+    messageParts.push(`Additional Instructions / Message:\n${message.trim()}`);
+  }
+
+  const consolidatedMessage = messageParts.length > 0 
+    ? messageParts.join('\n\n')
+    : (message || address || items || 'No details provided');
+
+  // We provide both individual variables (phone, user_phone, address, items)
+  // AND ensure phone, address & items are in message, user_message, details, etc.
+  // so no matter how the EmailJS template is mapped, owner always sees phone, items, address.
   const templateParams = {
     name,
+    from_name: name,
+    customer_name: name,
     phone,
+    user_phone: phone,
+    customer_phone: phone,
+    contact_number: phone,
+    mobile: phone,
     email,
+    from_email: email,
+    customer_email: email,
+    reply_to: email,
     subject,
-    message
+    address: address || '',
+    items: items || '',
+    details: consolidatedMessage,
+    message: `Phone: ${phone}\n\n${consolidatedMessage}`
   };
 
   const basePayload = {

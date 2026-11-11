@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2, Clock, ChevronDown, Check } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2, Clock, ChevronDown, Check, Shirt, Truck } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import TypewriterHeading from '../components/TypewriterHeading';
 
@@ -424,19 +424,65 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Message <span style={{ color: '#ef4444' }}>*</span></label>
+                  <label htmlFor="address" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Pickup / Doorstep Address</label>
+                  <input 
+                    type="text" 
+                    id="address"
+                    name="address"
+                    className="form-control" 
+                    placeholder="Flat / House No., Landmark, Area (Jamnagar)" 
+                    value={formData.address}
+                    onChange={handleChange}
+                    disabled={status.loading}
+                    style={{ marginBottom: 0, padding: '0.75rem 1rem' }}
+                  />
+                </div>
+
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.4rem' }}>
+                    <label htmlFor="items" style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem', margin: 0 }}>
+                      Items & Clothes Details
+                    </label>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)' }}>
+                      e.g. 10 T-Shirts, 10 Shirts, Towels
+                    </span>
+                  </div>
+                  <input 
+                    type="text" 
+                    id="items"
+                    name="items"
+                    className="form-control" 
+                    placeholder="e.g. 10 T-Shirts, 10 Shirts, Towels, Bed sheets" 
+                    value={formData.items}
+                    onChange={handleChange}
+                    disabled={status.loading}
+                    style={{ marginBottom: 0, padding: '0.75rem 1rem' }}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Message / Special Instructions <span style={{ color: '#ef4444' }}>*</span></label>
                   <textarea 
                     id="message"
                     name="message"
                     className="form-control" 
-                    placeholder="Tell us about your requirements..."
+                    placeholder="Tell us about your garment care preferences or schedule..."
                     required
-                    minLength={10}
+                    minLength={5}
                     value={formData.message}
                     onChange={handleChange}
                     disabled={status.loading}
-                    style={{ marginBottom: 0, minHeight: '120px', resize: 'vertical', padding: '0.75rem 1rem' }}
+                    style={{ marginBottom: 0, minHeight: '100px', resize: 'vertical', padding: '0.75rem 1rem' }}
                   ></textarea>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', padding: '10px 14px', background: 'var(--bg-card-subtle)', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', fontWeight: 600, color: 'var(--ink)' }}>
+                    <Truck size={15} color="var(--accent-rust)" /> Free Doorstep Pickup Across Jamnagar
+                  </div>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', paddingLeft: '23px' }}>
+                    *Applicable on bulk orders & eligible quantities of garment items
+                  </span>
                 </div>
 
                 <button 

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useId } from 'react';
-import { X, Send, AlertCircle, Loader2, Truck, ChevronDown, Check, Phone, User, Mail, MapPin } from 'lucide-react';
+import { X, Send, AlertCircle, Loader2, Truck, ChevronDown, Check, Phone, User, Mail, MapPin, Shirt } from 'lucide-react';
 
 const SUBJECT_OPTIONS = [
   'Doorstep Pickup Booking',
@@ -16,7 +16,8 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
     phone: '',
     email: '',
     subject: SUBJECT_OPTIONS[0],
-    message: ''
+    address: '',
+    items: ''
   });
   const [fieldErrors, setFieldErrors] = useState({});
   const [status, setStatus] = useState({ loading: false, error: '' });
@@ -37,7 +38,8 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
   const phoneId = useId();
   const emailId = useId();
   const subjectId = useId();
-  const messageId = useId();
+  const addressId = useId();
+  const itemsId = useId();
 
   // Reset state when modal is opened or closed
   useEffect(() => {
@@ -74,9 +76,13 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
       if (!value.trim()) error = 'Email address is required.';
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) error = 'Please enter a valid email address.';
     }
-    if (field === 'message') {
-      if (!value.trim()) error = 'Pickup address / notes are required.';
+    if (field === 'address') {
+      if (!value.trim()) error = 'Pickup address in Jamnagar is required.';
       else if (value.trim().length < 6) error = 'Please provide your doorstep address (at least 6 chars).';
+    }
+    if (field === 'items') {
+      if (!value.trim()) error = 'Please list items/garment details (e.g. 10 T-Shirts, 10 Shirts, Towels).';
+      else if (value.trim().length < 3) error = 'Please specify item details.';
     }
     return error;
   };
@@ -104,7 +110,8 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
       name: validateField('name', formData.name),
       phone: validateField('phone', formData.phone),
       email: validateField('email', formData.email),
-      message: validateField('message', formData.message),
+      address: validateField('address', formData.address),
+      items: validateField('items', formData.items),
     };
 
     const hasAnyError = Object.values(errors).some(Boolean);
@@ -116,12 +123,18 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
     setStatus({ loading: true, error: '' });
 
     try {
+      const payload = {
+        ...formData,
+        // message field provides backward compatibility for templates rendering {{message}}
+        message: `Pickup Address:\n${formData.address.trim()}\n\nItems / Clothes Details:\n${formData.items.trim()}`
+      };
+
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
@@ -138,7 +151,8 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
         phone: '',
         email: '',
         subject: SUBJECT_OPTIONS[0],
-        message: ''
+        address: '',
+        items: ''
       });
       setFieldErrors({});
 
@@ -418,38 +432,76 @@ const BookPickupModal = ({ isOpen, onClose, onSuccessToast }) => {
             </div>
           </div>
 
-          {/* Message / Pickup Address */}
-          <div style={{ marginBottom: '22px' }}>
-            <label htmlFor={messageId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
-              Pickup Address & Specific Instructions <span style={{ color: 'var(--accent-rust)' }}>*</span>
+          {/* Pickup Address */}
+          <div style={{ marginBottom: '14px' }}>
+            <label htmlFor={addressId} style={{ display: 'block', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', marginBottom: '6px' }}>
+              Pickup Address in Jamnagar <span style={{ color: 'var(--accent-rust)' }}>*</span>
             </label>
             <div style={{ position: 'relative' }}>
+              <input
+                id={addressId}
+                name="address"
+                type="text"
+                placeholder="Flat / House No., Landmark, Area (e.g. Patel Colony, Digjam Circle)"
+                value={formData.address}
+                onChange={handleChange}
+                className="form-control"
+                style={{
+                  paddingLeft: '38px',
+                  borderColor: fieldErrors.address ? '#ef4444' : undefined
+                }}
+              />
+              <MapPin size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-tertiary)', pointerEvents: 'none' }} />
+            </div>
+            {fieldErrors.address && (
+              <span style={{ fontSize: '12px', color: '#dc2626', marginTop: '4px', display: 'block' }}>
+                {fieldErrors.address}
+              </span>
+            )}
+          </div>
+
+          {/* Items / Clothes Details */}
+          <div style={{ marginBottom: '18px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
+              <label htmlFor={itemsId} style={{ fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', margin: 0 }}>
+                Items & Clothes Details <span style={{ color: 'var(--accent-rust)' }}>*</span>
+              </label>
+              <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>
+                e.g. 10 T-Shirts, 10 Shirts, Towels
+              </span>
+            </div>
+            <div style={{ position: 'relative' }}>
               <textarea
-                id={messageId}
-                name="message"
+                id={itemsId}
+                name="items"
                 rows={3}
-                placeholder="Enter your doorstep address in Jamnagar, preferred pickup time, or fabric care notes..."
-                value={formData.message}
+                placeholder="List your items & quantities (e.g. 10 T-Shirts, 8 Shirts, 4 Bed sheets, Towels, Saree)..."
+                value={formData.items}
                 onChange={handleChange}
                 className="form-control"
                 style={{
                   paddingLeft: '38px',
                   resize: 'vertical',
-                  borderColor: fieldErrors.message ? '#ef4444' : undefined
+                  borderColor: fieldErrors.items ? '#ef4444' : undefined
                 }}
               />
-              <MapPin size={16} style={{ position: 'absolute', left: '12px', top: '14px', color: 'var(--text-tertiary)', pointerEvents: 'none' }} />
+              <Shirt size={16} style={{ position: 'absolute', left: '12px', top: '14px', color: 'var(--text-tertiary)', pointerEvents: 'none' }} />
             </div>
-            {fieldErrors.message && (
+            {fieldErrors.items && (
               <span style={{ fontSize: '12px', color: '#dc2626', marginTop: '4px', display: 'block' }}>
-                {fieldErrors.message}
+                {fieldErrors.items}
               </span>
             )}
           </div>
 
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--text-tertiary)', fontFamily: 'DM Mono, monospace' }}>
-              <Truck size={14} color="var(--accent-rust)" /> Free Doorstep Pickup Across Jamnagar
+          <div style={{ display: 'flex', gap: '14px', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12.5px', color: 'var(--ink)', fontWeight: 600 }}>
+                <Truck size={14} color="var(--accent-rust)" /> Free Doorstep Pickup Across Jamnagar
+              </div>
+              <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', paddingLeft: '20px' }}>
+                *Applicable on bulk orders & eligible quantities of garment items
+              </span>
             </div>
 
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center', width: 'fit-content' }}>
