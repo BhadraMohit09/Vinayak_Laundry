@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2, Clock, ChevronDown, Check, Shirt, Truck } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Loader2, Clock, ChevronDown, Check, Shirt, Truck, Navigation } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import TypewriterHeading from '../components/TypewriterHeading';
+import LocationPickerModal from '../components/LocationPickerModal';
 
 const SUBJECT_OPTIONS = [
   'General Inquiry',
@@ -17,10 +18,15 @@ const Contact = () => {
     phone: '',
     email: '',
     subject: '',
+    address: '',
+    location_url: '',
+    items: '',
     message: ''
   });
   const [status, setStatus] = useState({ loading: false, success: false, error: '' });
   const [isSubjectOpen, setIsSubjectOpen] = useState(false);
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+  const [pinnedCoords, setPinnedCoords] = useState(null);
   const subjectDropdownRef = useRef(null);
 
   useEffect(() => {
@@ -37,17 +43,37 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleLocationSelected = ({ coords, mapsLink, readableAddress }) => {
+    setPinnedCoords(coords);
+    setFormData((prev) => ({
+      ...prev,
+      location_url: mapsLink,
+      address: prev.address.trim() ? prev.address : readableAddress
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ loading: true, success: false, error: '' });
 
     try {
+      const payload = {
+        ...formData,
+        // message field ensures backward compatibility for templates that only print {{message}}
+        message: [
+          formData.address ? `Pickup / Doorstep Address:\n${formData.address.trim()}` : '',
+          formData.location_url ? `📍 Pinned GPS / Google Maps Location (Zomato-style):\n${formData.location_url.trim()}` : '',
+          formData.items ? `Items / Clothes Details:\n${formData.items.trim()}` : '',
+          formData.message ? `Additional Notes / Message:\n${formData.message.trim()}` : ''
+        ].filter(Boolean).join('\n\n')
+      };
+
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
@@ -57,7 +83,17 @@ const Contact = () => {
       }
 
       setStatus({ loading: false, success: true, error: '' });
-      setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        subject: '',
+        address: '',
+        location_url: '',
+        items: '',
+        message: ''
+      });
+      setPinnedCoords(null);
     } catch (err) {
       console.error('Submit error:', err);
       setStatus({ loading: false, success: false, error: err.message || 'Something went wrong. Please try again or call us directly.' });
@@ -127,7 +163,6 @@ const Contact = () => {
                 </h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
 
-                  
                   <a href="https://maps.google.com/?q=Jamnagar,+Gujarat,+India" target="_blank" rel="noopener noreferrer" className="contact-card">
                     <div className="contact-icon-wrapper" style={{ background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-secondary)' }}>
                       <MapPin size={22} />
@@ -424,7 +459,32 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="address" style={{ display: 'block', marginBottom: '0.4rem', color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem' }}>Pickup / Doorstep Address</label>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                    <label htmlFor="address" style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.9rem', margin: 0 }}>
+                      Pickup / Doorstep Address
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setIsMapModalOpen(true)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        background: formData.location_url ? 'rgba(34, 197, 94, 0.12)' : 'var(--accent-rust-light)',
+                        color: formData.location_url ? '#15803d' : 'var(--accent-rust)',
+                        border: `1px solid ${formData.location_url ? 'rgba(34, 197, 94, 0.3)' : 'rgba(164, 66, 34, 0.25)'}`,
+                        borderRadius: '6px',
+                        padding: '3px 10px',
+                        fontSize: '11.5px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      <Navigation size={12} />
+                      <span>{formData.location_url ? '✓ Pinned on Map' : '📍 Pin on Map (Zomato)'}</span>
+                    </button>
+                  </div>
                   <input 
                     type="text" 
                     id="address"
@@ -436,6 +496,21 @@ const Contact = () => {
                     disabled={status.loading}
                     style={{ marginBottom: 0, padding: '0.75rem 1rem' }}
                   />
+                  {formData.location_url && (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px', padding: '6px 12px', background: 'rgba(34, 197, 94, 0.08)', borderRadius: '6px', border: '1px solid rgba(34, 197, 94, 0.2)' }}>
+                      <span style={{ fontSize: '12px', color: '#166534', fontWeight: 500 }}>
+                        📍 Map GPS Point saved ({pinnedCoords ? `${pinnedCoords[0].toFixed(4)}, ${pinnedCoords[1].toFixed(4)}` : 'Marked'})
+                      </span>
+                      <a
+                        href={formData.location_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ fontSize: '11.5px', color: 'var(--accent-rust)', textDecoration: 'underline', fontWeight: 600 }}
+                      >
+                        View Pinned Point
+                      </a>
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -516,6 +591,14 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* Zomato-style Map Location Picker Modal */}
+      <LocationPickerModal
+        isOpen={isMapModalOpen}
+        onClose={() => setIsMapModalOpen(false)}
+        initialCoords={pinnedCoords}
+        onSelectLocation={handleLocationSelected}
+      />
     </div>
   );
 };

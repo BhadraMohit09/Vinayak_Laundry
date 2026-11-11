@@ -14,6 +14,7 @@ export async function sendFormEmails(data) {
     email,
     subject = 'Doorstep Pickup Booking',
     address,
+    location_url,
     items,
     message
   } = data;
@@ -40,6 +41,9 @@ export async function sendFormEmails(data) {
   if (address && address.trim()) {
     messageParts.push(`Pickup / Doorstep Address:\n${address.trim()}`);
   }
+  if (location_url && location_url.trim()) {
+    messageParts.push(`📍 Pinned GPS / Google Maps Location (Zomato-style):\n${location_url.trim()}`);
+  }
   if (message && message.trim() && message.trim() !== address?.trim() && message.trim() !== items?.trim()) {
     messageParts.push(`Additional Instructions / Message:\n${message.trim()}`);
   }
@@ -48,9 +52,9 @@ export async function sendFormEmails(data) {
     ? messageParts.join('\n\n')
     : (message || address || items || 'No details provided');
 
-  // We provide both individual variables (phone, user_phone, address, items)
-  // AND ensure phone, address & items are in message, user_message, details, etc.
-  // so no matter how the EmailJS template is mapped, owner always sees phone, items, address.
+  // We provide both individual variables (phone, user_phone, address, items, location_url)
+  // AND ensure phone, address, map link & items are in message, user_message, details, etc.
+  // so no matter how the EmailJS template is mapped, owner always sees phone, items, address, and pinned location.
   const templateParams = {
     name,
     from_name: name,
@@ -66,6 +70,9 @@ export async function sendFormEmails(data) {
     reply_to: email,
     subject,
     address: address || '',
+    location_url: location_url || '',
+    maps_link: location_url || '',
+    google_maps: location_url || '',
     items: items || '',
     details: consolidatedMessage,
     message: `Phone: ${phone}\n\n${consolidatedMessage}`
